@@ -15,7 +15,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     title: "astraen.dev | Coming Soon",
     description: "astraen.dev: where ideas execute.",
-    icons: [{rel: "icon", url: "/favicon.ico"}],
+    icons: [
+        {
+            rel: "icon",
+            url: "/favicon.svg",
+            type: "image/svg+xml",
+        },
+    ],
 };
 
 export default function RootLayout({
