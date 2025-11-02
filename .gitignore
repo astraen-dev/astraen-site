@@ -5,6 +5,7 @@ output.txt
 diff.txt
 prompt.txt
 design_docs/
+!.env.example
 
 # JetBrains
 .idea/
