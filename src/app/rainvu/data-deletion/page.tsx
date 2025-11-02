@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import {LegalDocument} from "@/components/rainvu/LegalDocument";
+import {LegalDocument} from "@/components/ui/LegalDocument";
 
 export const metadata: Metadata = {
     title: "Data Deletion Instructions for RainVu | astraen.dev",

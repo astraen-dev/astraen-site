@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import {LegalDocument} from "@/components/rainvu/LegalDocument";
+import {LegalDocument} from "@/components/ui/LegalDocument";
 import Link from "next/link";
 
 export const metadata: Metadata = {

@@ -145,6 +145,24 @@ export default function Home() {
                             </TooltipProvider>
                         </div>
                     </div>
+
+                    {/* --- Footer with Legal Links --- */}
+                    <footer className="relative z-10 mt-10 border-t border-white/10 pt-6">
+                        <div className="flex items-center justify-center gap-4 text-xs">
+                            <Link href="/terms"
+                                  className="text-slate-400 transition-colors hover:text-primary-a hover:underline">
+                                Terms of Service
+                            </Link>
+                            <span className="text-slate-600">|</span>
+                            <Link href="/privacy"
+                                  className="text-slate-400 transition-colors hover:text-primary-a hover:underline">
+                                Privacy Policy
+                            </Link>
+                        </div>
+                        <p className="mt-4 text-center text-xs text-slate-500">
+                            &copy; {new Date().getFullYear()} ASTRAEN (PTY) LTD. All Rights Reserved.
+                        </p>
+                    </footer>
                 </motion.div>
             </main>
         </div>
