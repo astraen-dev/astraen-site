@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 import {Toaster} from "sonner";
+import {ReactNode} from "react";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -13,9 +14,31 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
+const siteConfig = {
+    name: "astraen.dev",
+    url: "https://astraen.dev",
+    ogImage: "https://astraen.dev/astraen_logo_v3.png",
+    description: "astraen.dev: where ideas execute. From concept to clean code.",
+    author: "ASTRAEN (PTY) LTD",
+};
+
 export const metadata: Metadata = {
-    title: "astraen.dev | Coming Soon",
-    description: "astraen.dev: where ideas execute.",
+    metadataBase: new URL(siteConfig.url),
+    title: {
+        default: `${siteConfig.name} | From Concept to Clean Code`,
+        template: `%s | ${siteConfig.name}`,
+    },
+    description: siteConfig.description,
+    authors: [{name: siteConfig.author, url: siteConfig.url}],
+    creator: siteConfig.author,
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+        },
+    },
     icons: [
         {
             rel: "icon",
@@ -23,18 +46,53 @@ export const metadata: Metadata = {
             type: "image/svg+xml",
         },
     ],
+    openGraph: {
+        type: "website",
+        url: siteConfig.url,
+        title: siteConfig.name,
+        description: siteConfig.description,
+        siteName: siteConfig.name,
+        images: [
+            {
+                url: siteConfig.ogImage,
+                width: 1024,
+                height: 1024,
+                alt: "Astraen Logo",
+            },
+        ],
+    },
+    alternates: {
+        canonical: "/",
+    },
 };
+
+const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "astraen.dev",
+    "url": "https://astraen.dev",
+    "logo": "https://astraen.dev/astraen_logo_v3.png",
+    "sameAs": [
+        "https://github.com/astraen-dev",
+        "https://www.linkedin.com/company/astraen"
+    ]
+};
+
 
 export default function RootLayout({
                                        children,
                                    }: Readonly<{
-    children: React.ReactNode;
+    children: ReactNode;
 }>) {
     return (
         <html lang="en">
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{__html: JSON.stringify(structuredData)}}
+        />
         {children}
         <Toaster
             theme="dark"
