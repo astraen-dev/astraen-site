@@ -21,6 +21,37 @@
 	}
 }
 
+/* Add/update these styles for prose content */
+@layer utilities {
+	.prose-styles p {
+		@apply text-slate-300 leading-relaxed mb-4;
+	}
+
+	.prose-styles .h3-style {
+		@apply text-2xl font-semibold text-white mt-8 mb-4 border-b border-primary-a/20 pb-2;
+	}
+
+	.prose-styles .h4-style {
+		@apply text-lg font-semibold text-secondary-a mt-6 mb-3;
+	}
+
+	.prose-styles .ul-style {
+		@apply list-disc list-inside space-y-2 mb-4 pl-4 text-slate-300;
+	}
+
+	.prose-styles .ol-style {
+		@apply list-decimal list-inside space-y-2 mb-4 pl-4 text-slate-300;
+	}
+
+	.prose-styles strong {
+		@apply text-secondary-a font-semibold;
+	}
+
+	.prose-styles .a-style {
+		@apply text-primary-a hover:underline;
+	}
+}
+
 /* Pure CSS Parallax Starfield Background */
 @layer base {
 	@keyframes animate-stars {

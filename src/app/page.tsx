@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import {CodeXml, Github, Linkedin, MapPin} from "lucide-react";
+import {CodeXml, Droplets, Github, Linkedin, MapPin} from "lucide-react";
 import {TypeAnimation} from "react-type-animation";
 import {motion} from "framer-motion";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
+import Link from "next/link";
 
 const socialLinks = [
     {
@@ -94,7 +95,7 @@ export default function Home() {
                             <span>origin/za-cpt</span>
                         </div>
 
-                        {/* Social Links */}
+                        {/* Links */}
                         <div className="mt-8 flex gap-6">
                             <TooltipProvider delayDuration={0}>
                                 {socialLinks.map((link) => (
@@ -119,6 +120,28 @@ export default function Home() {
                                         </TooltipContent>
                                     </Tooltip>
                                 ))}
+                                {/* RainVu Project Link */}
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <motion.div
+                                            whileHover={{
+                                                scale: 1.2,
+                                                filter: "drop-shadow(0 0 0.75rem var(--color-primary-a))",
+                                            }}
+                                            whileTap={{scale: 0.9}}
+                                        >
+                                            <Link
+                                                href="/rainvu"
+                                                className="text-slate-400 transition-all duration-300 hover:text-white"
+                                            >
+                                                <Droplets className="h-7 w-7"/>
+                                            </Link>
+                                        </motion.div>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>RainVu App</p>
+                                    </TooltipContent>
+                                </Tooltip>
                             </TooltipProvider>
                         </div>
                     </div>
