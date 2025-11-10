@@ -108,7 +108,7 @@ export default async function RootLayout({
             </div>
 
             <Header/>
-            <main className="relative z-10 pt-32 pb-16">{children}</main>
+            {children}
             <Footer/>
         </div>
         <Toaster
