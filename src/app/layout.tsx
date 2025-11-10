@@ -4,6 +4,7 @@ import "./globals.css";
 import {Toaster} from "sonner";
 import {ReactNode} from "react";
 import {Analytics} from "@vercel/analytics/next";
+import {headers} from "next/headers";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -80,11 +81,14 @@ const structuredData = {
 };
 
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+export default async function RootLayout({
+                                             children,
+                                         }: Readonly<{
     children: ReactNode;
 }>) {
+    const headersList = await headers();
+    const nonce = headersList.get('x-nonce') || '';
+
     return (
         <html lang="en">
         <body
@@ -93,6 +97,8 @@ export default function RootLayout({
         <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{__html: JSON.stringify(structuredData)}}
+            nonce={nonce}
+            suppressHydrationWarning
         />
         {children}
         <Toaster
