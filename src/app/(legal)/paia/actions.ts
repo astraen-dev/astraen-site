@@ -9,6 +9,20 @@ const recaptchaResponseSchema = z.object({
     "error-codes": z.array(z.string()).optional(),
 });
 
+// Define a type for the expected error from Vercel Blob
+interface VercelBlobError extends Error {
+    statusCode: number;
+}
+
+// Create a type guard to safely check if an error is a VercelBlobError
+function isVercelBlobError(error: unknown): error is VercelBlobError {
+    return (
+        error instanceof Error &&
+        'statusCode' in error &&
+        typeof (error as { statusCode: unknown }).statusCode === 'number'
+    );
+}
+
 export async function getPaiaManualUrl(
     token: string | undefined,
 ): Promise<{ success: boolean; url?: string; error?: string }> {
@@ -50,7 +64,7 @@ export async function getPaiaManualUrl(
 
         return {success: true, url: paiaManualUrl};
     } catch (error) {
-        if (error instanceof Error && (error as any).statusCode === 404) {
+        if (isVercelBlobError(error) && error.statusCode === 404) {
             console.error("PAIA manual blob not found.", error);
             return {success: false, error: "The requested document could not be found."};
         }
