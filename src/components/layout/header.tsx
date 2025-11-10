@@ -172,6 +172,12 @@ export function Header() {
                                                 exit={{opacity: 0}}
                                                 className="fixed inset-0 z-50"
                                             >
+                                                <Dialog.Title className="sr-only">
+                                                    Navigation Menu
+                                                </Dialog.Title>
+                                                <Dialog.Description className="sr-only">
+                                                    A list of links to navigate the site, including Home and RainVu.
+                                                </Dialog.Description>
                                                 <div className="container mx-auto flex h-full max-w-5xl flex-col px-4">
                                                     <div className="flex h-[88px] items-center justify-between">
                                                         <Link
