@@ -5,6 +5,8 @@ import {Toaster} from "sonner";
 import {ReactNode} from "react";
 import {Analytics} from "@vercel/analytics/next";
 import {headers} from "next/headers";
+import {Header} from "@/components/layout/header";
+import {Footer} from "@/components/layout/footer";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -71,15 +73,14 @@ export const metadata: Metadata = {
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "astraen.dev",
-    "url": "https://astraen.dev",
-    "logo": "https://astraen.dev/astraen_logo_v3.png",
-    "sameAs": [
+    name: "astraen.dev",
+    url: "https://astraen.dev",
+    logo: "https://astraen.dev/astraen_logo_v3.png",
+    sameAs: [
         "https://github.com/astraen-dev",
-        "https://www.linkedin.com/company/astraen"
-    ]
+        "https://www.linkedin.com/company/astraen",
+    ],
 };
-
 
 export default async function RootLayout({
                                              children,
@@ -87,20 +88,29 @@ export default async function RootLayout({
     children: ReactNode;
 }>) {
     const headersList = await headers();
-    const nonce = headersList.get('x-nonce') || '';
+    const nonce = headersList.get("x-nonce") || "";
 
     return (
-        <html lang="en">
-        <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <html lang="en" className="!scroll-smooth">
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{__html: JSON.stringify(structuredData)}}
             nonce={nonce}
             suppressHydrationWarning
         />
-        {children}
+        <div className="relative min-h-screen w-full overflow-x-hidden">
+            {/* Animated Background */}
+            <div className="star-bg">
+                <div id="stars1" className="stars"></div>
+                <div id="stars2" className="stars stars2"></div>
+                <div id="stars3" className="stars stars3"></div>
+            </div>
+
+            <Header/>
+            <main className="relative z-10 pt-32 pb-16">{children}</main>
+            <Footer/>
+        </div>
         <Toaster
             theme="dark"
             position="bottom-right"
