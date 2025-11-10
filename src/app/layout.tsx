@@ -7,6 +7,7 @@ import {Analytics} from "@vercel/analytics/next";
 import {headers} from "next/headers";
 import {Header} from "@/components/layout/header";
 import {Footer} from "@/components/layout/footer";
+import {ScrollToTop} from "@/components/layout/scroll-to-top"; // <-- IMPORT
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -93,6 +94,7 @@ export default async function RootLayout({
     return (
         <html lang="en" className="!scroll-smooth">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ScrollToTop/>
         <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{__html: JSON.stringify(structuredData)}}
