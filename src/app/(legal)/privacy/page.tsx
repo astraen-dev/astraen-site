@@ -7,8 +7,14 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
+    const policyRevisionUrl = "https://github.com/astraen-dev/astraen-site/commits/main/src/app/(legal)/privacy/page.tsx";
+
     return (
-        <LegalDocument title="Website Privacy Policy" lastUpdated="November 2, 2025">
+        <LegalDocument
+            title="Website Privacy Policy"
+            lastUpdated="November 10, 2025"
+            revisionHistoryUrl={policyRevisionUrl}
+        >
             <p>
                 ASTRAEN (PTY) LTD (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the astraen.dev website
                 (&quot;the Site&quot;).
@@ -18,9 +24,10 @@ export default function PrivacyPage() {
 
             <h3 className="h3-style">1. Our Commitment to Your Privacy</h3>
             <p>
-                This website is designed to be privacy-respecting. We do not place any tracking or marketing cookies on
-                your device. We do not include any third-party analytics scripts (like Google Analytics) or tracking
-                pixels.
+                This website is designed to be privacy-respecting. We use Vercel Analytics, a first-party analytics
+                tool provided by our hosting platform. This service does not use cookies and does not collect personally
+                identifiable information. We do not use any third-party marketing trackers or invasive analytics scripts
+                like Google Analytics.
             </p>
 
             <h3 className="h3-style">2. Information We Collect</h3>

@@ -7,8 +7,14 @@ export const metadata: Metadata = {
 };
 
 export default function TermsPage() {
+    const termsRevisionUrl = "https://github.com/astraen-dev/astraen-site/commits/main/src/app/(legal)/terms/page.tsx";
+
     return (
-        <LegalDocument title="Website Terms of Service" lastUpdated="November 2, 2025">
+        <LegalDocument
+            title="Website Terms of Service"
+            lastUpdated="November 2, 2025"
+            revisionHistoryUrl={termsRevisionUrl}
+        >
             <p>
                 Welcome to astraen.dev. This website is owned and operated by ASTRAEN (PTY) LTD (Registration No.
                 2025/845626/07). By accessing and using this website (&quot;the Site&quot;), you agree to be bound by
