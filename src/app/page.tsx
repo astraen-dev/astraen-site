@@ -75,7 +75,7 @@ export default function Home() {
                             <CodeXml className="inline-block h-5 w-5 mr-2 -mt-1 text-primary-b"/>
                             <TypeAnimation
                                 sequence={[
-                                    "deploy(quality); // shipping the future",
+                                    "// shipping the future",
                                     2000,
                                     "from concept to clean code;",
                                     2000,
