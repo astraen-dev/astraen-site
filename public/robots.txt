@@ -3,5 +3,6 @@
 User-agent: *
 Allow: /
 Disallow: /paia
+Disallow: /api/paia-download
 
 Sitemap: https://astraen.dev/sitemap.xml

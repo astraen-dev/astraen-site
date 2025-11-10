@@ -2,17 +2,17 @@
 
 import {GoogleReCaptchaProvider, useGoogleReCaptcha} from "react-google-recaptcha-v3";
 import React, {useCallback, useState} from "react";
-import {getPaiaManualUrl} from "./actions";
-import {Download, FileText, LoaderCircle, ShieldCheck} from "lucide-react";
+import {getPaiaDownloadToken} from "./actions";
+import {FileText, LoaderCircle, ShieldCheck} from "lucide-react";
 import {toast} from "sonner";
 import {AnimatePresence, motion} from "framer-motion";
 
 function PaiaAccessGate() {
     const {executeRecaptcha} = useGoogleReCaptcha();
     const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
-    const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+    const [downloadToken, setDownloadToken] = useState<string | null>(null);
 
-    const handleVerifyAndDownload = useCallback(async () => {
+    const handleVerifyAndRequest = useCallback(async () => {
         if (!executeRecaptcha) {
             toast.error("reCAPTCHA not ready. Please wait and try again.");
             return;
@@ -20,12 +20,12 @@ function PaiaAccessGate() {
         setStatus("loading");
         try {
             const token = await executeRecaptcha("paia_manual_access");
-            const result = await getPaiaManualUrl(token);
+            const result = await getPaiaDownloadToken(token);
 
-            if (result.success && result.url) {
-                setDownloadUrl(result.url);
+            if (result.success && result.token) {
+                setDownloadToken(result.token);
                 setStatus("success");
-                toast.success("Verification successful. Your download is ready.");
+                toast.success("Verification successful. The document is ready to view.");
             } else {
                 setStatus("idle");
                 toast.error(result.error || "An unknown error occurred.");
@@ -57,7 +57,7 @@ function PaiaAccessGate() {
                             <motion.button
                                 key="verify-button"
                                 initial={{opacity: 0, y: 10}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -10}}
-                                onClick={handleVerifyAndDownload}
+                                onClick={handleVerifyAndRequest}
                                 className="group flex h-14 w-full transform items-center justify-center gap-3 rounded-lg bg-slate-900/50 px-5 py-3 font-semibold text-secondary-a ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:text-white hover:shadow-lg hover:shadow-primary-a/20 hover:ring-primary-a/50"
                             >
                                 <ShieldCheck
@@ -75,16 +75,15 @@ function PaiaAccessGate() {
                             </motion.div>
                         ) : (
                             <motion.a
-                                key="download-button"
+                                key="view-button"
                                 initial={{opacity: 0, y: 10}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -10}}
-                                href={downloadUrl!}
-                                download="Astraen-PAIA-Manual.pdf"
+                                href={`/api/paia-download?token=${downloadToken!}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group flex h-14 w-full transform items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-success-b to-success-a/80 px-5 py-3 font-semibold text-background-start ring-1 ring-success-a/50 backdrop-blur-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:shadow-success-a/30"
                             >
-                                <Download className="h-6 w-6"/>
-                                <span>Download PAIA Manual</span>
+                                <FileText className="h-6 w-6"/>
+                                <span>View PAIA Manual</span>
                             </motion.a>
                         )}
                     </AnimatePresence>

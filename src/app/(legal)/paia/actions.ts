@@ -1,7 +1,8 @@
 "use server";
 
-import {head} from "@vercel/blob";
 import {z} from "zod";
+import {nanoid} from "nanoid";
+import {redis} from "@/lib/redis";
 
 const recaptchaResponseSchema = z.object({
     success: z.boolean(),
@@ -9,27 +10,14 @@ const recaptchaResponseSchema = z.object({
     "error-codes": z.array(z.string()).optional(),
 });
 
-// Define a type for the expected error from Vercel Blob
-interface VercelBlobError extends Error {
-    statusCode: number;
-}
-
-// Create a type guard to safely check if an error is a VercelBlobError
-function isVercelBlobError(error: unknown): error is VercelBlobError {
-    return (
-        error instanceof Error &&
-        'statusCode' in error &&
-        typeof (error as { statusCode: unknown }).statusCode === 'number'
-    );
-}
-
-export async function getPaiaManualUrl(
+export async function getPaiaDownloadToken(
     token: string | undefined,
-): Promise<{ success: boolean; url?: string; error?: string }> {
+): Promise<{ success: boolean; token?: string; error?: string }> {
     if (!token) {
         return {success: false, error: "reCAPTCHA token is missing."};
     }
 
+    // --- Validate Environment Variables ---
     const secretKey = process.env.RECAPTCHA_SECRET_KEY;
     if (!secretKey) {
         console.error("RECAPTCHA_SECRET_KEY is not set.");
@@ -42,6 +30,7 @@ export async function getPaiaManualUrl(
         return {success: false, error: "Server configuration error."};
     }
 
+    // --- Verify reCAPTCHA ---
     try {
         const response = await fetch(
             `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`,
@@ -60,14 +49,12 @@ export async function getPaiaManualUrl(
             return {success: false, error: "Bot-like behavior detected."};
         }
 
-        await head(paiaManualUrl); // Verify the blob exists
-
-        return {success: true, url: paiaManualUrl};
+        // --- Generate and Store Download Token ---
+        const downloadToken = nanoid(32);
+        const key = `paia-token:${downloadToken}`;
+        await redis.set(key, "valid", {EX: 300});
+        return {success: true, token: downloadToken};
     } catch (error) {
-        if (isVercelBlobError(error) && error.statusCode === 404) {
-            console.error("PAIA manual blob not found.", error);
-            return {success: false, error: "The requested document could not be found."};
-        }
         console.error("An unexpected error occurred in PAIA action:", error);
         return {success: false, error: "An unexpected error occurred."};
     }
