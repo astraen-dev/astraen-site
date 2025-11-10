@@ -5,7 +5,9 @@ import {AnimatePresence, motion} from "framer-motion";
 import Image from "next/image";
 import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
-import React from "react";
+import React, {useState} from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import {Menu, X} from "lucide-react";
 
 const navItems = [
     {name: "Home", href: "/"},
@@ -24,6 +26,22 @@ export function Header() {
     const parentSegment = pathSegments[0] ? `/${pathSegments[0]}` : "/";
     const childSegment = pathSegments[1];
     const childPillName = childSegment ? subPageNames[childSegment] : null;
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const mobileLinkVariants = {
+        open: {opacity: 1, y: 0},
+        closed: {opacity: 0, y: 20},
+    };
+
+    const mobileNavVariants = {
+        open: {
+            transition: {staggerChildren: 0.1, delayChildren: 0.2},
+        },
+        closed: {
+            transition: {staggerChildren: 0.05, staggerDirection: -1},
+        },
+    };
 
     return (
         <motion.header
@@ -51,7 +69,9 @@ export function Header() {
 							astraen.dev
 						</span>
                     </Link>
-                    <div className="flex items-center gap-1 rounded-full bg-background-start/50 p-1">
+
+                    {/* --- Desktop Navigation --- */}
+                    <div className="hidden items-center gap-1 rounded-full bg-background-start/50 p-1 md:flex">
                         {navItems.map((item) => {
                             const isParentActive = parentSegment === item.href && item.href !== "/";
                             const isHomeActive = item.href === "/" && pathname === "/";
@@ -120,6 +140,96 @@ export function Header() {
                                 </Link>
                             );
                         })}
+                    </div>
+
+                    {/* --- Mobile Navigation --- */}
+                    <div className="md:hidden">
+                        <Dialog.Root open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+                            <Dialog.Trigger asChild>
+                                <button
+                                    className="rounded-full p-2.5 text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                                    aria-label="Open menu"
+                                >
+                                    <Menu className="h-5 w-5"/>
+                                </button>
+                            </Dialog.Trigger>
+                            <AnimatePresence>
+                                {isMenuOpen && (
+                                    <Dialog.Portal forceMount>
+                                        <Dialog.Overlay asChild>
+                                            <motion.div
+                                                initial={{opacity: 0}}
+                                                animate={{opacity: 1}}
+                                                exit={{opacity: 0}}
+                                                transition={{duration: 0.3, ease: "easeInOut"}}
+                                                className="fixed inset-0 z-50 bg-background-start/80 backdrop-blur-xl"
+                                            />
+                                        </Dialog.Overlay>
+                                        <Dialog.Content asChild>
+                                            <motion.div
+                                                initial={{opacity: 0}}
+                                                animate={{opacity: 1}}
+                                                exit={{opacity: 0}}
+                                                className="fixed inset-0 z-50"
+                                            >
+                                                <div className="container mx-auto flex h-full max-w-5xl flex-col px-4">
+                                                    <div className="flex h-[88px] items-center justify-between">
+                                                        <Link
+                                                            href="/"
+                                                            onClick={() => setIsMenuOpen(false)}
+                                                            className="flex items-center gap-3"
+                                                        >
+                                                            <div className="relative">
+                                                                <div
+                                                                    className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-primary-a to-secondary-b opacity-75 blur"/>
+                                                                <Image
+                                                                    src="/astraen_logo_v3.png"
+                                                                    alt="Astraen Logo"
+                                                                    width={36}
+                                                                    height={36}
+                                                                    className="relative rounded-full"
+                                                                />
+                                                            </div>
+                                                        </Link>
+                                                        <Dialog.Close asChild>
+                                                            <button
+                                                                className="rounded-full p-2.5 text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                                                                aria-label="Close menu"
+                                                            >
+                                                                <X className="h-5 w-5"/>
+                                                            </button>
+                                                        </Dialog.Close>
+                                                    </div>
+
+                                                    <motion.div
+                                                        initial="closed"
+                                                        animate="open"
+                                                        exit="closed"
+                                                        variants={mobileNavVariants}
+                                                        className="flex flex-1 flex-col items-center justify-center gap-8"
+                                                    >
+                                                        {navItems.map((item) => (
+                                                            <motion.div
+                                                                key={item.href}
+                                                                variants={mobileLinkVariants}
+                                                            >
+                                                                <Link
+                                                                    href={item.href}
+                                                                    onClick={() => setIsMenuOpen(false)}
+                                                                    className="block text-3xl font-semibold text-secondary-a transition-colors hover:text-white hover:[filter:drop-shadow(0_0_0.5rem_var(--color-primary-b))]"
+                                                                >
+                                                                    {item.name}
+                                                                </Link>
+                                                            </motion.div>
+                                                        ))}
+                                                    </motion.div>
+                                                </div>
+                                            </motion.div>
+                                        </Dialog.Content>
+                                    </Dialog.Portal>
+                                )}
+                            </AnimatePresence>
+                        </Dialog.Root>
                     </div>
                 </nav>
             </div>
