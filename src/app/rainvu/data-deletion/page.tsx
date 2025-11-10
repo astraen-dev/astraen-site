@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function DataDeletionPage() {
     return (
-        <LegalDocument title="RainVu Data Deletion Instructions" lastUpdated="November 2, 2025">
+        <LegalDocument title="RainVu Data Deletion Instructions" lastUpdated="November 10, 2025">
             <p>
                 This page provides instructions on how to delete your data from the RainVu application, as required
                 by the Google Play Store.
@@ -83,7 +83,7 @@ export default function DataDeletionPage() {
             </p>
             <ol className="ol-style">
                 <li>Open the RainVu app and navigate to <strong>Settings</strong>.</li>
-                <li>Under the &quot;Preferences&quot; section, find the toggle for <strong>Share Usage Data</strong>.
+                <li>Under the &quot;Privacy & Data&quot; section, find the toggle for <strong>Share Usage Data</strong>.
                 </li>
                 <li><strong>Turn off</strong> this toggle.</li>
             </ol>
