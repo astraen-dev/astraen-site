@@ -30,7 +30,7 @@ function PaiaAccessGate() {
                 setStatus("idle");
                 toast.error(result.error || "An unknown error occurred.");
             }
-        } catch (error) {
+        } catch {
             setStatus("idle");
             toast.error("Failed to contact verification server.");
         }
