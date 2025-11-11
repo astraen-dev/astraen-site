@@ -102,7 +102,7 @@ export default async function RootLayout({
             nonce={nonce}
             suppressHydrationWarning
         />
-        <div className="relative min-h-screen w-full overflow-x-hidden">
+        <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
             <HyperdriveBackground/>
 
             <Header/>
