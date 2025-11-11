@@ -8,6 +8,7 @@ import {usePathname} from "next/navigation";
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import {Menu, X} from "lucide-react";
+import {Breadcrumbs} from "./breadcrumbs";
 
 const navItems = [
     {name: "Home", href: "/"},
@@ -27,8 +28,8 @@ export function Header() {
     React.useEffect(() => {
         const calculatePill = () => {
             const parentSegment = `/${pathname.split("/")[1] ?? ""}`;
-            const activeIndex = navItems.findIndex(
-                item => (item.href === "/" ? pathname === "/" : item.href === parentSegment),
+            const activeIndex = navItems.findIndex(item =>
+                item.href === "/" ? pathname === "/" : item.href === parentSegment,
             );
 
             const activeItem = itemRefs.current[activeIndex];
@@ -48,7 +49,6 @@ export function Header() {
             }
         };
 
-        // Initial calculation can be delayed slightly to ensure layout is stable
         const timeoutId = setTimeout(calculatePill, 50);
 
         window.addEventListener("resize", calculatePill);
@@ -84,22 +84,24 @@ export function Header() {
             <div className="mx-auto mt-6 max-w-5xl px-4">
                 <nav
                     className="flex items-center justify-between rounded-full bg-slate-900/40 p-2.5 shadow-lg shadow-primary-a/10 ring-1 ring-white/10 backdrop-blur-lg">
-                    <Link href="/" className="flex shrink-0 items-center gap-3 pl-3">
-                        <div className="relative">
-                            <div
-                                className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-primary-a to-secondary-b opacity-75 blur"/>
-                            <Image
-                                src="/astraen_logo_v3.png"
-                                alt="Astraen Logo"
-                                width={36}
-                                height={36}
-                                className="relative rounded-full"
-                            />
+                    <div className="flex shrink-0 items-center gap-3 pl-3">
+                        <Link href="/" aria-label="Go to homepage">
+                            <div className="relative">
+                                <div
+                                    className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-primary-a to-secondary-b opacity-75 blur"/>
+                                <Image
+                                    src="/astraen_logo_v3.png"
+                                    alt="Astraen Logo"
+                                    width={36}
+                                    height={36}
+                                    className="relative rounded-full"
+                                />
+                            </div>
+                        </Link>
+                        <div className="hidden sm:inline">
+                            <Breadcrumbs/>
                         </div>
-                        <span className="hidden text-xl font-bold tracking-wider text-white sm:inline">
-							astraen.dev
-						</span>
-                    </Link>
+                    </div>
 
                     {/* --- Desktop Navigation --- */}
                     <div
