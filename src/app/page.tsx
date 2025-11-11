@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import {ArrowRight, CodeXml, Droplets, Layers, Lightbulb, Rocket,} from "lucide-react";
+import {ArrowRight, CodeXml, Layers, Lightbulb, Rocket,} from "lucide-react";
 import {TypeAnimation} from "react-type-animation";
 import Link from "next/link";
 import {Section} from "@/components/home/section";
+import {MaskedIcon} from "@/components/ui/masked-icon";
 
 const services = [
     {
@@ -56,8 +57,6 @@ export default function Home() {
                 <div className="mt-6 h-7 text-lg text-secondary-a sm:text-xl">
                     <TypeAnimation
                         sequence={[
-                            "deploy(quality);",
-                            2000,
                             "from signal to syntax;",
                             2000,
                             "from concept to clean code;",
@@ -97,7 +96,7 @@ export default function Home() {
                     </p>
                 </div>
                 <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                    {services.map((service) => (
+                    {services.map(service => (
                         <div
                             key={service.title}
                             className="relative overflow-hidden rounded-2xl bg-slate-900/40 p-8 ring-1 ring-white/10 backdrop-blur-lg transition-all duration-300 hover:ring-primary-a/50 hover:shadow-2xl hover:shadow-secondary-b/10"
@@ -134,11 +133,16 @@ export default function Home() {
                     >
                         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
                             <div
-                                className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-a/20 to-secondary-b/20 ring-1 ring-primary-a/30">
-                                <Droplets className="h-8 w-8 text-primary-b"/>
+                                className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary-a/20 to-secondary-b/20 p-2 ring-1 ring-primary-a/30">
+                                <MaskedIcon
+                                    src="/rainvu/rainvu-icon-mask.png"
+                                    className="h-10 w-10"
+                                />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-xl font-semibold text-white">RainVu 💧</h3>
+                                <h3 className="text-xl font-semibold text-white">
+                                    RainVu
+                                </h3>
                                 <p className="mt-2 text-slate-400">
                                     A modern, open-source Flutter app for meticulously logging and
                                     analyzing rainfall data. Built for farmers, gardeners, and
