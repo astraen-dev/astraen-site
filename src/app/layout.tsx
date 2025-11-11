@@ -8,6 +8,7 @@ import {headers} from "next/headers";
 import {Header} from "@/components/layout/header";
 import {Footer} from "@/components/layout/footer";
 import {ScrollToTop} from "@/components/layout/scroll-to-top";
+import HyperdriveBackground from "@/components/layout/hyperdrive-background";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -102,12 +103,7 @@ export default async function RootLayout({
             suppressHydrationWarning
         />
         <div className="relative min-h-screen w-full overflow-x-hidden">
-            {/* Animated Background */}
-            <div className="star-bg">
-                <div id="stars1" className="stars"></div>
-                <div id="stars2" className="stars stars2"></div>
-                <div id="stars3" className="stars stars3"></div>
-            </div>
+            <HyperdriveBackground/>
 
             <Header/>
             {children}
