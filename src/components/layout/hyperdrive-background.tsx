@@ -14,8 +14,8 @@ const HyperdriveBackground = () => {
 
         let animationFrameId: number;
         let stars: Star[] = [];
-        const numStars = 1000;
         const speed = 2;
+        const STARFIELD_DEPTH = 2000;
 
         type Star = {
             x: number;
@@ -30,6 +30,12 @@ const HyperdriveBackground = () => {
         };
 
         const initStars = () => {
+            const starDensityDivisor = 2000;
+            const calculatedStars = Math.floor(
+                (canvas.width * canvas.height) / starDensityDivisor,
+            );
+            const numStars = Math.max(150, Math.min(calculatedStars, 1500));
+
             stars = [];
             for (let i = 0; i < numStars; i++) {
                 stars.push(createStar());
@@ -40,15 +46,15 @@ const HyperdriveBackground = () => {
             const randomValue = Math.random();
             let color = "#FFFFFF";
             if (randomValue > 0.98) {
-                color = "#7AECFB"; // Primary Accent
+                color = "#7AECFB";
             } else if (randomValue > 0.96) {
-                color = "#C3A9FB"; // Secondary Accent
+                color = "#C3A9FB";
             }
 
             return {
                 x: Math.random() * canvas.width - canvas.width / 2,
                 y: Math.random() * canvas.height - canvas.height / 2,
-                z: z || Math.random() * canvas.width,
+                z: z || Math.random() * STARFIELD_DEPTH,
                 color: color,
             };
         };
@@ -56,7 +62,6 @@ const HyperdriveBackground = () => {
         const draw = () => {
             if (!ctx) return;
 
-            // Create background gradient
             const gradient = ctx.createRadialGradient(
                 canvas.width / 2,
                 canvas.height,
@@ -65,8 +70,8 @@ const HyperdriveBackground = () => {
                 canvas.height,
                 canvas.height,
             );
-            gradient.addColorStop(0, "#081329"); // Midnight Blue
-            gradient.addColorStop(1, "#091220"); // Very Dark Navy
+            gradient.addColorStop(0, "#081329");
+            gradient.addColorStop(1, "#091220");
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -77,7 +82,7 @@ const HyperdriveBackground = () => {
                 star.z -= speed;
 
                 if (star.z <= 0) {
-                    stars[index] = createStar(canvas.width);
+                    stars[index] = createStar(STARFIELD_DEPTH);
                 }
 
                 const fov = canvas.width * 0.8;
@@ -85,13 +90,12 @@ const HyperdriveBackground = () => {
                 const sx = star.x * scale;
                 const sy = star.y * scale;
                 const radius = Math.max(0, scale * 1.5);
-                const opacity = 1 - star.z / canvas.width;
+                const opacity = 1 - star.z / STARFIELD_DEPTH;
 
                 ctx.beginPath();
                 ctx.arc(sx, sy, radius, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(${hexToRgb(star.color)}, ${opacity})`;
 
-                // Add a subtle glow
                 if (star.color !== "#FFFFFF") {
                     ctx.shadowColor = star.color;
                     ctx.shadowBlur = 10;
