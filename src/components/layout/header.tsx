@@ -5,7 +5,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import Image from "next/image";
 import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
-import React, {useState} from "react";
+import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import {Menu, X} from "lucide-react";
 
@@ -14,20 +14,51 @@ const navItems = [
     {name: "RainVu", href: "/rainvu"},
 ];
 
-const subPageNames: Record<string, string> = {
-    privacy: "Privacy",
-    terms: "Terms",
-    "data-deletion": "Data Deletion",
-};
-
 export function Header() {
     const pathname = usePathname();
-    const pathSegments = pathname.split("/").filter(Boolean);
-    const parentSegment = pathSegments[0] ? `/${pathSegments[0]}` : "/";
-    const childSegment = pathSegments[1];
-    const childPillName = childSegment ? subPageNames[childSegment] : null;
+    const [activePill, setActivePill] = React.useState<{
+        left: number;
+        width: number;
+        opacity: number;
+    } | null>(null);
+    const navRef = React.useRef<HTMLDivElement>(null);
+    const itemRefs = React.useRef<Array<HTMLAnchorElement | null>>([]);
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    React.useEffect(() => {
+        const calculatePill = () => {
+            const parentSegment = `/${pathname.split("/")[1] ?? ""}`;
+            const activeIndex = navItems.findIndex(
+                item => (item.href === "/" ? pathname === "/" : item.href === parentSegment),
+            );
+
+            const activeItem = itemRefs.current[activeIndex];
+            const navContainer = navRef.current;
+
+            if (activeItem && navContainer) {
+                const navRect = navContainer.getBoundingClientRect();
+                const itemRect = activeItem.getBoundingClientRect();
+
+                setActivePill({
+                    left: itemRect.left - navRect.left,
+                    width: itemRect.width,
+                    opacity: 1,
+                });
+            } else {
+                setActivePill({left: 0, width: 0, opacity: 0});
+            }
+        };
+
+        // Initial calculation can be delayed slightly to ensure layout is stable
+        const timeoutId = setTimeout(calculatePill, 50);
+
+        window.addEventListener("resize", calculatePill);
+        return () => {
+            clearTimeout(timeoutId);
+            window.removeEventListener("resize", calculatePill);
+        };
+    }, [pathname]);
+
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     const mobileLinkVariants = {
         open: {opacity: 1, y: 0},
@@ -53,7 +84,7 @@ export function Header() {
             <div className="mx-auto mt-6 max-w-5xl px-4">
                 <nav
                     className="flex items-center justify-between rounded-full bg-slate-900/40 p-2.5 shadow-lg shadow-primary-a/10 ring-1 ring-white/10 backdrop-blur-lg">
-                    <Link href="/" className="flex items-center gap-3 pl-3">
+                    <Link href="/" className="flex shrink-0 items-center gap-3 pl-3">
                         <div className="relative">
                             <div
                                 className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-primary-a to-secondary-b opacity-75 blur"/>
@@ -71,69 +102,53 @@ export function Header() {
                     </Link>
 
                     {/* --- Desktop Navigation --- */}
-                    <div className="hidden items-center gap-1 rounded-full bg-background-start/50 p-1 md:flex">
-                        {navItems.map((item) => {
-                            const isParentActive = parentSegment === item.href && item.href !== "/";
-                            const isHomeActive = item.href === "/" && pathname === "/";
-                            const isActive = isParentActive || isHomeActive;
+                    <div
+                        ref={navRef}
+                        className="relative hidden items-center rounded-full bg-background-start/50 p-1 md:flex"
+                    >
+                        {/* Animated Glow Pill */}
+                        <AnimatePresence>
+                            {activePill && (
+                                <motion.div
+                                    initial={false}
+                                    animate={{
+                                        left: activePill.left,
+                                        width: activePill.width,
+                                        opacity: activePill.opacity,
+                                    }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 400,
+                                        damping: 35,
+                                    }}
+                                    className="absolute h-[calc(100%-8px)] rounded-full bg-primary-a/10"
+                                    style={{
+                                        boxShadow:
+                                            "0 0 12px 2px var(--color-primary-a-translucent, #7989EC30)",
+                                    }}
+                                />
+                            )}
+                        </AnimatePresence>
 
-                            if (isActive) {
-                                return (
-                                    <motion.div
-                                        key={`${item.href}-active`}
-                                        layoutId={`active-pill-${item.href}`}
-                                        className="flex items-center rounded-full bg-primary-a/20"
-                                        transition={{
-                                            type: "spring",
-                                            stiffness: 350,
-                                            damping: 30,
-                                        }}
-                                    >
-                                        <Link
-                                            href={item.href}
-                                            className="px-4 py-1.5 text-sm font-medium text-white"
-                                        >
-                                            {item.name}
-                                        </Link>
-
-                                        <AnimatePresence>
-                                            {isParentActive && childPillName && (
-                                                <motion.div
-                                                    className="flex items-center overflow-hidden"
-                                                    initial={{width: 0, opacity: 0}}
-                                                    animate={{width: "auto", opacity: 1}}
-                                                    exit={{width: 0, opacity: 0}}
-                                                    transition={{
-                                                        type: "spring",
-                                                        stiffness: 350,
-                                                        damping: 30,
-                                                        delay: 0.1,
-                                                    }}
-                                                >
-													<span
-                                                        className="text-slate-500"
-                                                        aria-hidden="true"
-                                                    >
-														/
-													</span>
-                                                    <div
-                                                        className="whitespace-nowrap py-1.5 pl-2 pr-4 text-sm font-medium text-white">
-                                                        {childPillName}
-                                                    </div>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </motion.div>
-                                );
-                            }
+                        {navItems.map((item, index) => {
+                            const parentSegment = `/${pathname.split("/")[1] ?? ""}`;
+                            const isActive =
+                                item.href === "/"
+                                    ? pathname === "/"
+                                    : item.href === parentSegment;
 
                             return (
                                 <Link
                                     key={item.href}
                                     href={item.href}
+                                    ref={el => {
+                                        itemRefs.current[index] = el;
+                                    }}
                                     className={cn(
-                                        "rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
-                                        "text-slate-300 hover:bg-white/10 hover:text-white",
+                                        "relative z-10 rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
+                                        isActive
+                                            ? "text-white"
+                                            : "text-slate-300 hover:text-white",
                                     )}
                                 >
                                     {item.name}
@@ -176,7 +191,8 @@ export function Header() {
                                                     Navigation Menu
                                                 </Dialog.Title>
                                                 <Dialog.Description className="sr-only">
-                                                    A list of links to navigate the site, including Home and RainVu.
+                                                    A list of links to navigate the site, including Home
+                                                    and RainVu.
                                                 </Dialog.Description>
                                                 <div
                                                     className="container mx-auto flex h-full max-w-5xl flex-col px-4 pt-6">
@@ -216,7 +232,7 @@ export function Header() {
                                                         variants={mobileNavVariants}
                                                         className="flex flex-1 flex-col items-center justify-center gap-8"
                                                     >
-                                                        {navItems.map((item) => (
+                                                        {navItems.map(item => (
                                                             <motion.div
                                                                 key={item.href}
                                                                 variants={mobileLinkVariants}
