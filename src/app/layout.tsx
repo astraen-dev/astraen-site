@@ -7,7 +7,7 @@ import {Analytics} from "@vercel/analytics/next";
 import {headers} from "next/headers";
 import {Header} from "@/components/layout/header";
 import {Footer} from "@/components/layout/footer";
-import {ScrollToTop} from "@/components/layout/scroll-to-top"; // <-- IMPORT
+import {ScrollToTop} from "@/components/layout/scroll-to-top";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
