@@ -49,7 +49,7 @@ export default function Home() {
                 />
                 <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
 					<span className="relative inline-block">
-						astraen.dev
+						astraen
 						<span
                             className="absolute -bottom-2 left-0 h-1 w-full bg-gradient-to-r from-primary-a to-secondary-b"/>
 					</span>

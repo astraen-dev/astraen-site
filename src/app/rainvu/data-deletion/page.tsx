@@ -2,7 +2,7 @@ import {Metadata} from "next";
 import {LegalDocument} from "@/components/ui/LegalDocument";
 
 export const metadata: Metadata = {
-    title: "Data Deletion Instructions for RainVu | astraen.dev",
+    title: "RainVu | Data Deletion Instructions",
     description: "Instructions on how to delete your data from the RainVu mobile application.",
 };
 

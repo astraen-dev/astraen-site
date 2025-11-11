@@ -53,7 +53,7 @@ export function Breadcrumbs() {
     if (!crumbs) {
         return (
             <Link href="/" className="text-xl font-bold tracking-wider text-white">
-                astraen.dev
+                astraen
             </Link>
         );
     }

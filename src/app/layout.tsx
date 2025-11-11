@@ -20,17 +20,17 @@ const geistMono = Geist_Mono({
 });
 
 const siteConfig = {
-    name: "astraen.dev",
+    name: "astraen",
     url: "https://astraen.dev",
     ogImage: "https://astraen.dev/astraen_logo_v3.png",
-    description: "astraen.dev: where ideas execute. From concept to clean code.",
+    description: "astraen: where ideas execute. From concept to clean code.",
     author: "ASTRAEN (PTY) LTD",
 };
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteConfig.url),
     title: {
-        default: `${siteConfig.name} | From Concept to Clean Code`,
+        default: `${siteConfig.name} | Where Ideas Execute`,
         template: `%s | ${siteConfig.name}`,
     },
     description: siteConfig.description,
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "astraen.dev",
+    name: "astraen",
     url: "https://astraen.dev",
     logo: "https://astraen.dev/astraen_logo_v3.png",
     sameAs: [

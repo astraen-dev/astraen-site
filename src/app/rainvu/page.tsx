@@ -2,17 +2,17 @@ import {Metadata} from "next";
 import {BarChart3, Database, FileJson, Layers3, Lock, Smartphone,} from "lucide-react";
 import Link from "next/link";
 import {BrandIcon} from "@/components/ui/brand-icon";
-import {MaskedIcon} from "@/components/ui/masked-icon"; // <-- IMPORT
+import {MaskedIcon} from "@/components/ui/masked-icon";
 
 export const metadata: Metadata = {
-    title: "RainVu App | astraen.dev",
+    title: "RainVu App",
     description: "A modern Flutter app for logging and analyzing rainfall data.",
     openGraph: {
         title: "RainVu | A Modern Rainfall Logging App",
         description: "Built for farmers, gardeners, and weather enthusiasts.",
         images: [
             {
-                url: "/rainvu/rainvu-og.png", // <-- Pointing to pre-rendered OG image
+                url: "/rainvu/rainvu-og.png",
                 width: 1200,
                 height: 630,
                 alt: "RainVu App Logo and Title",

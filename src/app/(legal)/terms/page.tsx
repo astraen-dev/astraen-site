@@ -2,8 +2,8 @@ import {Metadata} from "next";
 import {LegalDocument} from "@/components/ui/LegalDocument";
 
 export const metadata: Metadata = {
-    title: "Website Terms of Service | astraen.dev",
-    description: "Terms of Service for the astraen.dev website.",
+    title: "astraen | Website Terms of Service",
+    description: "Terms of Service for the astraen website.",
 };
 
 export default function TermsPage() {
@@ -12,15 +12,14 @@ export default function TermsPage() {
     return (
         <LegalDocument
             title="Website Terms of Service"
-            lastUpdated="November 2, 2025"
+            lastUpdated="November 11, 2025"
             revisionHistoryUrl={termsRevisionUrl}
         >
             <p>
-                Welcome to astraen.dev. This website is owned and operated by ASTRAEN (PTY) LTD (Registration No.
+                Welcome to astraen. This website is owned and operated by ASTRAEN (PTY) LTD (Registration No.
                 2025/845626/07). By accessing and using this website (&quot;the Site&quot;), you agree to be bound by
-                the
-                following Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, please do not use
-                the Site.
+                the following Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, please do not
+                use the Site.
             </p>
 
             <h3 className="h3-style">1. Use of the Site</h3>
