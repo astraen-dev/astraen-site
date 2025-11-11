@@ -2,10 +2,23 @@ import {Metadata} from "next";
 import {BarChart3, Database, FileJson, Layers3, Lock, Smartphone,} from "lucide-react";
 import Link from "next/link";
 import {BrandIcon} from "@/components/ui/brand-icon";
+import {MaskedIcon} from "@/components/ui/masked-icon";
 
 export const metadata: Metadata = {
-    title: "RainVu App | astraen.dev",
+    title: "RainVu App",
     description: "A modern Flutter app for logging and analyzing rainfall data.",
+    openGraph: {
+        title: "RainVu | A Modern Rainfall Logging App",
+        description: "Built for farmers, gardeners, and weather enthusiasts.",
+        images: [
+            {
+                url: "/rainvu/rainvu-og.png",
+                width: 1200,
+                height: 630,
+                alt: "RainVu App Logo and Title",
+            },
+        ],
+    },
 };
 
 const storeLinks = [
@@ -33,22 +46,26 @@ const features = [
     {
         icon: Database,
         title: "Data Logging & Management",
-        description: "Quickly log rainfall entries and manage multiple custom rain gauges.",
+        description:
+            "Quickly log rainfall entries and manage multiple custom rain gauges.",
     },
     {
         icon: BarChart3,
         title: "Powerful Analytics",
-        description: "Visualize data with charts for MTD/YTD totals and analyze historical trends.",
+        description:
+            "Visualize data with charts for MTD/YTD totals and analyze historical trends.",
     },
     {
         icon: FileJson,
         title: "Data Portability",
-        description: "Export all your data to CSV or JSON for backup or external analysis.",
+        description:
+            "Export all your data to CSV or JSON for backup or external analysis.",
     },
     {
         icon: Lock,
         title: "Secure & Private",
-        description: "All data is stored securely and locally on your device. No cloud account needed.",
+        description:
+            "All data is stored securely and locally on your device. No cloud account needed.",
     },
 ];
 
@@ -62,25 +79,30 @@ const techStack = [
 export default function RainVuPage() {
     return (
         <div
-            className="relative w-full rounded-2xl bg-slate-900/40 p-8 shadow-2xl shadow-primary-a/10 ring-1 ring-white/10 backdrop-blur-lg sm:p-12"
-        >
+            className="relative w-full rounded-2xl bg-slate-900/40 p-8 shadow-2xl shadow-primary-a/10 ring-1 ring-white/10 backdrop-blur-lg sm:p-12">
             {/* Subtle Gradient Border */}
             <div
-                className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary-a to-secondary-b opacity-20 blur-lg"
-            />
+                className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary-a to-secondary-b opacity-20 blur-lg"/>
 
-            <div className="relative z-10">
-                <h1 className="text-4xl sm:text-5xl font-bold tracking-wider text-white">
-                    RainVu <span className="text-primary-b">💧</span>
+            <div className="relative z-10 flex flex-col items-center">
+                <div
+                    className="mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-a/20 to-secondary-b/20 p-3 ring-1 ring-primary-a/30 shadow-2xl shadow-primary-a/20">
+                    <MaskedIcon
+                        src="/rainvu/rainvu-icon-mask.png"
+                        className="h-16 w-16"
+                    />
+                </div>
+                <h1 className="text-center text-4xl font-bold tracking-wider text-white sm:text-5xl">
+                    RainVu
                 </h1>
-                <p className="mt-4 text-lg text-secondary-a">
+                <p className="mt-4 max-w-2xl text-center text-lg text-secondary-a">
                     A modern Flutter app for farmers, gardeners, and weather enthusiasts to
                     meticulously log and analyze rainfall.
                 </p>
 
                 {/* --- App Store and GitHub Links --- */}
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                    {storeLinks.map((link) => (
+                    {storeLinks.map(link => (
                         <a
                             key={link.name}
                             href={link.href}
@@ -89,34 +111,43 @@ export default function RainVuPage() {
                             aria-label={link.ariaLabel}
                             className="group flex transform items-center justify-center gap-3 rounded-lg bg-slate-900/50 px-5 py-3 font-semibold text-secondary-a ring-1 ring-white/10 backdrop-blur-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:text-white hover:shadow-lg hover:shadow-primary-a/20 hover:ring-primary-a/50"
                         >
-                            <BrandIcon path={link.path}
-                                       className="h-5 w-5 transition-colors group-hover:text-primary-b"/>
+                            <BrandIcon
+                                path={link.path}
+                                className="h-5 w-5 transition-colors group-hover:text-primary-b"
+                            />
                             <span>{link.name}</span>
                         </a>
                     ))}
                 </div>
 
-
-                <div className="mt-12">
-                    <h2 className="text-2xl font-semibold text-primary-b">Key Features</h2>
+                <div className="mt-12 w-full">
+                    <h2 className="text-center text-2xl font-semibold text-primary-b">
+                        Key Features
+                    </h2>
                     <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                        {features.map((feature) => (
+                        {features.map(feature => (
                             <div
                                 key={feature.title}
                                 className="rounded-lg bg-background-end/50 p-4 ring-1 ring-white/10"
                             >
                                 <feature.icon className="h-7 w-7 text-secondary-b"/>
-                                <h3 className="mt-3 font-semibold text-white">{feature.title}</h3>
-                                <p className="mt-1 text-sm text-slate-400">{feature.description}</p>
+                                <h3 className="mt-3 font-semibold text-white">
+                                    {feature.title}
+                                </h3>
+                                <p className="mt-1 text-sm text-slate-400">
+                                    {feature.description}
+                                </p>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="mt-12">
-                    <h2 className="text-2xl font-semibold text-primary-b">Tech Stack</h2>
-                    <div className="mt-6 flex flex-wrap gap-4">
-                        {techStack.map((tech) => (
+                <div className="mt-12 w-full">
+                    <h2 className="text-center text-2xl font-semibold text-primary-b">
+                        Tech Stack
+                    </h2>
+                    <div className="mt-6 flex flex-wrap justify-center gap-4">
+                        {techStack.map(tech => (
                             <div
                                 key={tech.name}
                                 className="flex items-center gap-2 rounded-full bg-background-end/50 px-4 py-2 ring-1 ring-white/10"
@@ -129,19 +160,25 @@ export default function RainVuPage() {
                 </div>
 
                 <div
-                    className="mt-12 flex flex-col items-center justify-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:gap-6">
-                    <Link href="/rainvu/privacy"
-                          className="text-sm text-secondary-a transition-colors hover:text-primary-a hover:underline">
+                    className="mt-12 flex w-full flex-col items-center justify-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:gap-6">
+                    <Link
+                        href="/rainvu/privacy"
+                        className="text-sm text-secondary-a transition-colors hover:text-primary-a hover:underline"
+                    >
                         Privacy Policy
                     </Link>
                     <span className="hidden sm:inline text-slate-600">|</span>
-                    <Link href="/rainvu/terms"
-                          className="text-sm text-secondary-a transition-colors hover:text-primary-a hover:underline">
+                    <Link
+                        href="/rainvu/terms"
+                        className="text-sm text-secondary-a transition-colors hover:text-primary-a hover:underline"
+                    >
                         Terms of Service
                     </Link>
                     <span className="hidden sm:inline text-slate-600">|</span>
-                    <Link href="/rainvu/data-deletion"
-                          className="text-sm text-secondary-a transition-colors hover:text-primary-a hover:underline">
+                    <Link
+                        href="/rainvu/data-deletion"
+                        className="text-sm text-secondary-a transition-colors hover:text-primary-a hover:underline"
+                    >
                         Data Deletion
                     </Link>
                 </div>

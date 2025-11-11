@@ -3,7 +3,7 @@ import {LegalDocument} from "@/components/ui/LegalDocument";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Terms of Service for RainVu | astraen.dev",
+    title: "RainVu | Terms of Service",
     description: "Terms of Service for the RainVu mobile application.",
 };
 

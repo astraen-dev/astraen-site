@@ -21,8 +21,19 @@
 	}
 }
 
-/* Add/update these styles for prose content */
 @layer utilities {
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
+	}
+
 	.prose-styles p {
 		@apply text-slate-300 leading-relaxed mb-4;
 	}
@@ -49,65 +60,5 @@
 
 	.prose-styles .a-style {
 		@apply text-primary-a hover:underline;
-	}
-}
-
-/* Pure CSS Parallax Starfield Background */
-@layer base {
-	@keyframes animate-stars {
-		from {
-			transform: translateY(0px);
-		}
-		to {
-			transform: translateY(-2000px);
-		}
-	}
-
-	.star-bg {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-		background: radial-gradient(ellipse at bottom, #081329 0%, #091220 100%);
-	}
-
-	.stars {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 2000px;
-		animation: animate-stars 150s linear infinite;
-	}
-
-	.stars::after {
-		content: "";
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		background: transparent;
-		box-shadow: 186px 1735px #FFF, 1269px 1264px #FFF, 142px 1475px #FFF, 429px 101px #FFF, 1373px 1526px #FFF, 1726px 1865px #FFF, 1039px 34px #FFF, 1195px 1246px #FFF, 143px 1152px #FFF, 949px 1391px #FFF, 1222px 505px #FFF, 1515px 1823px #FFF, 1667px 119px #FFF, 1503px 166px #FFF, 715px 1564px #FFF, 1083px 1311px #FFF, 1204px 1746px #FFF, 1024px 1473px #FFF, 194px 1500px #FFF, 142px 1429px #FFF, 1428px 1393px #FFF, 1419px 1180px #FFF, 1845px 132px #FFF, 1093px 1358px #FFF, 649px 1428px #FFF, 100px 108px #FFF, 1030px 1386px #FFF, 133px 1603px #FFF, 1146px 1133px #FFF, 1968px 1695px #FFF, 1851px 1123px #FFF, 1792px 699px #FFF, 1650px 1864px #FFF, 1215px 956px #FFF, 1902px 126px #FFF, 1070px 1859px #FFF, 1832px 1239px #FFF, 1779px 1137px #FFF, 1324px 575px #FFF, 1259px 1850px #FFF, 1184px 183px #FFF, 1240px 1491px #FFF, 1378px 899px #FFF, 1042px 104px #FFF, 1301px 197px #FFF, 1181px 1581px #FFF, 1889px 1795px #FFF, 198px 1224px #FFF, 219px 1049px #FFF, 477px 1791px #FFF, 1332px 1106px #FFF, 321px 1988px #FFF, 1709px 1445px #FFF, 124px 1151px #FFF, 1424px 1278px #FFF, 1390px 1409px #FFF, 1685px 1337px #FFF, 1269px 1022px #FFF, 1326px 1355px #FFF, 104px 1132px #FFF, 1493px 867px #FFF, 1309px 1599px #FFF, 1303px 463px #FFF, 1002px 1753px #FFF, 1877px 345px #FFF, 1749px 1842px #FFF, 1018px 185px #FFF, 1029px 1000px #FFF, 1532px 1783px #FFF, 439px 1491px #FFF, 1171px 1007px #FFF, 1121px 1916px #FFF, 1188px 1141px #FFF, 1016px 1063px #FFF, 115px 1250px #FFF, 1157px 1115px #FFF, 1127px 1957px #FFF, 1618px 1835px #FFF, 1188px 1659px #FFF, 1043px 1962px #FFF, 106px 1594px #FFF, 1130px 1019px #FFF, 1032px 116px #FFF, 110px 1342px #FFF, 101px 116px #FFF, 1083px 1729px #FFF, 1111px 1399px #FFF, 104px 1928px #FFF, 102px 124px #FFF, 112px 135px #FFF, 110px 145px #FFF, 100px 155px #FFF;
-	}
-
-	.stars2 {
-		animation-duration: 100s;
-	}
-
-	.stars2::after {
-		width: 2px;
-		height: 2px;
-		box-shadow: 1603px 1443px #FFF, 156px 458px #FFF, 125px 1248px #FFF, 1831px 1135px #FFF, 138px 106px #FFF, 1843px 1801px #FFF, 1481px 1526px #FFF, 1591px 181px #FFF, 182px 1546px #FFF, 1165px 134px #FFF, 1254px 189px #FFF, 1373px 1226px #FFF, 1195px 1800px #FFF, 113px 1629px #FFF, 102px 1890px #FFF, 187px 1175px #FFF, 180px 1043px #FFF, 150px 1253px #FFF, 130px 1153px #FFF, 120px 1053px #FFF;
-	}
-
-	.stars3 {
-		animation-duration: 50s;
-	}
-
-	.stars3::after {
-		width: 3px;
-		height: 3px;
-		box-shadow: 608px 1274px #FFF, 1825px 1298px #FFF, 138px 190px #FFF, 1803px 144px #FFF, 1180px 1005px #FFF, 1142px 1820px #FFF, 1188px 1403px #FFF, 110px 150px #FFF, 120px 160px #FFF, 130px 170px #FFF, 140px 180px #FFF;
 	}
 }

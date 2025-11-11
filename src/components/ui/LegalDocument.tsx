@@ -5,14 +5,13 @@ interface LegalDocumentProps {
     title: string;
     lastUpdated: string;
     children: React.ReactNode;
-    revisionHistoryUrl?: string; // Add this optional prop
+    revisionHistoryUrl?: string;
 }
 
 export function LegalDocument({title, lastUpdated, children, revisionHistoryUrl}: LegalDocumentProps) {
     return (
         <div
             className="relative w-full rounded-2xl bg-slate-900/40 p-8 shadow-2xl shadow-primary-a/10 ring-1 ring-white/10 backdrop-blur-lg sm:p-12">
-            {/* Subtle Gradient Border */}
             <div
                 className="absolute -inset-px rounded-2xl bg-gradient-to-br from-primary-a to-secondary-b opacity-20 blur-lg"/>
 

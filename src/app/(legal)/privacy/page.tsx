@@ -2,8 +2,8 @@ import {Metadata} from "next";
 import {LegalDocument} from "@/components/ui/LegalDocument";
 
 export const metadata: Metadata = {
-    title: "Website Privacy Policy | astraen.dev",
-    description: "Privacy Policy for the astraen.dev website.",
+    title: "astraen | Privacy Policy",
+    description: "Privacy Policy for the astraen website.",
 };
 
 export default function PrivacyPage() {
@@ -12,11 +12,11 @@ export default function PrivacyPage() {
     return (
         <LegalDocument
             title="Website Privacy Policy"
-            lastUpdated="November 10, 2025"
+            lastUpdated="November 11, 2025"
             revisionHistoryUrl={policyRevisionUrl}
         >
             <p>
-                ASTRAEN (PTY) LTD (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the astraen.dev website
+                ASTRAEN (PTY) LTD (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates the astraen website
                 (&quot;the Site&quot;).
                 This Privacy Policy outlines how we collect, use, and protect your information in compliance with South
                 Africa&apos;s Protection of Personal Information Act (POPIA).

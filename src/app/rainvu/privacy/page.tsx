@@ -3,7 +3,7 @@ import {LegalDocument} from "@/components/ui/LegalDocument";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Privacy Policy for RainVu | astraen.dev",
+    title: "RainVu | Privacy Policy",
     description: "Privacy Policy for the RainVu mobile application.",
 };
 
@@ -101,7 +101,8 @@ export default function PrivacyPage() {
                     in <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
                           className="a-style">Google&apos;s Privacy Policy</a>.
                 </li>
-                <li><strong>Support Communications:</strong> If you contact us via email at <a href="mailto:dev@astraen.dev" className="a-style">dev@astraen.dev</a>, your email
+                <li><strong>Support Communications:</strong> If you contact us via email at
+                    <a href="mailto:dev@astraen.dev" className="a-style">dev@astraen.dev</a>, your email
                     address and the contents of your message will be processed by Zoho Mail&apos;s email services to
                     facilitate our communication. To help us resolve your issue, the app may pre-fill an email draft
                     with non-personal diagnostic information, such as the app version and build number.

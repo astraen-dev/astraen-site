@@ -1,4 +1,4 @@
-# astraen.dev
+# astraen
 
 The official website for **astraen.dev**, built with Next.js and hosted on Vercel.
 

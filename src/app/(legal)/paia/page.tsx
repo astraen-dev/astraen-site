@@ -2,7 +2,7 @@ import {Metadata} from "next";
 import PaiaClientPage from "./PaiaClientPage";
 
 export const metadata: Metadata = {
-    title: "PAIA Manual Access | astraen.dev",
+    title: "astraen | PAIA Manual Access",
     description: "Access the Promotion of Access to Information Act (PAIA) manual for ASTRAEN (PTY) LTD.",
     robots: {
         index: false,
