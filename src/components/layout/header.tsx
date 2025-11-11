@@ -178,12 +178,14 @@ export function Header() {
                                                 <Dialog.Description className="sr-only">
                                                     A list of links to navigate the site, including Home and RainVu.
                                                 </Dialog.Description>
-                                                <div className="container mx-auto flex h-full max-w-5xl flex-col px-4">
-                                                    <div className="flex h-[88px] items-center justify-between">
+                                                <div
+                                                    className="container mx-auto flex h-full max-w-5xl flex-col px-4 pt-6">
+                                                    <div
+                                                        className="flex items-center justify-between rounded-full bg-slate-900/40 p-2.5 shadow-lg shadow-primary-a/10 ring-1 ring-white/10 backdrop-blur-lg">
                                                         <Link
                                                             href="/"
                                                             onClick={() => setIsMenuOpen(false)}
-                                                            className="flex items-center gap-3"
+                                                            className="flex items-center gap-3 pl-3"
                                                         >
                                                             <div className="relative">
                                                                 <div
