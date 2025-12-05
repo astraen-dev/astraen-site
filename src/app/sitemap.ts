@@ -1,4 +1,4 @@
-import {MetadataRoute} from 'next'
+import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://astraen.dev';
@@ -46,5 +46,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'yearly',
             priority: 0.4,
         },
-    ]
+    ];
 }

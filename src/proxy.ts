@@ -1,9 +1,10 @@
-import {NextRequest, NextResponse} from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export function proxy(request: NextRequest) {
     const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
 
-    const devScripts = process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : "";
+    const devScripts =
+        process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : '';
 
     const cspDirectives = [
         `default-src 'self'`,
@@ -32,10 +33,16 @@ export function proxy(request: NextRequest) {
     });
 
     response.headers.set('Content-Security-Policy', cspHeader);
-    response.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+    response.headers.set(
+        'Strict-Transport-Security',
+        'max-age=63072000; includeSubDomains; preload'
+    );
     response.headers.set('X-Content-Type-Options', 'nosniff');
     response.headers.set('Referrer-Policy', 'origin-when-cross-origin');
-    response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+    response.headers.set(
+        'Permissions-Policy',
+        'camera=(), microphone=(), geolocation=()'
+    );
 
     return response;
 }
@@ -45,8 +52,8 @@ export const config = {
         {
             source: '/((?!_next/static|_next/image|favicon.svg|sitemap.xml|robots.txt).*)',
             missing: [
-                {type: 'header', key: 'next-router-prefetch'},
-                {type: 'header', key: 'purpose', value: 'prefetch'},
+                { type: 'header', key: 'next-router-prefetch' },
+                { type: 'header', key: 'purpose', value: 'prefetch' },
             ],
         },
     ],

@@ -1,0 +1,17 @@
+# PNPM
+**/pnpm-lock.yaml
+
+# Caches
+.eslintcache
+
+# Next.js
+.next/
+next-env.d.ts
+
+# Other
+venv
+design_docs
+node_modules
+collect_files.py
+list_files.py
+prompt.txt

@@ -1,64 +1,64 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-	--color-primary-a: #7989ec;
-	--color-primary-b: #7aecfb;
-	--color-secondary-a: #deccfb;
-	--color-secondary-b: #c3a9fb;
-	--color-danger-a: #f03a38;
-	--color-danger-b: #ff5f57;
-	--color-success-a: #b6f09c;
-	--color-success-b: #4ac97e;
-	--color-background-start: #091220;
-	--color-background-end: #081329;
+    --color-primary-a: #7989ec;
+    --color-primary-b: #7aecfb;
+    --color-secondary-a: #deccfb;
+    --color-secondary-b: #c3a9fb;
+    --color-danger-a: #f03a38;
+    --color-danger-b: #ff5f57;
+    --color-success-a: #b6f09c;
+    --color-success-b: #4ac97e;
+    --color-background-start: #091220;
+    --color-background-end: #081329;
 }
 
 @layer base {
-	body {
-		background-color: var(--color-background-start);
-		color: var(--color-secondary-a);
-		font-family: var(--font-mono);
-	}
+    body {
+        background-color: var(--color-background-start);
+        color: var(--color-secondary-a);
+        font-family: var(--font-mono);
+    }
 }
 
 @layer utilities {
-	.sr-only {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border-width: 0;
-	}
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
 
-	.prose-styles p {
-		@apply text-slate-300 leading-relaxed mb-4;
-	}
+    .prose-styles p {
+        @apply mb-4 leading-relaxed text-slate-300;
+    }
 
-	.prose-styles .h3-style {
-		@apply text-2xl font-semibold text-white mt-8 mb-4 border-b border-primary-a/20 pb-2;
-	}
+    .prose-styles .h3-style {
+        @apply border-primary-a/20 mt-8 mb-4 border-b pb-2 text-2xl font-semibold text-white;
+    }
 
-	.prose-styles .h4-style {
-		@apply text-lg font-semibold text-secondary-a mt-6 mb-3;
-	}
+    .prose-styles .h4-style {
+        @apply text-secondary-a mt-6 mb-3 text-lg font-semibold;
+    }
 
-	.prose-styles .ul-style {
-		@apply list-disc list-inside space-y-2 mb-4 pl-4 text-slate-300;
-	}
+    .prose-styles .ul-style {
+        @apply mb-4 list-inside list-disc space-y-2 pl-4 text-slate-300;
+    }
 
-	.prose-styles .ol-style {
-		@apply list-decimal list-inside space-y-2 mb-4 pl-4 text-slate-300;
-	}
+    .prose-styles .ol-style {
+        @apply mb-4 list-inside list-decimal space-y-2 pl-4 text-slate-300;
+    }
 
-	.prose-styles strong {
-		@apply text-secondary-a font-semibold;
-	}
+    .prose-styles strong {
+        @apply text-secondary-a font-semibold;
+    }
 
-	.prose-styles .a-style {
-		@apply text-primary-a hover:underline;
-	}
+    .prose-styles .a-style {
+        @apply text-primary-a hover:underline;
+    }
 }

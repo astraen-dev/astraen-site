@@ -1,4 +1,4 @@
 onlyBuiltDependencies:
-  - msw
-  - sharp
-  - unrs-resolver
+    - msw
+    - sharp
+    - unrs-resolver

@@ -1,23 +1,26 @@
-import {cn} from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 interface MaskedIconProps {
     src: string;
     className?: string;
 }
 
-export function MaskedIcon({src, className}: MaskedIconProps) {
+export function MaskedIcon({ src, className }: MaskedIconProps) {
     return (
         <div
-            className={cn("bg-gradient-to-br from-primary-a to-primary-b", className)}
+            className={cn(
+                'from-primary-a to-primary-b bg-gradient-to-br',
+                className
+            )}
             style={{
                 maskImage: `url(${src})`,
-                maskSize: "contain",
-                maskPosition: "center",
-                maskRepeat: "no-repeat",
+                maskSize: 'contain',
+                maskPosition: 'center',
+                maskRepeat: 'no-repeat',
                 WebkitMaskImage: `url(${src})`,
-                WebkitMaskSize: "contain",
-                WebkitMaskPosition: "center",
-                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskSize: 'contain',
+                WebkitMaskPosition: 'center',
+                WebkitMaskRepeat: 'no-repeat',
             }}
         />
     );
