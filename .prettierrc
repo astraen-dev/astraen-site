@@ -1,0 +1,16 @@
+{
+    "useTabs": false,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "printWidth": 80,
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "overrides": [
+        {
+            "files": "*.tsx",
+            "options": {
+                "parser": "typescript"
+            }
+        }
+    ]
+}

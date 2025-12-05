@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from 'react';
 
 const HyperdriveBackground = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -9,7 +9,7 @@ const HyperdriveBackground = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         let animationFrameId: number;
@@ -32,7 +32,7 @@ const HyperdriveBackground = () => {
         const initStars = () => {
             const starDensityDivisor = 2000;
             const calculatedStars = Math.floor(
-                (canvas.width * canvas.height) / starDensityDivisor,
+                (canvas.width * canvas.height) / starDensityDivisor
             );
             const numStars = Math.max(150, Math.min(calculatedStars, 1500));
 
@@ -44,11 +44,11 @@ const HyperdriveBackground = () => {
 
         const createStar = (z?: number): Star => {
             const randomValue = Math.random();
-            let color = "#FFFFFF";
+            let color = '#FFFFFF';
             if (randomValue > 0.98) {
-                color = "#7AECFB";
+                color = '#7AECFB';
             } else if (randomValue > 0.96) {
-                color = "#C3A9FB";
+                color = '#C3A9FB';
             }
 
             return {
@@ -68,10 +68,10 @@ const HyperdriveBackground = () => {
                 0,
                 canvas.width / 2,
                 canvas.height,
-                canvas.height,
+                canvas.height
             );
-            gradient.addColorStop(0, "#081329");
-            gradient.addColorStop(1, "#091220");
+            gradient.addColorStop(0, '#081329');
+            gradient.addColorStop(1, '#091220');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -96,11 +96,11 @@ const HyperdriveBackground = () => {
                 ctx.arc(sx, sy, radius, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(${hexToRgb(star.color)}, ${opacity})`;
 
-                if (star.color !== "#FFFFFF") {
+                if (star.color !== '#FFFFFF') {
                     ctx.shadowColor = star.color;
                     ctx.shadowBlur = 10;
                 } else {
-                    ctx.shadowColor = "transparent";
+                    ctx.shadowColor = 'transparent';
                     ctx.shadowBlur = 0;
                 }
 
@@ -112,13 +112,15 @@ const HyperdriveBackground = () => {
         };
 
         const hexToRgb = (hex: string) => {
-            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(
+                hex
+            );
             return result
                 ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(
-                    result[3],
-                    16,
-                )}`
-                : "255, 255, 255";
+                      result[3],
+                      16
+                  )}`
+                : '255, 255, 255';
         };
 
         const handleResize = () => {
@@ -126,13 +128,13 @@ const HyperdriveBackground = () => {
             initStars();
         };
 
-        window.addEventListener("resize", handleResize);
+        window.addEventListener('resize', handleResize);
         resizeCanvas();
         initStars();
         draw();
 
         return () => {
-            window.removeEventListener("resize", handleResize);
+            window.removeEventListener('resize', handleResize);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
@@ -141,11 +143,11 @@ const HyperdriveBackground = () => {
         <canvas
             ref={canvasRef}
             style={{
-                position: "fixed",
+                position: 'fixed',
                 top: 0,
                 left: 0,
-                width: "100%",
-                height: "100%",
+                width: '100%',
+                height: '100%',
                 zIndex: -1,
             }}
         />

@@ -1,9 +1,9 @@
-import {createClient} from 'redis';
+import { createClient } from 'redis';
 
 const redisUrl = process.env.REDIS_URL;
 
 if (!redisUrl) {
-    throw new Error("REDIS_URL environment variable is not set.");
+    throw new Error('REDIS_URL environment variable is not set.');
 }
 
 // Configure the client

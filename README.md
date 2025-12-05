@@ -25,26 +25,29 @@ This project embodies a "Deep-Space Dark & Electric Neon" aesthetic, featuring:
 This project uses [pnpm](https://pnpm.io/) as the package manager.
 
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/astraen-dev/astraen-site.git
-   cd astraen-site
-   ```
+
+    ```bash
+    git clone https://github.com/astraen-dev/astraen-site.git
+    cd astraen-site
+    ```
 
 2. **Install dependencies:**
-   ```bash
-   pnpm install
-   ```
+
+    ```bash
+    pnpm install
+    ```
 
 3. **Set up environment variables:**
    Create a `.env.local` file by copying the example and fill in the required values.
-   ```bash
-   cp .env.example .env.local
-   ```
+
+    ```bash
+    cp .env.example .env.local
+    ```
 
 4. **Run the development server:**
-   ```bash
-   pnpm dev
-   ```
+    ```bash
+    pnpm dev
+    ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
