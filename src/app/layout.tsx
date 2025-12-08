@@ -25,7 +25,8 @@ const siteConfig = {
     name: 'astraen',
     url: 'https://astraen.dev',
     ogImage: 'https://astraen.dev/astraen_logo_v3.png',
-    description: 'astraen: where ideas execute. From concept to clean code.',
+    description:
+        'The independent development lab behind RainVu. Specializing in high-performance web architecture, mobile applications, and open-source experiments.',
     author: 'ASTRAEN (PTY) LTD',
 };
 

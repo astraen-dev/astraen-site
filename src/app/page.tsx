@@ -1,36 +1,36 @@
 'use client';
 
 import Image from 'next/image';
-import { ArrowRight, CodeXml, Layers, Lightbulb, Rocket } from 'lucide-react';
+import { ArrowRight, CodeXml, Cpu, Globe, Sparkles } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 import Link from 'next/link';
 import { Section } from '@/components/home/section';
 import { MaskedIcon } from '@/components/ui/masked-icon';
 
-const services = [
+const competencies = [
     {
-        icon: Lightbulb,
-        title: 'Concept & Strategy',
+        icon: Sparkles,
+        title: 'Digital Craftsmanship',
         description:
-            'Transforming raw ideas into actionable, technical blueprints for success.',
+            'A focus on polish, fluidity, and user experience. bridging the gap between functional code and art.',
     },
     {
-        icon: Layers,
-        title: 'Architecture & Design',
+        icon: Globe,
+        title: 'Modern Web Architecture',
         description:
-            'Building robust, scalable, and maintainable foundations for modern applications.',
+            'Building responsive, edge-ready applications using Next.js and serverless technologies.',
     },
     {
         icon: CodeXml,
-        title: 'Development & Execution',
+        title: 'Mobile Engineering',
         description:
-            'Writing clean, efficient, and well-documented code that brings designs to life.',
+            'Creating native-feel cross-platform experiences with Flutter. Performance-first mobile development.',
     },
     {
-        icon: Rocket,
-        title: 'Deployment & Quality',
+        icon: Cpu,
+        title: 'Systems & Backend',
         description:
-            'Ensuring seamless delivery and high-quality performance from staging to production.',
+            'Robust data design and API development. Ensuring scalable foundations for ambitious ideas.',
     },
 ];
 
@@ -56,11 +56,11 @@ export default function Home() {
                 <div className="text-secondary-a mt-6 h-7 text-lg sm:text-xl">
                     <TypeAnimation
                         sequence={[
-                            'from signal to syntax;',
+                            'the digital lab;',
                             2000,
-                            'from concept to clean code;',
+                            'building open source;',
                             2000,
-                            'where ideas execute;',
+                            'engineering ideas;',
                             2000,
                         ]}
                         wrapper="span"
@@ -69,46 +69,46 @@ export default function Home() {
                     />
                 </div>
                 <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-                    Boutique software development focusing on quality,
-                    performance, and clean architecture. Shipping the future,
-                    one commit at a time.
+                    An independent development studio and umbrella for personal
+                    projects. Specializing in high-performance architecture and
+                    bespoke freelance engineering.
                 </p>
                 <div className="mt-10 flex items-center justify-center gap-x-6">
                     <Link
                         href="#projects"
                         className="group from-primary-a to-secondary-b text-background-start ring-primary-a/50 hover:shadow-primary-b/30 flex transform items-center justify-center gap-2 rounded-full bg-gradient-to-r px-6 py-3 font-semibold ring-1 backdrop-blur-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg"
                     >
-                        View Projects
+                        Explore The Lab
                         <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                     </Link>
                 </div>
             </Section>
 
-            {/* --- Services Section --- */}
+            {/* --- Competencies Section --- */}
             <Section id="about">
                 <div className="text-center">
                     <h2 className="text-primary-b text-3xl font-bold tracking-tight sm:text-4xl">
-                        From Concept to Clean Code
+                        The Technical Foundation
                     </h2>
                     <p className="mt-4 text-lg leading-8 text-slate-300">
-                        A philosophy of meticulous development across the entire
-                        product lifecycle.
+                        The principles and stack that power my projects and
+                        freelance work.
                     </p>
                 </div>
                 <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                    {services.map((service) => (
+                    {competencies.map((item) => (
                         <div
-                            key={service.title}
+                            key={item.title}
                             className="hover:ring-primary-a/50 hover:shadow-secondary-b/10 relative overflow-hidden rounded-2xl bg-slate-900/40 p-8 ring-1 ring-white/10 backdrop-blur-lg transition-all duration-300 hover:shadow-2xl"
                         >
                             <div className="from-primary-a/20 to-secondary-b/20 ring-primary-a/30 mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br ring-1">
-                                <service.icon className="text-primary-b h-6 w-6" />
+                                <item.icon className="text-primary-b h-6 w-6" />
                             </div>
                             <h3 className="text-lg font-semibold text-white">
-                                {service.title}
+                                {item.title}
                             </h3>
                             <p className="mt-2 text-sm text-slate-400">
-                                {service.description}
+                                {item.description}
                             </p>
                         </div>
                     ))}
@@ -119,10 +119,11 @@ export default function Home() {
             <Section id="projects">
                 <div className="text-center">
                     <h2 className="text-primary-b text-3xl font-bold tracking-tight sm:text-4xl">
-                        Featured Projects
+                        Lab Projects
                     </h2>
                     <p className="mt-4 text-lg leading-8 text-slate-300">
-                        A glimpse into what&apos;s been built.
+                        Public applications and open-source tools born from the
+                        studio.
                     </p>
                 </div>
                 <div className="mt-16 grid grid-cols-1 gap-8">
