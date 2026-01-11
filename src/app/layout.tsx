@@ -59,7 +59,7 @@ export default function RootLayout({
             <body
                 className={`${fontSans.variable} ${fontMono.variable} antialiased selection:bg-white selection:text-black`}
             >
-                <div className="bg-noise" />
+                <div className="bg-noise z-0" />
                 <ScrollToTop />
                 <Header />
                 <main className="relative z-10 flex min-h-screen flex-col">
