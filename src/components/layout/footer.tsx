@@ -1,12 +1,17 @@
 import Link from 'next/link';
-import { Github, Linkedin } from 'lucide-react';
+import { GithubIcon } from '@/components/icons/GithubIcon';
+import { LinkedinIcon } from '@/components/icons/LinkedinIcon';
 
 const links = [
-    { label: 'GitHub', href: 'https://github.com/astraen-dev', icon: Github },
+    {
+        label: 'GitHub',
+        href: 'https://github.com/astraen-dev',
+        icon: GithubIcon,
+    },
     {
         label: 'LinkedIn',
         href: 'https://www.linkedin.com/company/astraen',
-        icon: Linkedin,
+        icon: LinkedinIcon,
     },
 ];
 

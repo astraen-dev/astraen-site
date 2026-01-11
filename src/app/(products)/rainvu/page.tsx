@@ -6,13 +6,13 @@ import {
     Shield,
     Zap,
     Layers,
-    Github,
     WifiOff,
     FileJson,
     Calendar,
     ArrowUpRight,
 } from 'lucide-react';
 import Link from 'next/link';
+import { GithubIcon } from '@/components/icons/GithubIcon';
 
 export const metadata: Metadata = {
     title: 'RainVu',
@@ -201,7 +201,7 @@ export default function RainVuPage() {
                                 rel="noopener noreferrer"
                                 className="group inline-flex items-center gap-2 border-b border-white/30 pb-1 text-white hover:border-white"
                             >
-                                <Github className="h-4 w-4" />
+                                <GithubIcon className="h-4 w-4" />
                                 View Source Code
                                 <ArrowUpRight className="h-3 w-3 opacity-50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                             </a>
