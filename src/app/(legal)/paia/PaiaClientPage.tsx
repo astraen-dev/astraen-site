@@ -102,9 +102,22 @@ function PaiaAccessGate() {
     );
 }
 
-export default function PaiaClientPage({ siteKey }: { siteKey: string }) {
+export default function PaiaClientPage({
+    siteKey,
+    nonce,
+}: {
+    siteKey: string;
+    nonce?: string;
+}) {
     return (
-        <GoogleReCaptchaProvider reCaptchaKey={siteKey}>
+        <GoogleReCaptchaProvider
+            reCaptchaKey={siteKey}
+            scriptProps={{
+                nonce,
+                defer: true,
+                appendTo: 'head',
+            }}
+        >
             <PaiaAccessGate />
         </GoogleReCaptchaProvider>
     );

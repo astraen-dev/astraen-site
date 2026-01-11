@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import PaiaClientPage from './PaiaClientPage';
+import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
     title: 'astraen | PAIA Manual Access',
@@ -11,8 +12,9 @@ export const metadata: Metadata = {
     },
 };
 
-export default function PaiaPage() {
+export default async function PaiaPage() {
     const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    const nonce = (await headers()).get('x-nonce') || undefined;
 
     if (!recaptchaSiteKey) {
         return (
@@ -31,5 +33,5 @@ export default function PaiaPage() {
         );
     }
 
-    return <PaiaClientPage siteKey={recaptchaSiteKey} />;
+    return <PaiaClientPage siteKey={recaptchaSiteKey} nonce={nonce} />;
 }

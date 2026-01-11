@@ -8,12 +8,12 @@ export function proxy(request: NextRequest) {
 
     const cspDirectives = [
         `default-src 'self'`,
-        `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${devScripts} https://vitals.vercel-insights.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/`,
+        `script-src 'self' 'nonce-${nonce}' ${devScripts} https://vitals.vercel-insights.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://vercel.live`,
         `style-src 'self' 'unsafe-inline'`,
-        `img-src 'self' blob: data:`,
-        `font-src 'self'`,
-        `connect-src 'self' https://vitals.vercel-insights.com`,
-        `frame-src https://www.google.com/recaptcha/`,
+        `img-src 'self' blob: data: https://vercel.live`,
+        `font-src 'self' data:`,
+        `connect-src 'self' https://vitals.vercel-insights.com https://vercel.live`,
+        `frame-src 'self' https://www.google.com/recaptcha/ https://vercel.live`,
         `object-src 'none'`,
         `base-uri 'self'`,
         `form-action 'self'`,
@@ -25,6 +25,7 @@ export function proxy(request: NextRequest) {
 
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-nonce', nonce);
+    requestHeaders.set('Content-Security-Policy', cspHeader);
 
     const response = NextResponse.next({
         request: {
