@@ -4,7 +4,6 @@ import './globals.css';
 import { Toaster } from 'sonner';
 import { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { ScrollToTop } from '@/components/layout/scroll-to-top';
@@ -55,7 +54,6 @@ export default async function RootLayout({
                 <Footer />
                 <Toaster theme="dark" position="bottom-center" />
                 <Analytics />
-                <SpeedInsights />
             </body>
         </html>
     );

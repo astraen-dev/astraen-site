@@ -1,4 +1,5 @@
-import { Metadata } from 'next';
+'use client';
+
 import {
     Database,
     ShieldCheck,
@@ -12,12 +13,6 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { LogicVisualizer } from '@/components/case-studies/logic-visualizer';
-
-export const metadata: Metadata = {
-    title: 'Case Study: Bespoke Stock Manager',
-    description:
-        'Architecture of a bespoke, high-integrity inventory and logistics OS.',
-};
 
 export default function StockManagerCaseStudy() {
     return (
@@ -46,7 +41,7 @@ export default function StockManagerCaseStudy() {
                 </h1>
 
                 <p className="text-text-secondary mb-12 text-xl leading-relaxed">
-                    A high-integrity logistics OS designed to eliminate human
+                    A high-integrity logistics tool designed to eliminate human
                     error. We architected a database-centric system with an
                     immutable ledger that automates the complex relationship
                     between physical components, digital sales bundles, and

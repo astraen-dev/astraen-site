@@ -1,4 +1,11 @@
 import React from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Case Study: Bespoke Stock Manager',
+    description:
+        'Architecture of a bespoke, high-integrity inventory and logistics tool.',
+};
 
 export default function CaseStudyLayout({
     children,
