@@ -1,8 +1,6 @@
 <svg width="1128" height="191" viewBox="0 0 1128 191" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background -->
     <rect width="1128" height="191" fill="#050505"/>
 
-    <!-- Ultra-subtle Horizontal Grid Lines -->
     <defs>
         <pattern id="horizontalGrid" width="1128" height="20" patternUnits="userSpaceOnUse">
             <line x1="0" y1="0" x2="1128" y2="0" stroke="#ededed" stroke-width="0.5" stroke-opacity="0.03"/>
@@ -15,14 +13,6 @@
     <rect width="1128" height="191" fill="url(#horizontalGrid)" />
     <rect width="1128" height="191" fill="url(#centerHighlight)" />
 
-    <!-- Left Accent: Data Coordinates
-    <g transform="translate(40, 80)">
-        <text fill="#444" font-family="monospace" font-size="8" letter-spacing="0.1em">CORE_SYS: v0.0.1</text>
-        <text y="15" fill="#444" font-family="monospace" font-size="8" letter-spacing="0.1em">STATUS: OPERATIONAL</text>
-        <rect y="25" width="60" height="1" fill="#ededed" fill-opacity="0.1"/>
-    </g>-->
-
-    <!-- Center Logo & Branding -->
     <g transform="translate(564, 85) scale(0.28)">
         <g transform="translate(-256, -250)">
             <path d="M256 120L130 380H190L256 240L322 380H382L256 120Z" fill="#ededed"/>
@@ -32,17 +22,6 @@
     </g>
 
     <text x="564" y="145" text-anchor="middle" fill="#ededed" font-family="monospace" font-size="12" letter-spacing="0.5em" font-weight="bold">ASTRAEN</text>
-    <!-- <text x="564" y="162" text-anchor="middle" fill="#666" font-family="monospace" font-size="8" letter-spacing="0.2em">SOFTWARE LAB</text> -->
-
-    <!-- Right Accent: Lab Active Indicator
-    <g transform="translate(1000, 80)">
-        <circle cx="0" cy="5" r="3" fill="#22c55e">
-            <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite" />
-        </circle>
-        <text x="10" y="8" fill="#ededed" fill-opacity="0.6" font-family="monospace" font-size="9">LAB_ACTIVE</text>
-        <path d="M0 20 H100" stroke="#ededed" stroke-width="0.5" stroke-opacity="0.1" />
-        <text x="0" y="35" fill="#444" font-family="monospace" font-size="8">51.5074° N</text>
-    </g>-->
 
     <g transform="translate(1000, 80)">
         <text fill="#444" font-family="monospace" font-size="8" letter-spacing="0.1em">CORE_SYS: v0.0.1</text>
@@ -50,7 +29,6 @@
         <rect y="25" width="60" height="1" fill="#ededed" fill-opacity="0.1"/>
     </g>
 
-    <!-- Subtle Edge Framing -->
     <rect x="20" y="20" width="10" height="10" stroke="#ededed" stroke-opacity="0.1" stroke-width="0.5" fill="none"/>
     <rect x="1098" y="161" width="10" height="10" stroke="#ededed" stroke-opacity="0.1" stroke-width="0.5" fill="none"/>
 </svg>
