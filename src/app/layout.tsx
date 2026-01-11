@@ -51,11 +51,11 @@ export const metadata: Metadata = {
     },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
     children,
 }: Readonly<{ children: ReactNode }>) {
     return (
-        <html lang="en" className="scroll-smooth">
+        <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
             <body
                 className={`${fontSans.variable} ${fontMono.variable} antialiased selection:bg-white selection:text-black`}
             >

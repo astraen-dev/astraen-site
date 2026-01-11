@@ -13,8 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default async function PaiaPage() {
+    const headerList = await headers();
+    const nonce = headerList.get('x-nonce') || '';
+
     const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-    const nonce = (await headers()).get('x-nonce') || undefined;
 
     if (!recaptchaSiteKey) {
         return (
