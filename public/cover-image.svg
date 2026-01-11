@@ -1,0 +1,48 @@
+<svg width="1584" height="396" viewBox="0 0 1584 396" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="1584" height="396" fill="#050505"/>
+
+    <!-- Subtle Engineering Grid -->
+    <defs>
+        <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+            <path d="M 44 0 L 0 0 0 44" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.05"/>
+        </pattern>
+        <radialGradient id="logoGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#ededed" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="#ededed" stop-opacity="0" />
+        </radialGradient>
+    </defs>
+    <rect width="1584" height="396" fill="url(#grid)" />
+
+    <!-- Central Radial Glow -->
+    <circle cx="792" cy="198" r="300" fill="url(#logoGlow)" />
+
+    <!-- Decorative Tech Lines -->
+    <line x1="0" y1="198" x2="680" y2="198" stroke="#ededed" stroke-width="0.5" stroke-opacity="0.1" />
+    <line x1="904" y1="198" x2="1584" y2="198" stroke="#ededed" stroke-width="0.5" stroke-opacity="0.1" />
+
+    <!-- Logo Section (Centered and Scaled) -->
+    <g transform="translate(712, 118) scale(0.3125)">
+        <!-- Scaled from 512 to ~160px height -->
+        <path d="M256 120L130 380H190L256 240L322 380H382L256 120Z" fill="#ededed"/>
+        <circle cx="256" cy="340" r="30" fill="#ededed"/>
+        <path d="M256 120L130 380H190L256 240L322 380H382L256 120Z" stroke="#050505" stroke-width="10" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Brand Typography (Monospace Style) -->
+    <text x="792" y="320" text-anchor="middle" fill="#ededed" font-family="monospace" font-size="14" letter-spacing="0.4em" font-weight="bold">ASTRAEN</text>
+    <text x="792" y="345" text-anchor="middle" fill="#888" font-family="monospace" font-size="10" letter-spacing="0.2em">SOFTWARE LABORATORY</text>
+
+    <!-- Lab Status Indicator (Top Right)
+    <g transform="translate(1450, 40)">
+        <rect width="100" height="24" rx="12" fill="#111" stroke="#333" stroke-width="1"/>
+        <circle cx="15" cy="12" r="3" fill="#22c55e">
+            <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <text x="25" y="16" fill="#22c55e" font-family="monospace" font-size="9" font-weight="bold">LAB ACTIVE</text>
+    </g> -->
+
+    <!-- Bottom Left Details
+    <text x="40" y="360" fill="#444" font-family="monospace" font-size="10">SYS_REF: 01-ARCH</text>
+    <text x="40" y="375" fill="#444" font-family="monospace" font-size="10">LOC: 51.5074° N, 0.1278° W</text> -->
+</svg>
