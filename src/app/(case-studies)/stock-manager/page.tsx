@@ -1,5 +1,6 @@
 'use client';
 
+import { motion, Variants, stagger } from 'framer-motion';
 import {
     Database,
     ShieldCheck,
@@ -14,11 +15,35 @@ import {
 import Link from 'next/link';
 import { LogicVisualizer } from '@/components/case-studies/logic-visualizer';
 
+const fadeInUp: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: 'easeOut' },
+    },
+};
+
+const staggerContainer: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            delayChildren: stagger(0.1, { startDelay: 0.2 }),
+        },
+    },
+};
+
 export default function StockManagerCaseStudy() {
     return (
         <div className="w-full pt-32 pb-20">
             {/* Header / Intro */}
-            <section className="container mx-auto mb-24 max-w-4xl px-6">
+            <motion.section
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUp}
+                className="container mx-auto mb-24 max-w-4xl px-6"
+            >
                 <Link
                     href="/"
                     className="text-text-secondary mb-8 inline-flex items-center gap-2 text-sm transition-colors hover:text-white"
@@ -83,12 +108,18 @@ export default function StockManagerCaseStudy() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </motion.section>
 
             {/* The Problem Space */}
-            <section className="container mx-auto mb-32 max-w-4xl px-6">
+            <motion.section
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                variants={staggerContainer}
+                className="container mx-auto mb-32 max-w-4xl px-6"
+            >
                 <div className="grid gap-12 md:grid-cols-2">
-                    <div>
+                    <motion.div variants={fadeInUp}>
                         <h2 className="mb-4 text-2xl font-bold text-white">
                             The Entropy Problem
                         </h2>
@@ -118,29 +149,38 @@ export default function StockManagerCaseStudy() {
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div className="flex flex-col justify-center rounded-2xl border border-red-500/10 bg-red-900/5 p-8">
-                        <div className="mb-6 flex items-start gap-4">
-                            <Activity className="mt-1 h-6 w-6 text-red-400" />
-                            <div>
-                                <h3 className="mb-1 font-bold text-white">
-                                    System Fragility
-                                </h3>
-                                <p className="text-sm text-red-200/60">
-                                    Previous reliance on &#34;avoiding human
-                                    error&#34; was unsustainable at scale. A
-                                    single missed spreadsheet update caused
-                                    cascading failures in fulfillment.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    </motion.div>
+
+                    <motion.div
+                        variants={fadeInUp}
+                        className="flex flex-col items-center justify-center rounded-2xl border border-red-500/10 bg-red-900/5 p-10 text-center"
+                    >
+                        <Activity
+                            className="mb-6 h-20 w-20 text-red-400 opacity-80"
+                            strokeWidth={1}
+                        />
+                        <h3 className="mb-4 text-xl font-bold text-white">
+                            System Fragility
+                        </h3>
+                        <p className="leading-relaxed text-red-200/60">
+                            Previous reliance on &#34;avoiding human error&#34;
+                            was unsustainable at scale. A single missed
+                            spreadsheet update caused cascading failures in
+                            fulfillment.
+                        </p>
+                    </motion.div>
                 </div>
-            </section>
+            </motion.section>
 
             {/* The Architecture Solution (Atoms/Molecules) */}
             <section className="bg-surface/30 mb-32 border-y border-white/5 py-24">
-                <div className="container mx-auto max-w-4xl px-6">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: '-100px' }}
+                    variants={fadeInUp}
+                    className="container mx-auto max-w-4xl px-6"
+                >
                     <div className="mb-12">
                         <h2 className="mb-2 font-mono text-sm tracking-widest text-indigo-400 uppercase">
                             Architecture
@@ -199,18 +239,30 @@ export default function StockManagerCaseStudy() {
                             </p>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </section>
 
             {/* Technical Highlights */}
-            <section className="container mx-auto mb-24 max-w-4xl px-6">
-                <h2 className="mb-12 text-3xl font-bold text-white">
+            <motion.section
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-100px' }}
+                variants={staggerContainer}
+                className="container mx-auto mb-24 max-w-4xl px-6"
+            >
+                <motion.h2
+                    variants={fadeInUp}
+                    className="mb-12 text-3xl font-bold text-white"
+                >
                     Engineering Highlights
-                </h2>
+                </motion.h2>
 
                 <div className="space-y-6">
                     {/* Feature 1: Immutable Logs */}
-                    <div className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10">
+                    <motion.div
+                        variants={fadeInUp}
+                        className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10"
+                    >
                         <div className="flex flex-col gap-6 md:flex-row">
                             <div className="shrink-0">
                                 <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-500/20 bg-blue-500/10">
@@ -240,10 +292,13 @@ export default function StockManagerCaseStudy() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Feature 2: Automated Replenishment */}
-                    <div className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10">
+                    <motion.div
+                        variants={fadeInUp}
+                        className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10"
+                    >
                         <div className="flex flex-col gap-6 md:flex-row">
                             <div className="shrink-0">
                                 <div className="flex h-12 w-12 items-center justify-center rounded-full border border-emerald-500/20 bg-emerald-500/10">
@@ -265,10 +320,13 @@ export default function StockManagerCaseStudy() {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Feature 3: Automated Financial Ledgers */}
-                    <div className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10">
+                    <motion.div
+                        variants={fadeInUp}
+                        className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10"
+                    >
                         <div className="flex flex-col gap-6 md:flex-row">
                             <div className="shrink-0">
                                 <div className="flex h-12 w-12 items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10">
@@ -299,10 +357,13 @@ export default function StockManagerCaseStudy() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* REVISED Feature 4: Security */}
-                    <div className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10">
+                    <motion.div
+                        variants={fadeInUp}
+                        className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10"
+                    >
                         <div className="flex flex-col gap-6 md:flex-row">
                             <div className="shrink-0">
                                 <div className="flex h-12 w-12 items-center justify-center rounded-full border border-amber-500/20 bg-amber-500/10">
@@ -334,9 +395,9 @@ export default function StockManagerCaseStudy() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
-            </section>
+            </motion.section>
         </div>
     );
 }
