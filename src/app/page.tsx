@@ -4,17 +4,20 @@ import { motion, stagger, Variants } from 'framer-motion';
 import Link from 'next/link';
 import {
     ArrowRight,
-    Code,
     Smartphone,
-    Terminal,
     Zap,
     Plus,
     Droplets,
     Calendar,
     BarChart3,
+    Cpu,
+    Compass,
+    Code2,
+    PenTool,
+    Signal,
     Wifi,
     Battery,
-    Signal,
+    Microscope,
 } from 'lucide-react';
 import { MaskedIcon } from '@/components/ui/masked-icon';
 
@@ -50,7 +53,7 @@ export default function Home() {
                                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
                                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
                             </span>
-                            Available for new projects
+                            Lab active
                         </span>
                     </motion.div>
 
@@ -58,75 +61,122 @@ export default function Home() {
                         variants={item}
                         className="mb-8 text-6xl leading-[0.9] font-bold tracking-tighter text-white sm:text-8xl md:text-9xl"
                     >
-                        Logic <span className="text-text-muted">into</span>
-                        <br />
-                        Reality.
+                        Software, <br />
+                        <span className="text-text-muted">Refined.</span>
                     </motion.h1>
 
                     <motion.p
                         variants={item}
                         className="text-text-secondary max-w-xl text-lg leading-relaxed sm:text-xl"
                     >
-                        Astraen is an independent development studio obsessing
-                        over high-performance architecture, clean code, and
-                        native-feel experiences.
+                        Astraen is an independent software laboratory. We
+                        engineer durable digital systems and craft high-fidelity
+                        user experiences, prioritizing logic, performance, and
+                        privacy.
                     </motion.p>
                 </motion.div>
             </section>
 
-            {/* Bento Grid Competencies */}
+            {/* Capabilities / Competencies Grid */}
             <section className="border-border w-full border-t px-6 py-24">
                 <div className="mx-auto max-w-6xl">
+                    <div className="mb-12 flex items-center justify-between">
+                        <h2 className="text-text-muted font-mono text-sm tracking-widest uppercase">
+                            Competencies
+                        </h2>
+                    </div>
+
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                        <div className="bg-surface/30 border-border hover:bg-surface/50 rounded-2xl border p-8 transition-colors md:col-span-2">
-                            <Terminal className="mb-4 h-8 w-8 text-white" />
-                            <h3 className="mb-2 text-2xl font-bold text-white">
-                                Full-Stack Architecture
-                            </h3>
-                            <p className="text-text-secondary">
-                                Building scalable, edge-ready foundations using
-                                Next.js, Serverless, and Redis. Robust data
-                                design for ambitious ideas.
-                            </p>
-                        </div>
-                        <div className="bg-surface/30 border-border hover:bg-surface/50 rounded-2xl border p-8 transition-colors">
-                            <Smartphone className="mb-4 h-8 w-8 text-white" />
-                            <h3 className="mb-2 text-2xl font-bold text-white">
-                                Mobile
-                            </h3>
-                            <p className="text-text-secondary">
-                                Native-feel Flutter engineering.
-                            </p>
-                        </div>
-                        <div className="bg-surface/30 border-border hover:bg-surface/50 rounded-2xl border p-8 transition-colors">
-                            <Zap className="mb-4 h-8 w-8 text-white" />
-                            <h3 className="mb-2 text-2xl font-bold text-white">
-                                Performance
-                            </h3>
-                            <p className="text-text-secondary">
-                                Optimization is not an afterthought.
-                            </p>
-                        </div>
-                        <div className="bg-surface/30 border-border hover:bg-surface/50 rounded-2xl border p-8 transition-colors md:col-span-2">
-                            <Code className="mb-4 h-8 w-8 text-white" />
-                            <h3 className="mb-2 text-2xl font-bold text-white">
+                        {/* Interaction Design */}
+                        <div className="bg-surface/30 border-border group hover:bg-surface/80 rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-2xl hover:shadow-blue-900/10 md:col-span-2">
+                            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400 transition-colors group-hover:bg-blue-500/20 group-hover:text-blue-300">
+                                <Smartphone className="h-6 w-6" />
+                            </div>
+                            <h3 className="mb-2 text-xl font-bold text-white">
                                 Digital Craftsmanship
                             </h3>
-                            <p className="text-text-secondary">
+                            <p className="text-text-secondary mb-4 leading-relaxed">
                                 Bridging the gap between functional code and
-                                art. Polished, fluid, and meticulous.
+                                art. We build fluid, native-feel interfaces
+                                where every interaction, animation, and state
+                                transition is deliberate and polished.
+                            </p>
+                            <div className="flex gap-2">
+                                <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 font-mono text-xs text-white/60">
+                                    Native Mobile
+                                </span>
+                                <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 font-mono text-xs text-white/60">
+                                    Reactive Web
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* System Logic */}
+                        <div className="bg-surface/30 border-border group hover:bg-surface/80 rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-2xl hover:shadow-purple-900/10">
+                            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 text-purple-400 transition-colors group-hover:bg-purple-500/20 group-hover:text-purple-300">
+                                <Cpu className="h-6 w-6" />
+                            </div>
+                            <h3 className="mb-2 text-xl font-bold text-white">
+                                System Logic
+                            </h3>
+                            <p className="text-text-secondary mb-4 text-sm leading-relaxed">
+                                Architecting the invisible. Designing robust
+                                data structures, memory-safe backends, and
+                                scalable infrastructure that underpin complex
+                                applications.
+                            </p>
+                        </div>
+
+                        {/* R&D */}
+                        <div className="bg-surface/30 border-border group hover:bg-surface/80 rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-2xl hover:shadow-emerald-900/10">
+                            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 transition-colors group-hover:bg-emerald-500/20 group-hover:text-emerald-300">
+                                <Compass className="h-6 w-6" />
+                            </div>
+                            <h3 className="mb-2 text-xl font-bold text-white">
+                                Technical R&D
+                            </h3>
+                            <p className="text-text-secondary mb-4 text-sm leading-relaxed">
+                                Exploring the edge of what is possible. From
+                                custom simulation engines to novel algorithm
+                                implementations, we solve problems that require
+                                first-principles thinking.
+                            </p>
+                        </div>
+
+                        {/* Holistic Engineering */}
+                        <div className="bg-surface/30 border-border group hover:bg-surface/80 rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-2xl hover:shadow-orange-900/10 md:col-span-2">
+                            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/10 text-orange-400 transition-colors group-hover:bg-orange-500/20 group-hover:text-orange-300">
+                                <Code2 className="h-6 w-6" />
+                            </div>
+                            <h3 className="mb-2 text-xl font-bold text-white">
+                                Holistic Engineering
+                            </h3>
+                            <p className="text-text-secondary mb-4 leading-relaxed">
+                                Software does not exist in a vacuum. We take
+                                ownership of the entire lifecycle—architecture,
+                                design, implementation, and deployment—ensuring
+                                coherence from the database schema to the final
+                                pixel.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Featured Work */}
+            {/* In-House Products / Output */}
             <section className="border-border w-full border-t px-6 py-24">
                 <div className="mx-auto max-w-6xl">
-                    <h2 className="text-text-muted mb-12 font-mono text-sm tracking-widest uppercase">
-                        Featured Work
-                    </h2>
+                    <div className="mb-12">
+                        <h2 className="text-text-muted mb-2 font-mono text-sm tracking-widest uppercase">
+                            Lab Output
+                        </h2>
+                        <p className="text-text-secondary max-w-2xl text-lg">
+                            We build products to test our theories on
+                            architecture and user experience. RainVu is our
+                            active experiment in local-first, privacy-centric
+                            mobile design.
+                        </p>
+                    </div>
 
                     <Link href="/rainvu" className="group block">
                         <div className="bg-surface/30 border-border relative grid w-full overflow-hidden rounded-3xl border transition-colors hover:border-white/20 md:grid-cols-2">
@@ -148,19 +198,20 @@ export default function Home() {
                                         RainVu
                                     </h3>
                                     <p className="text-text-secondary mb-8 text-lg leading-relaxed">
-                                        Precision rainfall logging for farmers
-                                        and enthusiasts. Built with a
-                                        privacy-first local architecture and
-                                        120fps Flutter rendering.
+                                        A precision rainfall logging tool.
+                                        RainVu demonstrates that complex data
+                                        visualization and robust offline
+                                        capabilities can exist without
+                                        compromising user privacy.
                                     </p>
                                 </div>
 
                                 <div className="flex flex-wrap gap-2">
                                     {[
-                                        'Flutter',
-                                        'Dart',
-                                        'Drift DB',
-                                        'Riverpod',
+                                        'iOS',
+                                        'Android',
+                                        'Analytics',
+                                        'Offline-First',
                                     ].map((tag) => (
                                         <span
                                             key={tag}
@@ -201,7 +252,7 @@ export default function Home() {
 
                                         {/* Body (ListView) */}
                                         <div className="flex flex-col gap-4">
-                                            {/* MonthlySummaryCard.dart */}
+                                            {/* MonthlySummaryCard */}
                                             <div className="bg-surface-highlight rounded-2xl border border-white/5 p-4">
                                                 <div className="mb-2 flex items-center justify-between">
                                                     <div>
@@ -241,7 +292,7 @@ export default function Home() {
                                                 </div>
                                             </div>
 
-                                            {/* YtdSummaryCard.dart */}
+                                            {/* YtdSummaryCard */}
                                             <div className="bg-surface-highlight rounded-2xl border border-white/5 p-4">
                                                 <div className="mb-3 flex items-center justify-between">
                                                     <span className="text-xs font-medium text-white">
@@ -265,7 +316,7 @@ export default function Home() {
                                                 </div>
                                             </div>
 
-                                            {/* MonthlyTrendChart.dart (Abstract) */}
+                                            {/* MonthlyTrendChart (Abstract) */}
                                             <div className="bg-surface-highlight rounded-2xl border border-white/5 p-4">
                                                 <div className="mb-4 flex items-center justify-between">
                                                     <span className="text-xs font-medium text-white">
@@ -303,6 +354,60 @@ export default function Home() {
                             </div>
                         </div>
                     </Link>
+                </div>
+            </section>
+
+            {/* Philosophy / Mindset */}
+            <section className="border-border w-full border-t px-6 py-24">
+                <div className="mx-auto max-w-6xl">
+                    <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+                        <div>
+                            <h2 className="text-text-muted mb-6 font-mono text-sm tracking-widest uppercase">
+                                The Lab Mindset
+                            </h2>
+                            <h3 className="mb-4 text-3xl font-bold tracking-tight text-white">
+                                Engineering, not Assembly.
+                            </h3>
+                            <p className="text-text-secondary text-lg leading-relaxed">
+                                We believe software is an asset that should
+                                appreciate over time. We favor simple, proven
+                                technologies that allow for deep understanding,
+                                easy maintenance, and performance that lasts.
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="bg-surface/30 border-border group hover:bg-surface/80 rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-lg hover:shadow-white/5">
+                                <PenTool className="mb-3 h-6 w-6 text-white/60 transition-colors group-hover:text-white" />
+                                <h4 className="mb-1 font-bold text-white">
+                                    Precision
+                                </h4>
+                                <p className="text-text-secondary text-sm">
+                                    Attention to detail in code, interface, and
+                                    infrastructure.
+                                </p>
+                            </div>
+                            <div className="bg-surface/30 border-border group hover:bg-surface/80 rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-lg hover:shadow-white/5">
+                                <Microscope className="mb-3 h-6 w-6 text-white/60 transition-colors group-hover:text-white" />
+                                <h4 className="mb-1 font-bold text-white">
+                                    Analysis
+                                </h4>
+                                <p className="text-text-secondary text-sm">
+                                    Decisions driven by data, testing, and core
+                                    engineering principles.
+                                </p>
+                            </div>
+                            <div className="bg-surface/30 border-border group hover:bg-surface/80 rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-lg hover:shadow-white/5">
+                                <Zap className="mb-3 h-6 w-6 text-white/60 transition-colors group-hover:text-white" />
+                                <h4 className="mb-1 font-bold text-white">
+                                    Performance
+                                </h4>
+                                <p className="text-text-secondary text-sm">
+                                    Efficiency is not an afterthought; it is a
+                                    design constraint.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

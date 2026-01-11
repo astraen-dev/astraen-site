@@ -33,8 +33,9 @@ export function Footer() {
                             </span>
                         </Link>
                         <p className="text-text-secondary max-w-sm leading-relaxed">
-                            An independent software laboratory engineering logic
-                            into reality.
+                            An independent software laboratory. Engineering
+                            durable digital systems and high-fidelity
+                            experiences.
                         </p>
                     </div>
 

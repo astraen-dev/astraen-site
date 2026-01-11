@@ -33,7 +33,8 @@ export const metadata: Metadata = {
         default: siteConfig.name,
         template: `%s | ${siteConfig.name}`,
     },
-    description: siteConfig.description,
+    description:
+        'Astraen is an independent software laboratory dedicated to engineering high-fidelity digital systems.',
     icons: [{ rel: 'icon', url: '/favicon.svg', type: 'image/svg+xml' }],
 };
 

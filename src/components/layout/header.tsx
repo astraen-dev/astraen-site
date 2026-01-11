@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
-    { name: 'Index', href: '/' },
+    { name: 'Studio', href: '/' },
     { name: 'RainVu', href: '/rainvu' },
 ];
 
