@@ -18,6 +18,9 @@ import {
     Wifi,
     Battery,
     Microscope,
+    Database,
+    Layers,
+    ArrowUpRight,
 } from 'lucide-react';
 import { MaskedIcon } from '@/components/ui/masked-icon';
 
@@ -350,6 +353,107 @@ export default function Home() {
 
                                 <div className="absolute right-6 bottom-6 rounded-full border border-white/20 bg-black/50 p-3 backdrop-blur-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-white group-hover:text-black">
                                     <ArrowRight className="h-5 w-5" />
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </section>
+
+            {/* Case Studies */}
+            <section className="border-border w-full border-t px-6 py-24">
+                <div className="mx-auto max-w-6xl">
+                    <div className="mb-12 flex items-center justify-between">
+                        <h2 className="text-text-muted font-mono text-sm tracking-widest uppercase">
+                            Case Studies
+                        </h2>
+                    </div>
+
+                    <Link href="/stock-manager" className="group block">
+                        <div className="bg-surface/30 border-border relative overflow-hidden rounded-3xl border transition-all duration-500 hover:border-white/20 hover:shadow-2xl hover:shadow-indigo-900/10">
+                            <div className="grid md:grid-cols-2">
+                                <div className="flex flex-col justify-between p-8 md:p-12">
+                                    <div>
+                                        <div className="mb-6 flex items-center gap-3">
+                                            <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-indigo-500/20 bg-indigo-500/10 text-indigo-400">
+                                                <Database className="h-4 w-4" />
+                                            </span>
+                                            <span className="font-mono text-xs text-indigo-300">
+                                                Enterprise Architecture
+                                            </span>
+                                        </div>
+                                        <h3 className="mb-4 text-3xl font-bold tracking-tight text-white">
+                                            Bespoke Stock Manager
+                                        </h3>
+                                        <p className="text-text-secondary mb-8 text-lg leading-relaxed">
+                                            Moving a high-volume logistics
+                                            operation from spreadsheets to a
+                                            bespoke, immutable ledger system. We
+                                            engineered a &#34;molecular&#34;
+                                            inventory architecture to bridge the
+                                            gap between physical stock and
+                                            digital sales channels.
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-sm font-medium text-white">
+                                        Read Case Study
+                                        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                    </div>
+                                </div>
+
+                                {/* Abstract Visual for Landing Page */}
+                                <div className="relative min-h-75 border-t border-white/5 bg-black/20 md:min-h-full md:border-t-0 md:border-l">
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(99,102,241,0.1),transparent_50%)]" />
+
+                                    {/* Visualizing Data Layers */}
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="perspective-1000 relative h-64 w-64">
+                                            <motion.div
+                                                className="absolute inset-0 rounded-xl border border-indigo-500/30 bg-indigo-500/5 backdrop-blur-sm"
+                                                style={{
+                                                    transform:
+                                                        'translateZ(0px) rotateX(60deg) rotateZ(-45deg)',
+                                                }}
+                                            />
+                                            <motion.div
+                                                className="bg-surface/80 absolute inset-0 rounded-xl border border-white/10 shadow-2xl"
+                                                initial={{ y: 0, opacity: 0.5 }}
+                                                whileInView={{
+                                                    y: -40,
+                                                    opacity: 1,
+                                                }}
+                                                transition={{ duration: 1 }}
+                                                style={{
+                                                    transform:
+                                                        'translateZ(40px) rotateX(60deg) rotateZ(-45deg)',
+                                                }}
+                                            >
+                                                <div className="grid grid-cols-2 gap-2 p-4">
+                                                    <div className="h-2 w-full rounded bg-indigo-500/20" />
+                                                    <div className="h-2 w-2/3 rounded bg-white/10" />
+                                                    <div className="col-span-2 mt-2 h-2 w-full rounded bg-white/5" />
+                                                </div>
+                                            </motion.div>
+                                            <motion.div
+                                                className="bg-surface-highlight absolute inset-0 flex items-center justify-center rounded-xl border border-white/20 shadow-xl"
+                                                initial={{ y: 0, opacity: 0 }}
+                                                whileInView={{
+                                                    y: -80,
+                                                    opacity: 1,
+                                                }}
+                                                transition={{
+                                                    duration: 1,
+                                                    delay: 0.2,
+                                                }}
+                                                style={{
+                                                    transform:
+                                                        'translateZ(80px) rotateX(60deg) rotateZ(-45deg)',
+                                                }}
+                                            >
+                                                <Layers className="h-8 w-8 text-white" />
+                                            </motion.div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
