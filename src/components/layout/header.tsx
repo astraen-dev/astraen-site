@@ -24,7 +24,6 @@ function formatSegment(segment: string): string {
     if (segmentDisplayNames[segment]) {
         return segmentDisplayNames[segment];
     }
-    // Fallback: convert segment to title case
     return segment
         .split('-')
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -38,7 +37,6 @@ interface BreadcrumbPart {
 
 function getBreadcrumbParts(pathname: string): BreadcrumbPart[] {
     const parts: BreadcrumbPart[] = [{ label: 'ASTRAEN', href: '/' }];
-
     const segments = pathname.split('/').filter(Boolean);
 
     segments.forEach((segment, index) => {
@@ -57,18 +55,13 @@ export function Header() {
     const { scrollY } = useScroll();
     const breadcrumbParts = getBreadcrumbParts(pathname);
 
-    // Motion value for width that switches between 100% and auto
     const width = useMotionValue<string>('100%');
-
-    // Scroll range for the transition (0px to 100px)
     const range = [0, 100];
 
-    // Layout Morphing - max width bar to pill around text
     const marginTop = useTransform(scrollY, range, [0, 16]);
     const paddingX = useTransform(scrollY, range, [24, 16]);
     const paddingY = useTransform(scrollY, range, [16, 10]);
 
-    // Update width based on scroll position
     useMotionValueEvent(scrollY, 'change', (latest) => {
         if (latest <= 50) {
             width.set('100%');
@@ -77,11 +70,9 @@ export function Header() {
         }
     });
 
-    // Radii: Start as bottom-rounded bar (0,0,24,24), morph to full pill (9999,9999,9999,9999)
     const topRadius = useTransform(scrollY, range, [0, 9999]);
     const bottomRadius = useTransform(scrollY, range, [24, 9999]);
 
-    // Visual Styles
     const backgroundColor = useTransform(scrollY, range, [
         'rgba(10, 10, 10, 0.8)',
         'rgba(10, 10, 10, 0.9)',
@@ -99,12 +90,10 @@ export function Header() {
         e: React.MouseEvent<HTMLAnchorElement>,
         href: string
     ) => {
-        // If clicking on current location, scroll to top
         if (href === pathname) {
             e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo(0, 0);
         }
-        // Otherwise, the Link component will handle navigation
     };
 
     return (
