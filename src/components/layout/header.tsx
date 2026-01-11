@@ -47,7 +47,7 @@ export function Header() {
                 <div className="container mx-auto flex max-w-7xl items-center justify-between">
                     <Link href="/" className="group relative z-50">
                         <span className="font-mono text-lg font-bold tracking-tighter text-white transition-opacity group-hover:opacity-80">
-                            ASTRAEN
+                            Astraen
                         </span>
                     </Link>
 
