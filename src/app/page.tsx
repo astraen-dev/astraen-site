@@ -115,30 +115,73 @@ export default function Home() {
                     <h2 className="text-text-muted mb-12 font-mono text-sm tracking-widest uppercase">
                         Featured Work
                     </h2>
+
                     <Link href="/rainvu" className="group block">
-                        <div className="bg-surface border-border relative aspect-2/1 w-full overflow-hidden rounded-3xl border">
-                            <div className="absolute inset-0 bg-linear-to-br from-blue-900/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                            <div className="absolute bottom-0 left-0 w-full p-8 sm:p-12">
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-6">
-                                        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white">
+                        <div className="bg-surface/30 border-border relative grid w-full overflow-hidden rounded-3xl border transition-colors hover:border-white/20 md:grid-cols-2">
+                            {/* Content Side */}
+                            <div className="flex flex-col justify-between p-8 md:p-12">
+                                <div>
+                                    <div className="mb-6 flex items-center gap-3">
+                                        <div className="bg-surface-highlight flex h-12 w-12 items-center justify-center rounded-xl border border-white/10">
                                             <MaskedIcon
                                                 src="/rainvu/rainvu-icon-mask.png"
-                                                className="h-10 w-10 bg-black"
+                                                className="h-6 w-6 bg-white"
                                             />
                                         </div>
-                                        <div>
-                                            <h3 className="text-3xl font-bold tracking-tight text-white">
-                                                RainVu
-                                            </h3>
-                                            <p className="text-text-secondary mt-1">
-                                                Precision Rainfall Logging
-                                            </p>
+                                        <span className="rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-medium text-blue-400">
+                                            Live on App Stores
+                                        </span>
+                                    </div>
+                                    <h3 className="mb-4 text-4xl font-bold tracking-tight text-white">
+                                        RainVu
+                                    </h3>
+                                    <p className="text-text-secondary mb-8 text-lg leading-relaxed">
+                                        Precision rainfall logging for farmers
+                                        and enthusiasts. Built with a
+                                        privacy-first local architecture and
+                                        120fps Flutter rendering.
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-wrap gap-2">
+                                    {[
+                                        'Flutter',
+                                        'Dart',
+                                        'Drift DB',
+                                        'Riverpod',
+                                    ].map((tag) => (
+                                        <span
+                                            key={tag}
+                                            className="bg-surface border-border rounded-md border px-2 py-1 font-mono text-xs text-white/70"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Visual Side */}
+                            <div className="relative min-h-75 overflow-hidden bg-linear-to-br from-blue-900/20 to-black md:min-h-full">
+                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(59,130,246,0.15),transparent_70%)]" />
+
+                                {/* Abstract UI Representation */}
+                                <div className="bg-background absolute top-1/2 left-1/2 h-[80%] w-[70%] -translate-x-1/2 -translate-y-1/3 rounded-t-3xl border border-white/10 shadow-2xl transition-transform duration-500 group-hover:-translate-y-[30%]">
+                                    <div className="border-border flex items-center gap-2 border-b p-4">
+                                        <div className="h-2 w-2 rounded-full bg-red-500/50" />
+                                        <div className="h-2 w-2 rounded-full bg-yellow-500/50" />
+                                        <div className="h-2 w-2 rounded-full bg-green-500/50" />
+                                    </div>
+                                    <div className="p-6">
+                                        <div className="mb-4 h-8 w-1/2 rounded-lg bg-white/5" />
+                                        <div className="space-y-3">
+                                            <div className="h-24 w-full rounded-xl bg-blue-500/10" />
+                                            <div className="h-24 w-full rounded-xl bg-white/5" />
                                         </div>
                                     </div>
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 transition-all duration-300 group-hover:bg-white group-hover:text-black">
-                                        <ArrowRight className="h-5 w-5" />
-                                    </div>
+                                </div>
+
+                                <div className="absolute right-6 bottom-6 rounded-full border border-white/20 bg-black/50 p-3 backdrop-blur-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-white group-hover:text-black">
+                                    <ArrowRight className="h-5 w-5" />
                                 </div>
                             </div>
                         </div>
