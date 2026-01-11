@@ -48,7 +48,7 @@ export default async function RootLayout({
                 <div className="bg-noise" />
                 <ScrollToTop />
                 <Header />
-                <main className="relative z-10 flex min-h-screen flex-col pt-32 pb-16">
+                <main className="relative z-10 flex min-h-screen flex-col">
                     {children}
                 </main>
                 <Footer />
