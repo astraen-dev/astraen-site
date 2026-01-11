@@ -36,6 +36,20 @@ export const metadata: Metadata = {
     description:
         'Astraen is an independent software laboratory dedicated to engineering high-fidelity digital systems.',
     icons: [{ rel: 'icon', url: '/favicon.svg', type: 'image/svg+xml' }],
+    openGraph: {
+        title: siteConfig.name,
+        description:
+            'Astraen is an independent software laboratory dedicated to engineering high-fidelity digital systems.',
+        url: siteConfig.url,
+        siteName: siteConfig.name,
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: siteConfig.name,
+        description: 'Independent software laboratory.',
+    },
 };
 
 export default async function RootLayout({
