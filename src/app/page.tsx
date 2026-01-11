@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, stagger, Variants } from 'framer-motion';
 import Link from 'next/link';
 import {
     ArrowRight,
@@ -18,18 +18,17 @@ import {
 } from 'lucide-react';
 import { MaskedIcon } from '@/components/ui/masked-icon';
 
-const container = {
+const container: Variants = {
     hidden: { opacity: 0 },
     show: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.1,
-            delayChildren: 0.3,
+            delayChildren: stagger(0.1, { startDelay: 0.3 }),
         },
     },
 };
 
-const item = {
+const item: Variants = {
     hidden: { y: 20, opacity: 0 },
     show: { y: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
 };
