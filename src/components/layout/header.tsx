@@ -10,43 +10,52 @@ import {
     useMotionValueEvent,
 } from 'framer-motion';
 
-// Route display name mappings
-const routeDisplayNames: Record<string, string> = {
-    '/': 'ASTRAEN',
-    '/rainvu': 'ASTRAEN/RainVu',
-    '/rainvu/privacy': 'ASTRAEN/RainVu/Privacy',
-    '/rainvu/terms': 'ASTRAEN/RainVu/Terms',
-    '/rainvu/data-deletion': 'ASTRAEN/RainVu/Data Deletion',
-    '/paia': 'ASTRAEN/PAIA',
-    '/privacy': 'ASTRAEN/Privacy',
-    '/terms': 'ASTRAEN/Terms',
-    '/stock-manager': 'ASTRAEN/Stock Manager',
+// Segment display name mappings (for individual path segments)
+const segmentDisplayNames: Record<string, string> = {
+    rainvu: 'RainVu',
+    paia: 'PAIA',
+    privacy: 'Privacy',
+    terms: 'Terms',
+    'data-deletion': 'Data Deletion',
+    'stock-manager': 'Stock Manager',
 };
 
-function getRouteDisplayName(pathname: string): string {
-    // Check for exact match first
-    if (routeDisplayNames[pathname]) {
-        return routeDisplayNames[pathname];
+function formatSegment(segment: string): string {
+    if (segmentDisplayNames[segment]) {
+        return segmentDisplayNames[segment];
     }
+    // Fallback: convert segment to title case
+    return segment
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
 
-    // Fallback: convert pathname to display format
+interface BreadcrumbPart {
+    label: string;
+    href: string;
+}
+
+function getBreadcrumbParts(pathname: string): BreadcrumbPart[] {
+    const parts: BreadcrumbPart[] = [{ label: 'ASTRAEN', href: '/' }];
+
     const segments = pathname.split('/').filter(Boolean);
-    if (segments.length === 0) return 'ASTRAEN';
 
-    const formatted = segments.map((segment) =>
-        segment
-            .split('-')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ')
-    );
+    segments.forEach((segment, index) => {
+        const href = '/' + segments.slice(0, index + 1).join('/');
+        parts.push({
+            label: formatSegment(segment),
+            href,
+        });
+    });
 
-    return ['ASTRAEN', ...formatted].join('/');
+    return parts;
 }
 
 export function Header() {
     const pathname = usePathname();
     const { scrollY } = useScroll();
-    const displayName = getRouteDisplayName(pathname);
+    const breadcrumbParts = getBreadcrumbParts(pathname);
 
     // Motion value for width that switches between 100% and auto
     const width = useMotionValue<string>('100%');
@@ -86,6 +95,18 @@ export function Header() {
         'blur(16px)',
     ]);
 
+    const handleClick = (
+        e: React.MouseEvent<HTMLAnchorElement>,
+        href: string
+    ) => {
+        // If clicking on current location, scroll to top
+        if (href === pathname) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        // Otherwise, the Link component will handle navigation
+    };
+
     return (
         <header className="pointer-events-none fixed top-0 right-0 left-0 z-50 flex justify-center">
             <motion.div
@@ -107,11 +128,24 @@ export function Header() {
                 }}
                 className="pointer-events-auto flex items-center justify-center border shadow-lg shadow-black/20"
             >
-                <Link href="/" className="group relative z-50">
-                    <span className="font-mono text-sm font-bold tracking-widest whitespace-nowrap text-white transition-opacity group-hover:opacity-80">
-                        {displayName}
-                    </span>
-                </Link>
+                <nav className="relative z-50 flex items-center">
+                    {breadcrumbParts.map((part, index) => (
+                        <span key={part.href} className="flex items-center">
+                            {index > 0 && (
+                                <span className="mx-0.5 text-sm text-white/40">
+                                    /
+                                </span>
+                            )}
+                            <Link
+                                href={part.href}
+                                onClick={(e) => handleClick(e, part.href)}
+                                className="font-mono text-sm font-bold tracking-widest whitespace-nowrap text-white transition-opacity hover:opacity-80"
+                            >
+                                {part.label}
+                            </Link>
+                        </span>
+                    ))}
+                </nav>
             </motion.div>
         </header>
     );
