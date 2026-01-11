@@ -50,16 +50,6 @@ export default function Home() {
                     animate="show"
                     className="w-full max-w-4xl"
                 >
-                    <motion.div variants={item} className="mb-8">
-                        <span className="border-border bg-surface/50 text-text-secondary inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs">
-                            <span className="relative flex h-2 w-2">
-                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-                            </span>
-                            Lab active
-                        </span>
-                    </motion.div>
-
                     <motion.h1
                         variants={item}
                         className="mb-8 text-6xl leading-[0.9] font-bold tracking-tighter text-white sm:text-8xl md:text-9xl"
