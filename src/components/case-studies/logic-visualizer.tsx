@@ -28,8 +28,8 @@ export function LogicVisualizer() {
                 setStockA(Math.floor(Math.random() * 100) + 20);
                 setStockB(Math.floor(Math.random() * 100) + 20);
                 setIsCalculating(false);
-            }, 300);
-        }, 4000);
+            }, 500);
+        }, 2500);
         return () => clearInterval(interval);
     }, []);
 
@@ -67,7 +67,7 @@ export function LogicVisualizer() {
                         color="blue"
                     />
                     <div className="relative block h-8 md:hidden">
-                        <div className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-white/10 to-transparent" />
+                        <div className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-linear-to-b from-white/10 to-transparent" />
                         <ArrowDown className="absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 text-white/20" />
                     </div>
                     <InputCard
@@ -122,7 +122,7 @@ export function LogicVisualizer() {
                 </div>
 
                 <div className="relative block h-8 md:hidden">
-                    <div className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-white/10 to-transparent" />
+                    <div className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-linear-to-b from-white/10 to-transparent" />
                     <ArrowDown className="absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 text-white/20" />
                 </div>
 
@@ -132,7 +132,7 @@ export function LogicVisualizer() {
                         layout
                         className="relative overflow-hidden rounded-xl border border-indigo-500/30 bg-indigo-500/10 p-6 shadow-2xl shadow-indigo-500/10"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent opacity-50" />
+                        <div className="absolute inset-0 bg-linear-to-br from-indigo-500/10 via-transparent to-transparent opacity-50" />
 
                         <div className="relative z-10 flex items-start justify-between">
                             <div className="flex items-center gap-2 text-indigo-300">
@@ -195,7 +195,7 @@ function InputCard({
                 'relative flex flex-1 flex-col justify-center rounded-xl border p-5 transition-all duration-500',
                 isLimiting
                     ? 'border-amber-500/40 bg-amber-500/10'
-                    : 'border-white/5 bg-white/[0.02] hover:bg-white/[0.04]'
+                    : 'border-white/5 bg-white/2 hover:bg-white/4'
             )}
         >
             <div className="mb-4 flex items-center justify-between">

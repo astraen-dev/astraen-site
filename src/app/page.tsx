@@ -19,8 +19,8 @@ import {
     Battery,
     Microscope,
     Database,
-    Layers,
     ArrowUpRight,
+    Box,
 } from 'lucide-react';
 import { MaskedIcon } from '@/components/ui/masked-icon';
 
@@ -402,56 +402,173 @@ export default function Home() {
                                 </div>
 
                                 {/* Abstract Visual for Landing Page */}
-                                <div className="relative min-h-75 border-t border-white/5 bg-black/20 md:min-h-full md:border-t-0 md:border-l">
-                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(99,102,241,0.1),transparent_50%)]" />
+                                <div className="relative min-h-75 w-full overflow-hidden border-t border-white/5 bg-black/20 md:min-h-full md:border-t-0 md:border-l">
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(99,102,241,0.05),transparent_50%)]" />
 
-                                    {/* Visualizing Data Layers */}
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="perspective-1000 relative h-64 w-64">
-                                            <motion.div
-                                                className="absolute inset-0 rounded-xl border border-indigo-500/30 bg-indigo-500/5 backdrop-blur-sm"
-                                                style={{
-                                                    transform:
-                                                        'translateZ(0px) rotateX(60deg) rotateZ(-45deg)',
-                                                }}
-                                            />
-                                            <motion.div
-                                                className="bg-surface/80 absolute inset-0 rounded-xl border border-white/10 shadow-2xl"
-                                                initial={{ y: 0, opacity: 0.5 }}
-                                                whileInView={{
-                                                    y: -40,
-                                                    opacity: 1,
-                                                }}
-                                                transition={{ duration: 1 }}
-                                                style={{
-                                                    transform:
-                                                        'translateZ(40px) rotateX(60deg) rotateZ(-45deg)',
-                                                }}
-                                            >
-                                                <div className="grid grid-cols-2 gap-2 p-4">
-                                                    <div className="h-2 w-full rounded bg-indigo-500/20" />
-                                                    <div className="h-2 w-2/3 rounded bg-white/10" />
-                                                    <div className="col-span-2 mt-2 h-2 w-full rounded bg-white/5" />
-                                                </div>
-                                            </motion.div>
-                                            <motion.div
-                                                className="bg-surface-highlight absolute inset-0 flex items-center justify-center rounded-xl border border-white/20 shadow-xl"
-                                                initial={{ y: 0, opacity: 0 }}
-                                                whileInView={{
-                                                    y: -80,
-                                                    opacity: 1,
-                                                }}
-                                                transition={{
-                                                    duration: 1,
-                                                    delay: 0.2,
-                                                }}
-                                                style={{
-                                                    transform:
-                                                        'translateZ(80px) rotateX(60deg) rotateZ(-45deg)',
-                                                }}
-                                            >
-                                                <Layers className="h-8 w-8 text-white" />
-                                            </motion.div>
+                                    {/* Schematic Visualization */}
+                                    <div className="absolute inset-0 flex items-center justify-center p-8">
+                                        <div className="relative flex w-full max-w-sm items-center justify-between gap-4">
+                                            {/* Left Column: Components (Atoms) */}
+                                            <div className="flex flex-col gap-6">
+                                                {/* Component 1 (Abundant) */}
+                                                <motion.div
+                                                    initial={{
+                                                        x: -20,
+                                                        opacity: 0,
+                                                    }}
+                                                    whileInView={{
+                                                        x: 0,
+                                                        opacity: 1,
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.5,
+                                                        delay: 0.1,
+                                                    }}
+                                                    className="bg-surface/50 relative flex items-center gap-3 rounded-lg border border-white/10 p-3 pr-6 backdrop-blur-sm"
+                                                >
+                                                    <div className="flex h-8 w-8 items-center justify-center rounded bg-blue-500/10 text-blue-400">
+                                                        <Box className="h-4 w-4" />
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <span className="text-[10px] tracking-wider text-white/40 uppercase">
+                                                            Component A
+                                                        </span>
+                                                        <span className="font-mono text-sm font-bold text-white">
+                                                            150
+                                                        </span>
+                                                    </div>
+                                                    {/* Connection Point */}
+                                                    <div className="absolute top-1/2 -right-1 h-2 w-2 -translate-y-1/2 rounded-full bg-white/20" />
+                                                </motion.div>
+
+                                                {/* Component 2 (Scarce/Limiting) */}
+                                                <motion.div
+                                                    initial={{
+                                                        x: -20,
+                                                        opacity: 0,
+                                                    }}
+                                                    whileInView={{
+                                                        x: 0,
+                                                        opacity: 1,
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.5,
+                                                        delay: 0.2,
+                                                    }}
+                                                    className="bg-surface/50 relative flex items-center gap-3 rounded-lg border border-orange-500/20 p-3 pr-6 backdrop-blur-sm"
+                                                >
+                                                    <div className="flex h-8 w-8 items-center justify-center rounded bg-orange-500/10 text-orange-400">
+                                                        <Box className="h-4 w-4" />
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <span className="text-[10px] tracking-wider text-orange-200/60 uppercase">
+                                                            Component B
+                                                        </span>
+                                                        <span className="font-mono text-sm font-bold text-orange-200">
+                                                            12
+                                                        </span>
+                                                    </div>
+                                                    {/* Connection Point */}
+                                                    <div className="absolute top-1/2 -right-1 h-2 w-2 -translate-y-1/2 rounded-full bg-orange-500/50" />
+                                                </motion.div>
+                                            </div>
+
+                                            {/* Middle: Logic Flow */}
+                                            <div className="relative flex h-32 w-16 items-center justify-center">
+                                                <svg
+                                                    className="absolute inset-0 h-full w-full overflow-visible"
+                                                    viewBox="0 0 64 128"
+                                                >
+                                                    {/* Path from Comp A */}
+                                                    <motion.path
+                                                        d="M 0 32 C 32 32, 32 64, 64 64"
+                                                        fill="none"
+                                                        stroke="rgba(255,255,255,0.1)"
+                                                        strokeWidth="2"
+                                                        initial={{
+                                                            pathLength: 0,
+                                                        }}
+                                                        whileInView={{
+                                                            pathLength: 1,
+                                                        }}
+                                                        transition={{
+                                                            duration: 1,
+                                                            ease: 'easeInOut',
+                                                        }}
+                                                    />
+                                                    {/* Path from Comp B */}
+                                                    <motion.path
+                                                        d="M 0 96 C 32 96, 32 64, 64 64"
+                                                        fill="none"
+                                                        stroke="rgba(249, 115, 22, 0.4)" // Orange tint for limiting path
+                                                        strokeWidth="2"
+                                                        initial={{
+                                                            pathLength: 0,
+                                                        }}
+                                                        whileInView={{
+                                                            pathLength: 1,
+                                                        }}
+                                                        transition={{
+                                                            duration: 1,
+                                                            ease: 'easeInOut',
+                                                        }}
+                                                    />
+                                                </svg>
+                                                {/* Logic Node */}
+                                                <motion.div
+                                                    initial={{ scale: 0 }}
+                                                    whileInView={{ scale: 1 }}
+                                                    transition={{
+                                                        delay: 0.8,
+                                                        type: 'spring',
+                                                    }}
+                                                    className="z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-black text-white/60 shadow-xl"
+                                                >
+                                                    <div className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                                                </motion.div>
+                                            </div>
+
+                                            {/* Right Column: Composite Product (Molecule) */}
+                                            <div className="flex flex-col">
+                                                <motion.div
+                                                    initial={{
+                                                        x: 20,
+                                                        opacity: 0,
+                                                    }}
+                                                    whileInView={{
+                                                        x: 0,
+                                                        opacity: 1,
+                                                    }}
+                                                    transition={{
+                                                        duration: 0.5,
+                                                        delay: 0.4,
+                                                    }}
+                                                    className="bg-surface/80 relative flex flex-col items-center gap-2 rounded-xl border border-white/10 p-4 shadow-2xl backdrop-blur-md"
+                                                >
+                                                    {/* Connection Point Input */}
+                                                    <div className="absolute top-1/2 -left-1 h-2 w-2 -translate-y-1/2 rounded-full bg-white/20" />
+
+                                                    <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/20 text-indigo-300">
+                                                        <Database className="h-5 w-5" />
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <div className="text-[10px] tracking-wider text-white/40 uppercase">
+                                                            Available
+                                                        </div>
+                                                        <div className="flex items-baseline justify-center gap-1">
+                                                            <span className="font-mono text-2xl font-bold text-white">
+                                                                12
+                                                            </span>
+                                                            <span className="text-[10px] text-white/40">
+                                                                units
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="mt-2 w-full rounded-full bg-white/5 px-2 py-1 text-center text-[9px] text-white/30">
+                                                        Synced to Store
+                                                    </div>
+                                                </motion.div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
