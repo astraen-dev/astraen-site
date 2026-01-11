@@ -38,11 +38,42 @@
             );
     }
 
-    .prose-styles strong {
-        @apply text-secondary-a font-semibold;
+    /* --- Legal Document Formatting --- */
+    .prose-styles {
+        @apply text-slate-400;
     }
 
+    .prose-styles p {
+        @apply mb-4 leading-relaxed;
+    }
+
+    /* Target both the class used in the TSX and the tag for safety */
+    .prose-styles h3,
+    .prose-styles .h3-style {
+        @apply border-white/10 mt-10 mb-4 border-b pb-2 text-xl font-semibold text-white;
+    }
+
+    .prose-styles h4,
+    .prose-styles .h4-style {
+        @apply text-secondary-a mt-6 mb-3 text-lg font-medium;
+    }
+
+    .prose-styles ul,
+    .prose-styles .ul-style {
+        @apply mb-6 list-inside list-disc space-y-2 pl-2 text-slate-400;
+    }
+
+    .prose-styles ol,
+    .prose-styles .ol-style {
+        @apply mb-6 list-inside list-decimal space-y-2 pl-2 text-slate-400;
+    }
+
+    .prose-styles strong {
+        @apply text-slate-200 font-semibold;
+    }
+
+    .prose-styles a,
     .prose-styles .a-style {
-        @apply text-primary-a hover:underline;
+        @apply text-primary-b hover:text-white transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white/50;
     }
 }

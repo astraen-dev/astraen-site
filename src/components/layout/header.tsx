@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import React from 'react';
@@ -29,16 +28,10 @@ export function Header() {
                 <Link
                     href="/"
                     aria-label="Go to homepage"
-                    className="flex items-center gap-3"
+                    className="group flex items-center gap-2"
                 >
-                    <Image
-                        src="/astraen_logo_v3.png"
-                        alt="Astraen Logo"
-                        width={32}
-                        height={32}
-                        className="rounded-full opacity-90 grayscale transition-all hover:grayscale-0"
-                    />
-                    <span className="font-mono text-lg font-semibold tracking-tight text-white">
+                    <div className="h-2 w-2 rounded-full bg-blue-500 transition-transform group-hover:scale-125" />
+                    <span className="font-mono text-lg font-bold tracking-tight text-white">
                         astraen
                     </span>
                 </Link>
@@ -58,8 +51,8 @@ export function Header() {
                                 className={cn(
                                     'text-sm font-medium transition-colors',
                                     isActive
-                                        ? 'text-primary-b'
-                                        : 'text-slate-400 hover:text-white'
+                                        ? 'text-white'
+                                        : 'text-slate-500 hover:text-slate-300'
                                 )}
                             >
                                 {item.name}
@@ -97,14 +90,17 @@ export function Header() {
                                             }}
                                             className="bg-background-end fixed inset-y-0 right-0 z-50 w-full max-w-xs border-l border-white/10 p-6 shadow-2xl"
                                         >
-                                            <div className="flex items-center justify-end">
+                                            <div className="mb-12 flex items-center justify-between">
+                                                <span className="font-mono text-lg font-bold text-white">
+                                                    astraen
+                                                </span>
                                                 <Dialog.Close asChild>
                                                     <button className="text-slate-400 hover:text-white">
                                                         <X className="h-6 w-6" />
                                                     </button>
                                                 </Dialog.Close>
                                             </div>
-                                            <div className="mt-8 flex flex-col gap-6">
+                                            <div className="flex flex-col gap-6">
                                                 {navItems.map((item) => (
                                                     <Link
                                                         key={item.href}
@@ -112,7 +108,7 @@ export function Header() {
                                                         onClick={() =>
                                                             setIsMenuOpen(false)
                                                         }
-                                                        className="hover:text-primary-b text-2xl font-medium text-slate-200"
+                                                        className="text-2xl font-medium text-slate-300 hover:text-white"
                                                     >
                                                         {item.name}
                                                     </Link>
