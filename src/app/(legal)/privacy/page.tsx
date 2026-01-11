@@ -143,7 +143,7 @@ export default function PrivacyPage() {
                 For any questions regarding this policy or our privacy
                 practices, please contact our Information Officer.
             </p>
-            <ul className="ul-style !list-none !pl-0">
+            <ul className="ul-style list-none! pl-0!">
                 <li>
                     <strong>Name:</strong> David Samuel Young
                 </li>
@@ -165,7 +165,7 @@ export default function PrivacyPage() {
             <h4 className="h4-style">
                 The Information Regulator (South Africa):
             </h4>
-            <ul className="ul-style !list-none !pl-0">
+            <ul className="ul-style list-none! pl-0!">
                 <li>
                     <strong>Website:</strong>{' '}
                     <a
