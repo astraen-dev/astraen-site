@@ -17,7 +17,7 @@
     body {
         background-color: var(--color-background-start);
         color: var(--color-secondary-b);
-        font-family: var(--font-geist-sans);
+        font-family: var(--font-sans);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
@@ -40,7 +40,7 @@
 
     /* --- Legal Document Formatting --- */
     .prose-styles {
-        @apply text-slate-400;
+        @apply text-slate-400 font-sans;
     }
 
     .prose-styles p {

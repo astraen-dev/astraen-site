@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'sonner';
 import { ReactNode } from 'react';
@@ -11,13 +11,13 @@ import { Footer } from '@/components/layout/footer';
 import { ScrollToTop } from '@/components/layout/scroll-to-top';
 import GridBackground from '@/components/layout/grid-background';
 
-const geistSans = Geist({
-    variable: '--font-geist-sans',
+const fontSans = Inter({
+    variable: '--font-sans',
     subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
+const fontMono = JetBrains_Mono({
+    variable: '--font-mono',
     subsets: ['latin'],
 });
 
@@ -95,9 +95,9 @@ export default async function RootLayout({
     const nonce = headersList.get('x-nonce') || '';
 
     return (
-        <html lang="en" className="!scroll-smooth">
+        <html lang="en" className="scroll-smooth!">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${fontSans.variable} ${fontMono.variable} antialiased`}
             >
                 <ScrollToTop />
                 <script
@@ -123,6 +123,7 @@ export default async function RootLayout({
                             background: '#0f172a',
                             border: '1px solid #1e293b',
                             color: '#f8fafc',
+                            fontFamily: 'var(--font-sans)',
                         },
                     }}
                 />
