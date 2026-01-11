@@ -2,11 +2,7 @@
     "$schema": "https://unpkg.com/knip@5/schema.json",
     "entry": ["src/app/**/*.tsx"],
     "project": ["**/*.ts", "**/*.tsx"],
-    "ignore": [
-        "next.config.ts",
-        "postcss.config.mjs",
-        "eslint.config.mjs",
-    ],
+    "ignore": ["next.config.ts", "postcss.config.mjs", "eslint.config.mjs"],
     "ignoreDependencies": [
         "@tailwindcss/language-server",
         "tailwindcss",

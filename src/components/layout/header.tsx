@@ -1,127 +1,132 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
-import React from 'react';
-import * as Dialog from '@radix-ui/react-dialog';
+import {
+    motion,
+    AnimatePresence,
+    useScroll,
+    useTransform,
+} from 'framer-motion';
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
-    { name: 'Home', href: '/' },
+    { name: 'Index', href: '/' },
     { name: 'RainVu', href: '/rainvu' },
 ];
 
 export function Header() {
     const pathname = usePathname();
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { scrollY } = useScroll();
+
+    // Smooth transformation for header background and border
+    const bgOpacity = useTransform(scrollY, [0, 50], [0, 0.8]);
+    const borderOpacity = useTransform(scrollY, [0, 50], [0, 1]);
+    const paddingY = useTransform(scrollY, [0, 50], [24, 16]);
 
     return (
-        <motion.header
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="bg-background-start/80 fixed top-0 right-0 left-0 z-50 border-b border-white/5 backdrop-blur-md"
-        >
-            <div className="container mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-                <Link
-                    href="/"
-                    aria-label="Go to homepage"
-                    className="group flex items-center gap-2"
-                >
-                    <div className="h-2 w-2 rounded-full bg-blue-500 transition-transform group-hover:scale-125" />
-                    <span className="font-mono text-lg font-bold tracking-tight text-white">
-                        astraen
-                    </span>
-                </Link>
+        <>
+            <motion.header
+                style={{
+                    backgroundColor: useTransform(
+                        bgOpacity,
+                        (v) => `rgba(5, 5, 5, ${v})`
+                    ),
+                    borderBottomColor: useTransform(
+                        borderOpacity,
+                        (v) => `rgba(38, 38, 38, ${v})`
+                    ),
+                    paddingTop: paddingY,
+                    paddingBottom: paddingY,
+                }}
+                className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between border-b border-transparent px-6 backdrop-blur-md transition-all duration-300"
+            >
+                <div className="container mx-auto flex max-w-7xl items-center justify-between">
+                    <Link href="/" className="group relative z-50">
+                        <span className="font-mono text-lg font-bold tracking-tighter text-white transition-opacity group-hover:opacity-80">
+                            ASTRAEN
+                        </span>
+                    </Link>
 
-                <nav className="hidden md:flex md:items-center md:gap-8">
-                    {navItems.map((item) => {
-                        const parentSegment = `/${pathname.split('/')[1] ?? ''}`;
-                        const isActive =
-                            item.href === '/'
-                                ? pathname === '/'
-                                : item.href === parentSegment;
-
-                        return (
-                            <Link
-                                key={item.href}
-                                href={item.href}
-                                className={cn(
-                                    'text-sm font-medium transition-colors',
-                                    isActive
-                                        ? 'text-white'
-                                        : 'text-slate-500 hover:text-slate-300'
-                                )}
-                            >
-                                {item.name}
-                            </Link>
-                        );
-                    })}
-                </nav>
-
-                <div className="md:hidden">
-                    <Dialog.Root open={isMenuOpen} onOpenChange={setIsMenuOpen}>
-                        <Dialog.Trigger asChild>
-                            <button className="text-slate-300 transition-colors hover:text-white">
-                                <Menu className="h-6 w-6" />
-                            </button>
-                        </Dialog.Trigger>
-                        <AnimatePresence>
-                            {isMenuOpen && (
-                                <Dialog.Portal forceMount>
-                                    <Dialog.Overlay asChild>
+                    {/* Desktop Nav */}
+                    <nav className="hidden items-center gap-8 md:flex">
+                        {navItems.map((item) => {
+                            const isActive =
+                                item.href === '/'
+                                    ? pathname === '/'
+                                    : pathname.startsWith(item.href);
+                            return (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className={cn(
+                                        'relative text-sm font-medium transition-all duration-200',
+                                        isActive
+                                            ? 'text-white'
+                                            : 'text-text-secondary hover:text-white'
+                                    )}
+                                >
+                                    {item.name}
+                                    {isActive && (
                                         <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            className="bg-background-start/90 fixed inset-0 z-50 backdrop-blur-sm"
+                                            layoutId="nav-underline"
+                                            className="absolute right-0 -bottom-1 left-0 h-px bg-white"
                                         />
-                                    </Dialog.Overlay>
-                                    <Dialog.Content asChild>
-                                        <motion.div
-                                            initial={{ x: '100%' }}
-                                            animate={{ x: 0 }}
-                                            exit={{ x: '100%' }}
-                                            transition={{
-                                                ease: 'easeInOut',
-                                                duration: 0.2,
-                                            }}
-                                            className="bg-background-end fixed inset-y-0 right-0 z-50 w-full max-w-xs border-l border-white/10 p-6 shadow-2xl"
-                                        >
-                                            <div className="mb-12 flex items-center justify-between">
-                                                <span className="font-mono text-lg font-bold text-white">
-                                                    astraen
-                                                </span>
-                                                <Dialog.Close asChild>
-                                                    <button className="text-slate-400 hover:text-white">
-                                                        <X className="h-6 w-6" />
-                                                    </button>
-                                                </Dialog.Close>
-                                            </div>
-                                            <div className="flex flex-col gap-6">
-                                                {navItems.map((item) => (
-                                                    <Link
-                                                        key={item.href}
-                                                        href={item.href}
-                                                        onClick={() =>
-                                                            setIsMenuOpen(false)
-                                                        }
-                                                        className="text-2xl font-medium text-slate-300 hover:text-white"
-                                                    >
-                                                        {item.name}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </motion.div>
-                                    </Dialog.Content>
-                                </Dialog.Portal>
-                            )}
-                        </AnimatePresence>
-                    </Dialog.Root>
+                                    )}
+                                </Link>
+                            );
+                        })}
+                    </nav>
+
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        onClick={() => setMobileMenuOpen(true)}
+                        className="relative z-50 rounded-md p-1 text-white transition-colors hover:bg-white/10 md:hidden"
+                    >
+                        <Menu className="h-5 w-5" />
+                    </button>
                 </div>
-            </div>
-        </motion.header>
+            </motion.header>
+
+            {/* Mobile Navigation Overlay */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="fixed inset-0 z-60 flex flex-col items-center justify-center bg-black/95 backdrop-blur-xl"
+                    >
+                        <button
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="text-text-secondary absolute top-6 right-6 p-2 transition-colors hover:text-white"
+                        >
+                            <X className="h-6 w-6" />
+                        </button>
+
+                        <nav className="flex flex-col gap-8 text-center">
+                            {navItems.map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="text-3xl font-light tracking-tight text-white/90 transition-colors hover:text-white"
+                                >
+                                    {item.name}
+                                </Link>
+                            ))}
+                        </nav>
+
+                        <div className="text-text-muted absolute bottom-10 font-mono text-xs tracking-widest uppercase">
+                            Astraen Software Lab
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
     );
 }

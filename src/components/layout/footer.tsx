@@ -1,72 +1,82 @@
-'use client';
-
 import Link from 'next/link';
 import { Github, Linkedin } from 'lucide-react';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/ui/tooltip';
 
-const socialLinks = [
+const links = [
+    { label: 'GitHub', href: 'https://github.com/astraen-dev', icon: Github },
     {
-        name: 'GitHub',
-        url: 'https://github.com/astraen-dev',
-        icon: Github,
-    },
-    {
-        name: 'LinkedIn',
-        url: 'https://www.linkedin.com/company/astraen',
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/company/astraen',
         icon: Linkedin,
     },
 ];
 
+const legal = [
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
+    { label: 'PAIA Manual', href: '/paia' },
+];
+
 export function Footer() {
     return (
-        <footer className="relative z-10 w-full border-t border-white/10 py-8">
-            <div className="container mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 px-4 sm:flex-row">
-                <div className="flex flex-col items-center gap-2 text-center sm:items-start sm:text-left">
-                    <p className="text-sm text-slate-400">
+        <footer className="border-border w-full border-t bg-black pt-24 pb-12">
+            <div className="container mx-auto max-w-5xl px-6">
+                <div className="mb-24 grid grid-cols-1 gap-16 md:grid-cols-2">
+                    <div className="flex flex-col gap-6">
+                        <Link href="/" className="w-fit">
+                            <span className="font-mono text-2xl font-bold tracking-tighter text-white">
+                                ASTRAEN
+                            </span>
+                        </Link>
+                        <p className="text-text-secondary max-w-sm leading-relaxed">
+                            An independent software laboratory engineering logic
+                            into reality.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-8">
+                        <div>
+                            <h2 className="text-text-muted mb-6 font-mono text-xs tracking-widest uppercase">
+                                Connect
+                            </h2>
+                            <div className="flex flex-col gap-4">
+                                {links.map((link) => (
+                                    <a
+                                        key={link.label}
+                                        href={link.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group text-text-secondary flex items-center gap-2 text-sm transition-colors hover:text-white"
+                                    >
+                                        <link.icon className="h-4 w-4" />
+                                        <span>{link.label}</span>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                        <div>
+                            <h2 className="text-text-muted mb-6 font-mono text-xs tracking-widest uppercase">
+                                Legal
+                            </h2>
+                            <div className="flex flex-col gap-4">
+                                {legal.map((item) => (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className="text-text-secondary text-sm transition-colors hover:text-white"
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="border-border flex flex-col items-start justify-between gap-4 border-t pt-8 md:flex-row md:items-center">
+                    <p className="text-text-muted text-xs">
                         &copy; {new Date().getFullYear()} ASTRAEN (PTY) LTD. All
                         Rights Reserved.
                     </p>
-                    <div className="flex items-center gap-4 text-xs">
-                        <Link
-                            href="/terms"
-                            className="hover:text-primary-a text-slate-400 transition-colors hover:underline"
-                        >
-                            Terms
-                        </Link>
-                        <span className="text-slate-600">|</span>
-                        <Link
-                            href="/privacy"
-                            className="hover:text-primary-a text-slate-400 transition-colors hover:underline"
-                        >
-                            Privacy
-                        </Link>
-                    </div>
-                </div>
-                <div className="flex gap-6">
-                    <TooltipProvider delayDuration={0}>
-                        {socialLinks.map((link) => (
-                            <Tooltip key={link.name}>
-                                <TooltipTrigger asChild>
-                                    <a
-                                        href={link.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-slate-400 transition-all duration-300 hover:text-white hover:[filter:drop-shadow(0_0_0.5rem_var(--color-primary-b))]"
-                                    >
-                                        <link.icon className="h-6 w-6" />
-                                    </a>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{link.name}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        ))}
-                    </TooltipProvider>
                 </div>
             </div>
         </footer>
