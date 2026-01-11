@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { head } from '@vercel/blob';
-import { redis } from '@/lib/redis';
+import { redis, connectRedis } from '@/lib/redis';
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
@@ -10,15 +10,26 @@ export async function GET(request: NextRequest) {
         return new NextResponse('Missing verification token.', { status: 400 });
     }
 
-    const key = `paia-token:${token}`;
+    try {
+        await connectRedis();
 
-    const tokenExists = await redis.get(key);
+        const key = `paia-token:${token}`;
 
-    if (!tokenExists) {
-        return new NextResponse('Invalid or expired token.', { status: 403 });
+        const tokenExists = await redis.get(key);
+
+        if (!tokenExists) {
+            return new NextResponse('Invalid or expired token.', {
+                status: 403,
+            });
+        }
+
+        await redis.del(key);
+    } catch (error) {
+        console.error('Redis error in PAIA download:', error);
+        return new NextResponse('Service temporarily unavailable.', {
+            status: 503,
+        });
     }
-
-    await redis.del(key);
 
     const paiaManualUrl = process.env.PAIA_MANUAL_BLOB_URL;
     const paiaManualFilename = process.env.PAIA_MANUAL_FILENAME;
@@ -48,7 +59,6 @@ export async function GET(request: NextRequest) {
             },
         });
     } catch (error) {
-        // This catch block handles unexpected errors (e.g., network failures).
         console.error(
             'An unexpected error occurred while fetching the PAIA manual:',
             error

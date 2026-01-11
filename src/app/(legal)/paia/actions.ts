@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import { nanoid } from 'nanoid';
 import { headers } from 'next/headers';
-import { redis } from '@/lib/redis';
+import { redis, connectRedis } from '@/lib/redis';
 
 const RATE_LIMIT_WINDOW_SECONDS = 600;
 const RATE_LIMIT_MAX_REQUESTS = 10;
@@ -22,13 +22,15 @@ export async function getPaiaDownloadToken(
         return { success: false, error: 'reCAPTCHA token is missing.' };
     }
 
-    // --- Rate Limiting ---
-    const requestHeaders = await headers();
-    const ip = requestHeaders.get('x-forwarded-for');
-
-    if (!ip) {
-        return { success: false, error: 'Could not identify request origin.' };
+    // Ensure Redis is connected before performing operations
+    try {
+        await connectRedis();
+    } catch {
+        return { success: false, error: 'Service temporarily unavailable.' };
     }
+
+    const requestHeaders = await headers();
+    const ip = requestHeaders.get('x-forwarded-for') || 'anonymous';
 
     const rateLimitKey = `rate-limit:paia:${ip}`;
     try {

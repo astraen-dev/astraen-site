@@ -1,15 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { redis } from '@/lib/redis';
+import { redis, connectRedis } from '@/lib/redis';
 import { nanoid } from 'nanoid';
 
 const REPORT_TTL_SECONDS = 1_209_600;
 
 export async function POST(request: NextRequest) {
     try {
+        await connectRedis();
+
         const report = await request.json();
-
-        console.warn('CSP Violation Reported:', report);
-
         const reportId = nanoid();
         const key = `csp-report:${reportId}`;
 
