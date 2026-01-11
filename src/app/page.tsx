@@ -5,11 +5,9 @@ import Link from 'next/link';
 import {
     ArrowRight,
     Code,
-    Database,
     Smartphone,
     Terminal,
     Zap,
-    Menu,
     Plus,
     Droplets,
     Calendar,
