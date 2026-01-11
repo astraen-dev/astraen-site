@@ -69,8 +69,8 @@ export default function RainVuPage() {
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-6 md:grid-rows-2">
                     {/* Card 1: Analytics (Large) - Visualizing MonthlyTrendChart.dart */}
-                    <div className="group bg-surface/20 border-border relative overflow-hidden rounded-3xl border p-8 backdrop-blur-sm transition-colors hover:border-white/20 md:col-span-4 md:row-span-2">
-                        <div className="relative z-10">
+                    <div className="group bg-surface/20 border-border relative flex flex-col overflow-hidden rounded-3xl border px-8 pt-8 pb-0 backdrop-blur-sm transition-colors hover:border-white/20 md:col-span-4 md:row-span-2">
+                        <div className="relative z-10 mb-6 shrink-0">
                             <h3 className="mb-2 text-2xl font-bold text-white">
                                 Actionable Insights
                             </h3>
@@ -81,14 +81,13 @@ export default function RainVuPage() {
                             </p>
                         </div>
 
-                        {/* Mock Chart UI */}
-                        <div className="absolute right-0 bottom-0 left-0 h-64 translate-y-8 px-8 transition-transform duration-500 group-hover:translate-y-4">
-                            <div className="bg-surface-highlight h-full w-full rounded-t-2xl border-x border-t border-white/10 p-6 shadow-2xl">
-                                <div className="mb-6 flex items-center justify-between">
-                                    <div className="h-2 w-24 rounded-full bg-white/10" />
-                                    <div className="h-2 w-16 rounded-full bg-white/10" />
+                        <div className="relative mt-auto h-48 w-full translate-y-4 transition-transform duration-500 group-hover:translate-y-2 sm:h-64 sm:translate-y-8 sm:group-hover:translate-y-4">
+                            <div className="bg-surface-highlight h-full w-full rounded-t-2xl border-x border-t border-white/10 p-4 shadow-2xl sm:p-6">
+                                <div className="mb-4 flex items-center justify-between sm:mb-6">
+                                    <div className="h-2 w-16 rounded-full bg-white/10 sm:w-24" />
+                                    <div className="h-2 w-12 rounded-full bg-white/10 sm:w-16" />
                                 </div>
-                                <div className="flex h-40 items-end justify-between gap-2">
+                                <div className="flex h-28 items-end justify-between gap-1 sm:h-40 sm:gap-2">
                                     {[
                                         30, 45, 25, 60, 80, 50, 70, 40, 90, 55,
                                         35, 65,
@@ -150,8 +149,8 @@ export default function RainVuPage() {
                 </div>
 
                 <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
-                    <div className="bg-surface/20 border-border rounded-3xl border p-6 backdrop-blur-sm">
-                        <Shield className="mb-4 h-6 w-6 text-blue-400" />
+                    <div className="bg-surface/20 border-border group rounded-3xl border p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-lg hover:shadow-blue-900/10">
+                        <Shield className="mb-4 h-6 w-6 text-blue-400 transition-transform duration-300 group-hover:scale-110" />
                         <h3 className="mb-2 font-bold text-white">
                             Private by Design
                         </h3>
@@ -160,8 +159,8 @@ export default function RainVuPage() {
                             your phone.
                         </p>
                     </div>
-                    <div className="bg-surface/20 border-border rounded-3xl border p-6 backdrop-blur-sm">
-                        <Zap className="mb-4 h-6 w-6 text-blue-400" />
+                    <div className="bg-surface/20 border-border group rounded-3xl border p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-lg hover:shadow-blue-900/10">
+                        <Zap className="mb-4 h-6 w-6 text-blue-400 transition-transform duration-300 group-hover:scale-110" />
                         <h3 className="mb-2 font-bold text-white">
                             120fps Performance
                         </h3>
@@ -170,8 +169,8 @@ export default function RainVuPage() {
                             interactions.
                         </p>
                     </div>
-                    <div className="bg-surface/20 border-border rounded-3xl border p-6 backdrop-blur-sm">
-                        <FileJson className="mb-4 h-6 w-6 text-blue-400" />
+                    <div className="bg-surface/20 border-border group rounded-3xl border p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-lg hover:shadow-blue-900/10">
+                        <FileJson className="mb-4 h-6 w-6 text-blue-400 transition-transform duration-300 group-hover:scale-110" />
                         <h3 className="mb-2 font-bold text-white">
                             Data Portability
                         </h3>

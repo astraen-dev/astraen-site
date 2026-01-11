@@ -4,129 +4,149 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
     motion,
-    AnimatePresence,
     useScroll,
     useTransform,
+    useMotionValue,
+    useMotionValueEvent,
 } from 'framer-motion';
-import { cn } from '@/lib/utils';
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
 
-const navItems = [
-    { name: 'Studio', href: '/' },
-    { name: 'RainVu', href: '/rainvu' },
-];
+// Segment display name mappings (for individual path segments)
+const segmentDisplayNames: Record<string, string> = {
+    rainvu: 'RainVu',
+    paia: 'PAIA',
+    privacy: 'Privacy',
+    terms: 'Terms',
+    'data-deletion': 'Data Deletion',
+    'stock-manager': 'Stock Manager',
+};
+
+function formatSegment(segment: string): string {
+    if (segmentDisplayNames[segment]) {
+        return segmentDisplayNames[segment];
+    }
+    // Fallback: convert segment to title case
+    return segment
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
+interface BreadcrumbPart {
+    label: string;
+    href: string;
+}
+
+function getBreadcrumbParts(pathname: string): BreadcrumbPart[] {
+    const parts: BreadcrumbPart[] = [{ label: 'ASTRAEN', href: '/' }];
+
+    const segments = pathname.split('/').filter(Boolean);
+
+    segments.forEach((segment, index) => {
+        const href = '/' + segments.slice(0, index + 1).join('/');
+        parts.push({
+            label: formatSegment(segment),
+            href,
+        });
+    });
+
+    return parts;
+}
 
 export function Header() {
     const pathname = usePathname();
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { scrollY } = useScroll();
+    const breadcrumbParts = getBreadcrumbParts(pathname);
 
-    // Smooth transformation for header background and border
-    const bgOpacity = useTransform(scrollY, [0, 50], [0, 0.8]);
-    const borderOpacity = useTransform(scrollY, [0, 50], [0, 1]);
-    const paddingY = useTransform(scrollY, [0, 50], [24, 16]);
+    // Motion value for width that switches between 100% and auto
+    const width = useMotionValue<string>('100%');
+
+    // Scroll range for the transition (0px to 100px)
+    const range = [0, 100];
+
+    // Layout Morphing - max width bar to pill around text
+    const marginTop = useTransform(scrollY, range, [0, 16]);
+    const paddingX = useTransform(scrollY, range, [24, 16]);
+    const paddingY = useTransform(scrollY, range, [16, 10]);
+
+    // Update width based on scroll position
+    useMotionValueEvent(scrollY, 'change', (latest) => {
+        if (latest <= 50) {
+            width.set('100%');
+        } else {
+            width.set('auto');
+        }
+    });
+
+    // Radii: Start as bottom-rounded bar (0,0,24,24), morph to full pill (9999,9999,9999,9999)
+    const topRadius = useTransform(scrollY, range, [0, 9999]);
+    const bottomRadius = useTransform(scrollY, range, [24, 9999]);
+
+    // Visual Styles
+    const backgroundColor = useTransform(scrollY, range, [
+        'rgba(10, 10, 10, 0.8)',
+        'rgba(10, 10, 10, 0.9)',
+    ]);
+    const borderColor = useTransform(scrollY, range, [
+        'rgba(255, 255, 255, 0.05)',
+        'rgba(255, 255, 255, 0.1)',
+    ]);
+    const backdropBlur = useTransform(scrollY, range, [
+        'blur(12px)',
+        'blur(16px)',
+    ]);
+
+    const handleClick = (
+        e: React.MouseEvent<HTMLAnchorElement>,
+        href: string
+    ) => {
+        // If clicking on current location, scroll to top
+        if (href === pathname) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        // Otherwise, the Link component will handle navigation
+    };
 
     return (
-        <>
-            <motion.header
+        <header className="pointer-events-none fixed top-0 right-0 left-0 z-50 flex justify-center">
+            <motion.div
+                initial={false}
                 style={{
-                    backgroundColor: useTransform(
-                        bgOpacity,
-                        (v) => `rgba(5, 5, 5, ${v})`
-                    ),
-                    borderBottomColor: useTransform(
-                        borderOpacity,
-                        (v) => `rgba(38, 38, 38, ${v})`
-                    ),
+                    width,
+                    marginTop,
+                    borderTopLeftRadius: topRadius,
+                    borderTopRightRadius: topRadius,
+                    borderBottomLeftRadius: bottomRadius,
+                    borderBottomRightRadius: bottomRadius,
+                    backgroundColor,
+                    borderColor,
+                    backdropFilter: backdropBlur,
+                    paddingLeft: paddingX,
+                    paddingRight: paddingX,
                     paddingTop: paddingY,
                     paddingBottom: paddingY,
                 }}
-                className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between border-b border-transparent px-6 backdrop-blur-md transition-all duration-300"
+                className="pointer-events-auto flex items-center justify-center border shadow-lg shadow-black/20"
             >
-                <div className="container mx-auto flex max-w-7xl items-center justify-between">
-                    <Link href="/" className="group relative z-50">
-                        <span className="font-mono text-lg font-bold tracking-tighter text-white transition-opacity group-hover:opacity-80">
-                            ASTRAEN
+                <nav className="relative z-50 flex items-center">
+                    {breadcrumbParts.map((part, index) => (
+                        <span key={part.href} className="flex items-center">
+                            {index > 0 && (
+                                <span className="mx-0.5 text-sm text-white/40">
+                                    /
+                                </span>
+                            )}
+                            <Link
+                                href={part.href}
+                                onClick={(e) => handleClick(e, part.href)}
+                                className="font-mono text-sm font-bold tracking-widest whitespace-nowrap text-white transition-opacity hover:opacity-80"
+                            >
+                                {part.label}
+                            </Link>
                         </span>
-                    </Link>
-
-                    {/* Desktop Nav */}
-                    <nav className="hidden items-center gap-8 md:flex">
-                        {navItems.map((item) => {
-                            const isActive =
-                                item.href === '/'
-                                    ? pathname === '/'
-                                    : pathname.startsWith(item.href);
-                            return (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    className={cn(
-                                        'relative text-sm font-medium transition-all duration-200',
-                                        isActive
-                                            ? 'text-white'
-                                            : 'text-text-secondary hover:text-white'
-                                    )}
-                                >
-                                    {item.name}
-                                    {isActive && (
-                                        <motion.div
-                                            layoutId="nav-underline"
-                                            className="absolute right-0 -bottom-1 left-0 h-px bg-white"
-                                        />
-                                    )}
-                                </Link>
-                            );
-                        })}
-                    </nav>
-
-                    {/* Mobile Menu Toggle */}
-                    <button
-                        onClick={() => setMobileMenuOpen(true)}
-                        className="relative z-50 rounded-md p-1 text-white transition-colors hover:bg-white/10 md:hidden"
-                    >
-                        <Menu className="h-5 w-5" />
-                    </button>
-                </div>
-            </motion.header>
-
-            {/* Mobile Navigation Overlay */}
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="fixed inset-0 z-60 flex flex-col items-center justify-center bg-black/95 backdrop-blur-xl"
-                    >
-                        <button
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="text-text-secondary absolute top-6 right-6 p-2 transition-colors hover:text-white"
-                        >
-                            <X className="h-6 w-6" />
-                        </button>
-
-                        <nav className="flex flex-col gap-8 text-center">
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="text-3xl font-light tracking-tight text-white/90 transition-colors hover:text-white"
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
-                        </nav>
-
-                        <div className="text-text-muted absolute bottom-10 font-mono text-xs tracking-widest uppercase">
-                            Astraen Software Lab
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </>
+                    ))}
+                </nav>
+            </motion.div>
+        </header>
     );
 }
