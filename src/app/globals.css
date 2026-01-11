@@ -1,64 +1,92 @@
 @import 'tailwindcss';
 
 @theme {
-    --color-primary-a: #7989ec;
-    --color-primary-b: #7aecfb;
-    --color-secondary-a: #deccfb;
-    --color-secondary-b: #c3a9fb;
-    --color-danger-a: #f03a38;
-    --color-danger-b: #ff5f57;
-    --color-success-a: #b6f09c;
-    --color-success-b: #4ac97e;
-    --color-background-start: #091220;
-    --color-background-end: #081329;
+    --color-background: #050505;
+    --color-surface: #0a0a0a;
+    --color-surface-highlight: #171717;
+    --color-border: #262626;
+    --color-text-primary: #ededed;
+    --color-text-secondary: #a1a1aa;
+    --color-text-muted: #52525b;
+    --color-accent: #ffffff;
+    --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
+    --radius-xl: 1.5rem;
+    --radius-lg: 1rem;
+    --radius-md: 0.75rem;
 }
 
 @layer base {
     body {
-        background-color: var(--color-background-start);
-        color: var(--color-secondary-a);
-        font-family: var(--font-mono);
+        background-color: var(--color-background);
+        color: var(--color-text-primary);
+        font-family: var(--font-sans), sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+    }
+
+    ::selection {
+        background-color: var(--color-accent);
+        color: var(--color-background);
     }
 }
 
 @layer utilities {
-    .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border-width: 0;
+    .bg-noise {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .glass-panel {
+        @apply bg-surface/50 border-border/50 border backdrop-blur-xl;
+    }
+
+    .prose-styles {
+        @apply text-text-secondary max-w-none font-sans;
     }
 
     .prose-styles p {
-        @apply mb-4 leading-relaxed text-slate-300;
+        @apply mb-6 leading-7;
     }
 
-    .prose-styles .h3-style {
-        @apply border-primary-a/20 mt-8 mb-4 border-b pb-2 text-2xl font-semibold text-white;
+    .prose-styles h3 {
+        @apply text-text-primary mt-12 mb-4 text-xl font-medium tracking-tight;
     }
 
-    .prose-styles .h4-style {
-        @apply text-secondary-a mt-6 mb-3 text-lg font-semibold;
+    .prose-styles h4 {
+        @apply text-text-primary mt-8 mb-3 text-lg font-medium;
     }
 
-    .prose-styles .ul-style {
-        @apply mb-4 list-inside list-disc space-y-2 pl-4 text-slate-300;
+    .prose-styles ul,
+    .prose-styles ol {
+        @apply mb-6 space-y-2 pl-4;
     }
 
-    .prose-styles .ol-style {
-        @apply mb-4 list-inside list-decimal space-y-2 pl-4 text-slate-300;
+    .prose-styles ul {
+        @apply marker:text-text-muted list-disc;
     }
 
-    .prose-styles strong {
-        @apply text-secondary-a font-semibold;
+    .prose-styles ol {
+        @apply marker:text-text-muted list-decimal;
     }
 
-    .prose-styles .a-style {
-        @apply text-primary-a hover:underline;
+    .prose-styles a {
+        @apply text-text-primary underline decoration-white/20 underline-offset-4 transition-all hover:text-white hover:decoration-white;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 }

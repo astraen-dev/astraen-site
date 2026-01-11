@@ -5,13 +5,13 @@ import React from 'react';
 
 export default function Template({ children }: { children: React.ReactNode }) {
     return (
-        <motion.main
+        <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ ease: 'easeInOut', duration: 0.5 }}
-            className="relative z-10 flex-1 pt-32 pb-16"
+            className="flex-1"
         >
             {children}
-        </motion.main>
+        </motion.div>
     );
 }

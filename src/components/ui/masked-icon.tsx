@@ -8,10 +8,7 @@ interface MaskedIconProps {
 export function MaskedIcon({ src, className }: MaskedIconProps) {
     return (
         <div
-            className={cn(
-                'from-primary-a to-primary-b bg-gradient-to-br',
-                className
-            )}
+            className={cn('bg-current', className)}
             style={{
                 maskImage: `url(${src})`,
                 maskSize: 'contain',

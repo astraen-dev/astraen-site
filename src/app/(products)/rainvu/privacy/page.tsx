@@ -247,7 +247,7 @@ export default function PrivacyPage() {
                 you can contact our designated Information Officer.
             </p>
             <h4 className="h4-style">Information Officer:</h4>
-            <ul className="ul-style !list-none !pl-0">
+            <ul className="ul-style list-none! pl-0!">
                 <li>David Young</li>
                 <li>ASTRAEN (PTY) LTD</li>
                 <li>
@@ -266,7 +266,7 @@ export default function PrivacyPage() {
             <h4 className="h4-style">
                 The Information Regulator (South Africa):
             </h4>
-            <ul className="ul-style !list-none !pl-0">
+            <ul className="ul-style list-none! pl-0!">
                 <li>
                     <strong>Website:</strong>{' '}
                     <a

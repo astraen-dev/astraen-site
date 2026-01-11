@@ -15,9 +15,8 @@
         "@radix-ui/react-tooltip": "^1.2.8",
         "@vercel/analytics": "^1.6.1",
         "@vercel/blob": "^2.0.0",
-        "@vercel/speed-insights": "^1.3.1",
         "clsx": "^2.1.1",
-        "framer-motion": "^12.23.26",
+        "framer-motion": "^12.25.0",
         "lucide-react": "^0.562.0",
         "nanoid": "^5.1.6",
         "next": "16.1.1",
@@ -30,16 +29,18 @@
         "redis": "^5.10.0",
         "sonner": "^2.0.7",
         "tailwind-merge": "^3.4.0",
-        "zod": "^4.3.2"
+        "zod": "^4.3.5"
     },
     "devDependencies": {
+        "@tailwindcss/language-server": "^0.14.29",
         "@tailwindcss/postcss": "^4.1.18",
-        "@types/node": "^25.0.3",
-        "@types/react": "^19.2.7",
+        "@types/node": "^25.0.6",
+        "@types/react": "^19.2.8",
         "@types/react-dom": "^19.2.3",
         "eslint": "^9.39.2",
         "eslint-config-next": "16.1.1",
         "husky": "^9.1.7",
+        "knip": "^5.80.2",
         "lint-staged": "^16.2.7",
         "prettier": "^3.7.4",
         "prettier-plugin-tailwindcss": "^0.7.2",
@@ -53,5 +54,5 @@
             "pnpm exec eslint --fix"
         ]
     },
-    "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
+    "packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48"
 }

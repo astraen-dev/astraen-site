@@ -11,6 +11,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1,
         },
         {
+            url: `${baseUrl}/rainvu`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/stock-manager`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
             url: `${baseUrl}/terms`,
             lastModified: new Date(),
             changeFrequency: 'yearly',
@@ -21,12 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: new Date(),
             changeFrequency: 'yearly',
             priority: 0.5,
-        },
-        {
-            url: `${baseUrl}/rainvu`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
         },
         {
             url: `${baseUrl}/rainvu/terms`,
