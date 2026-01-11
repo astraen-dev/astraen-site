@@ -3,6 +3,7 @@ import {
     Database,
     ShieldCheck,
     Activity,
+    Landmark,
     ArrowLeft,
     Server,
     GitBranch,
@@ -14,7 +15,8 @@ import { LogicVisualizer } from '@/components/case-studies/logic-visualizer';
 
 export const metadata: Metadata = {
     title: 'Case Study: Bespoke Stock Manager',
-    description: 'Architecture of a bespoke inventory system.',
+    description:
+        'Architecture of a bespoke, high-integrity inventory and logistics OS.',
 };
 
 export default function StockManagerCaseStudy() {
@@ -32,7 +34,7 @@ export default function StockManagerCaseStudy() {
 
                 <div className="mb-6 flex gap-3">
                     <span className="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 font-mono text-xs text-indigo-300">
-                        Internal Tooling
+                        Business Operations
                     </span>
                     <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-white/60">
                         2025 - 2026
@@ -44,11 +46,11 @@ export default function StockManagerCaseStudy() {
                 </h1>
 
                 <p className="text-text-secondary mb-12 text-xl leading-relaxed">
-                    A high-integrity inventory and purchasing system designed to
-                    eliminate human error. We transitioned the client from
-                    manual spreadsheets to an automated, double-entry style
-                    ledger that bridges the gap between physical warehouse
-                    operations and digital sales channels.
+                    A high-integrity logistics OS designed to eliminate human
+                    error. We architected a database-centric system with an
+                    immutable ledger that automates the complex relationship
+                    between physical components, digital sales bundles, and
+                    end-to-end financial tracking.
                 </p>
 
                 <div className="grid grid-cols-2 gap-6 border-y border-white/5 py-8 md:grid-cols-4">
@@ -56,14 +58,17 @@ export default function StockManagerCaseStudy() {
                         <div className="text-text-muted mb-2 font-mono text-xs tracking-widest uppercase">
                             Stack
                         </div>
-                        <div className="font-medium text-white">Next.js 16</div>
+                        <div className="leading-snug font-medium text-white">
+                            Next.js 16 / TypeScript <br />
+                            PostgreSQL / Supabase
+                        </div>
                     </div>
                     <div>
                         <div className="text-text-muted mb-2 font-mono text-xs tracking-widest uppercase">
-                            Database
+                            UI/UX
                         </div>
                         <div className="font-medium text-white">
-                            PostgreSQL / Supabase
+                            Radix UI / Tailwind CSS
                         </div>
                     </div>
                     <div>
@@ -71,7 +76,7 @@ export default function StockManagerCaseStudy() {
                             Paradigm
                         </div>
                         <div className="font-medium text-white">
-                            Local-First / RPC
+                            Database-Centric / RPC
                         </div>
                     </div>
                     <div>
@@ -149,10 +154,11 @@ export default function StockManagerCaseStudy() {
                             Component Normalization
                         </h3>
                         <p className="text-text-secondary max-w-2xl text-lg">
-                            We decoupled the concept of &#34;what we sell&#34;
-                            from &#34;what we have&#34;. By treating inventory
-                            items as atomic units and sales products as
-                            molecular recipes, we achieved true data integrity.
+                            We decoupled the concept of &#34;what we
+                            sell&#34;from &#34;what we have&#34;. By treating
+                            inventory items as atomic units and sales products
+                            as molecular recipes, we achieved true data
+                            integrity.
                         </p>
                     </div>
 
@@ -221,20 +227,20 @@ export default function StockManagerCaseStudy() {
                                     Immutable Audit Ledger
                                 </h3>
                                 <p className="text-text-secondary mb-4">
-                                    Stock levels are never simply
-                                    &#34;overwritten&#34;. Every change is
-                                    recorded in a strict transactional table
-                                    with a categorical reason code and the ID of
-                                    the user responsible. This creates a
-                                    forensic audit trail for every item in the
-                                    warehouse.
+                                    Stock levels are never
+                                    simply&#34;overwritten&#34;. Every change is
+                                    recorded via a transactional RPC that
+                                    creates an entry in an immutable log table,
+                                    complete with a reason code, user ID, and a
+                                    before/after snapshot. This creates a
+                                    forensic audit trail for every item.
                                 </p>
                                 <div className="flex gap-2">
                                     <span className="rounded border border-white/5 bg-black/50 px-2 py-1 font-mono text-[10px] text-white/50">
-                                        PostgreSQL Triggers
+                                        Transactional RPCs
                                     </span>
                                     <span className="rounded border border-white/5 bg-black/50 px-2 py-1 font-mono text-[10px] text-white/50">
-                                        Event Sourcing
+                                        Data Integrity
                                     </span>
                                 </div>
                             </div>
@@ -254,20 +260,53 @@ export default function StockManagerCaseStudy() {
                                     Algorithmic Replenishment
                                 </h3>
                                 <p className="text-text-secondary mb-4">
-                                    The system analyzes target stock levels
-                                    against current deficits to generate
-                                    Purchase Order drafts automatically. It
-                                    handles the full lifecycle of a PO through
-                                    multi-stage verification steps,
-                                    automatically updating stock levels and
-                                    financial liability ledgers only upon final
-                                    receipt validation.
+                                    A core database function analyzes target
+                                    stock levels against real-time component
+                                    deficits to automatically generate draft
+                                    procurement requests. The system manages the
+                                    entire multi-stage procurement lifecycle,
+                                    updating stock and financial ledgers only
+                                    upon final receipt validation.
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Feature 3: Security */}
+                    {/* Feature 3: Automated Financial Ledgers */}
+                    <div className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10">
+                        <div className="flex flex-col gap-6 md:flex-row">
+                            <div className="shrink-0">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-purple-500/20 bg-purple-500/10">
+                                    <Landmark className="h-6 w-6 text-purple-400" />
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="mb-2 text-xl font-bold text-white">
+                                    Automated Financial Ledgers
+                                </h3>
+                                <p className="text-text-secondary mb-4">
+                                    The system links physical operations to
+                                    financial data. Upon receiving goods, it
+                                    automatically calculates and accrues the
+                                    corresponding financial liabilities into a
+                                    dedicated ledger. This provides a real-time,
+                                    auditable view of outstanding debts, which
+                                    can be settled through a secure,
+                                    transactional reconciliation process.
+                                </p>
+                                <div className="flex gap-2">
+                                    <span className="rounded border border-white/5 bg-black/50 px-2 py-1 font-mono text-[10px] text-white/50">
+                                        PL/pgSQL Functions
+                                    </span>
+                                    <span className="rounded border border-white/5 bg-black/50 px-2 py-1 font-mono text-[10px] text-white/50">
+                                        Financial Reporting
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* REVISED Feature 4: Security */}
                     <div className="group bg-surface/20 hover:bg-surface/40 rounded-2xl border border-white/5 p-8 transition-colors hover:border-white/10">
                         <div className="flex flex-col gap-6 md:flex-row">
                             <div className="shrink-0">
@@ -277,16 +316,27 @@ export default function StockManagerCaseStudy() {
                             </div>
                             <div>
                                 <h3 className="mb-2 text-xl font-bold text-white">
-                                    Granular Access Control
+                                    Database-Level Security (RLS)
                                 </h3>
                                 <p className="text-text-secondary mb-4">
-                                    Built on a secure authentication provider
-                                    with strict database-level policies.
-                                    Financial data is strictly siloed; warehouse
-                                    staff can update stock counts but cannot
-                                    view cost prices or supplier liability
+                                    Leveraging PostgreSQL&#39;s native Row Level
+                                    Security, access control is enforced at the
+                                    data layer itself, not just in the API. A
+                                    custom permissions system allows granular
+                                    control, ensuring warehouse staff can update
+                                    stock counts but are physically prevented by
+                                    the database from viewing sensitive
+                                    financial data like cost prices or liability
                                     ledgers.
                                 </p>
+                                <div className="flex gap-2">
+                                    <span className="rounded border border-white/5 bg-black/50 px-2 py-1 font-mono text-[10px] text-white/50">
+                                        PostgreSQL RLS
+                                    </span>
+                                    <span className="rounded border border-white/5 bg-black/50 px-2 py-1 font-mono text-[10px] text-white/50">
+                                        Custom Permissions
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
