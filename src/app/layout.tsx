@@ -9,7 +9,7 @@ import { headers } from 'next/headers';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { ScrollToTop } from '@/components/layout/scroll-to-top';
-import HyperdriveBackground from '@/components/layout/hyperdrive-background';
+import GridBackground from '@/components/layout/grid-background';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -109,7 +109,7 @@ export default async function RootLayout({
                     suppressHydrationWarning
                 />
                 <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-                    <HyperdriveBackground />
+                    <GridBackground />
 
                     <Header />
                     {children}
@@ -120,13 +120,9 @@ export default async function RootLayout({
                     position="bottom-right"
                     toastOptions={{
                         style: {
-                            background: 'hsl(222 47.4% 11.2% / 0.8)',
-                            borderColor: 'hsl(246 70% 70% / 0.2)',
-                            backdropFilter: 'blur(4px)',
-                        },
-                        classNames: {
-                            title: 'text-secondary-a',
-                            description: 'text-slate-400',
+                            background: '#0f172a',
+                            border: '1px solid #1e293b',
+                            color: '#f8fafc',
                         },
                     }}
                 />

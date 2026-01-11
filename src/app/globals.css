@@ -1,57 +1,41 @@
 @import 'tailwindcss';
 
 @theme {
-    --color-primary-a: #7989ec;
-    --color-primary-b: #7aecfb;
-    --color-secondary-a: #deccfb;
-    --color-secondary-b: #c3a9fb;
-    --color-danger-a: #f03a38;
-    --color-danger-b: #ff5f57;
-    --color-success-a: #b6f09c;
-    --color-success-b: #4ac97e;
-    --color-background-start: #091220;
-    --color-background-end: #081329;
+    --color-primary-a: #3b82f6;
+    --color-primary-b: #60a5fa;
+    --color-secondary-a: #f8fafc;
+    --color-secondary-b: #cbd5e1;
+    --color-danger-a: #ef4444;
+    --color-danger-b: #f87171;
+    --color-success-a: #22c55e;
+    --color-success-b: #4ade80;
+    --color-background-start: #020617;
+    --color-background-end: #0f172a;
 }
 
 @layer base {
     body {
         background-color: var(--color-background-start);
-        color: var(--color-secondary-a);
-        font-family: var(--font-mono);
+        color: var(--color-secondary-b);
+        font-family: var(--font-geist-sans);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }
 
 @layer utilities {
-    .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border-width: 0;
-    }
-
-    .prose-styles p {
-        @apply mb-4 leading-relaxed text-slate-300;
-    }
-
-    .prose-styles .h3-style {
-        @apply border-primary-a/20 mt-8 mb-4 border-b pb-2 text-2xl font-semibold text-white;
-    }
-
-    .prose-styles .h4-style {
-        @apply text-secondary-a mt-6 mb-3 text-lg font-semibold;
-    }
-
-    .prose-styles .ul-style {
-        @apply mb-4 list-inside list-disc space-y-2 pl-4 text-slate-300;
-    }
-
-    .prose-styles .ol-style {
-        @apply mb-4 list-inside list-decimal space-y-2 pl-4 text-slate-300;
+    .bg-grid-pattern {
+        background-size: 40px 40px;
+        background-image: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0.03) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.03) 1px,
+                transparent 1px
+            );
     }
 
     .prose-styles strong {
