@@ -2,7 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {
+    motion,
+    useScroll,
+    useTransform,
+    useMotionValue,
+    useMotionValueEvent,
+} from 'framer-motion';
 
 // Route display name mappings
 const routeDisplayNames: Record<string, string> = {
@@ -42,14 +48,25 @@ export function Header() {
     const { scrollY } = useScroll();
     const displayName = getRouteDisplayName(pathname);
 
+    // Motion value for width that switches between 100% and auto
+    const width = useMotionValue<string>('100%');
+
     // Scroll range for the transition (0px to 100px)
     const range = [0, 100];
 
     // Layout Morphing - max width bar to pill around text
-    const maxWidth = useTransform(scrollY, range, ['100%', 'auto']);
     const marginTop = useTransform(scrollY, range, [0, 16]);
     const paddingX = useTransform(scrollY, range, [24, 16]);
     const paddingY = useTransform(scrollY, range, [16, 10]);
+
+    // Update width based on scroll position
+    useMotionValueEvent(scrollY, 'change', (latest) => {
+        if (latest <= 50) {
+            width.set('100%');
+        } else {
+            width.set('auto');
+        }
+    });
 
     // Radii: Start as bottom-rounded bar (0,0,24,24), morph to full pill (9999,9999,9999,9999)
     const topRadius = useTransform(scrollY, range, [0, 9999]);
@@ -72,8 +89,9 @@ export function Header() {
     return (
         <header className="pointer-events-none fixed top-0 right-0 left-0 z-50 flex justify-center">
             <motion.div
+                initial={false}
                 style={{
-                    width: maxWidth,
+                    width,
                     marginTop,
                     borderTopLeftRadius: topRadius,
                     borderTopRightRadius: topRadius,
