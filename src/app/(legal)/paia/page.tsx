@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import PaiaClientPage from './PaiaClientPage';
 import { headers } from 'next/headers';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
     title: 'astraen | PAIA Manual Access',
     description:
