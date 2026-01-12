@@ -6,7 +6,6 @@ import { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/next';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
-import { ScrollToTop } from '@/components/layout/scroll-to-top';
 
 const fontSans = Inter({
     variable: '--font-sans',
@@ -60,7 +59,6 @@ export default function RootLayout({
                 className={`${fontSans.variable} ${fontMono.variable} antialiased selection:bg-white selection:text-black`}
             >
                 <div className="bg-noise z-0" />
-                <ScrollToTop />
                 <Header />
                 <main className="relative z-10 flex min-h-screen flex-col">
                     {children}
