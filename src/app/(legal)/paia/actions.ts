@@ -8,6 +8,31 @@ import { redis } from '@/lib/redis';
 const RATE_LIMIT_WINDOW_SECONDS = 600;
 const RATE_LIMIT_MAX_REQUESTS = 10;
 
+function getClientIp(requestHeaders: Headers): string | null {
+    const isDev = process.env.NODE_ENV === 'development';
+
+    const vercelForwardedFor = requestHeaders.get('x-vercel-forwarded-for');
+    if (vercelForwardedFor) {
+        return vercelForwardedFor.split(',')[0].trim();
+    }
+
+    const forwardedFor = requestHeaders.get('x-forwarded-for');
+    if (forwardedFor) {
+        return forwardedFor.split(',')[0].trim();
+    }
+
+    const realIp = requestHeaders.get('x-real-ip');
+    if (realIp) {
+        return realIp.trim();
+    }
+
+    if (isDev) {
+        return '127.0.0.1';
+    }
+
+    return null;
+}
+
 const recaptchaResponseSchema = z.object({
     success: z.boolean(),
     score: z.number().optional(),
@@ -24,7 +49,7 @@ export async function getPaiaDownloadToken(
 
     // --- Rate Limiting ---
     const requestHeaders = await headers();
-    const ip = requestHeaders.get('x-forwarded-for');
+    const ip = getClientIp(requestHeaders);
 
     if (!ip) {
         return { success: false, error: 'Could not identify request origin.' };
