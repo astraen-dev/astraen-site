@@ -8,12 +8,14 @@ export function proxy(request: NextRequest) {
         pathname.startsWith('/api/paia-download');
 
     const isDev = process.env.NODE_ENV === 'development';
+
+    const upgradeDirective = isDev ? '' : 'upgrade-insecure-requests;';
     const devEval = isDev ? "'unsafe-eval'" : '';
 
     const requestHeaders = new Headers(request.headers);
     const responseHeaders = new Headers();
 
-    // --- Protected Routes (Dynamic) ---
+    // --- Protected Routes ---
     if (isProtectedRoute) {
         const nonce = btoa(crypto.randomUUID());
 
@@ -31,7 +33,7 @@ export function proxy(request: NextRequest) {
             base-uri 'self';
             form-action 'self';
             frame-ancestors 'none';
-            upgrade-insecure-requests;
+            ${upgradeDirective}
         `
             .replace(/\s{2,}/g, ' ')
             .trim();
@@ -39,21 +41,21 @@ export function proxy(request: NextRequest) {
         responseHeaders.set('Content-Security-Policy', dynamicCsp);
     }
 
-    // --- Public Routes (Static/Edge Cacheable) ---
+    // --- Public Routes ---
     else {
         const staticCsp = `
             default-src 'self';
-            script-src 'self' ${devEval} 'unsafe-inline' https://va.vercel-scripts.com https://vitals.vercel-insights.com;
+            script-src 'self' ${devEval} 'unsafe-inline' https://va.vercel-scripts.com https://vitals.vercel-insights.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
             style-src 'self' 'unsafe-inline';
             img-src 'self' blob: data: https://*.vercel.app;
             font-src 'self' data:;
-            connect-src 'self' https://vitals.vercel-insights.com;
-            frame-src 'none';
+            connect-src 'self' https://vitals.vercel-insights.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
+            frame-src 'self' https://www.google.com/recaptcha/ https://recaptcha.google.com/;
             object-src 'none';
             base-uri 'self';
             form-action 'self';
             frame-ancestors 'none';
-            upgrade-insecure-requests;
+            ${upgradeDirective}
         `
             .replace(/\s{2,}/g, ' ')
             .trim();
