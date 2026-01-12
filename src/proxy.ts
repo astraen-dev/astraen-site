@@ -3,13 +3,17 @@ import { NextRequest, NextResponse } from 'next/server';
 export function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
+    const isDev = process.env.NODE_ENV === 'development';
+
     const isProtectedRoute =
         pathname.startsWith('/paia') ||
         pathname.startsWith('/api/paia-download');
 
+    const devEval = isDev ? "'unsafe-eval'" : '';
+
     const staticCsp = `
         default-src 'self';
-        script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vitals.vercel-insights.com https://vercel.live https://va.vercel-scripts.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
+        script-src 'self' ${devEval} 'unsafe-inline' https://vitals.vercel-insights.com https://vercel.live https://va.vercel-scripts.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
         style-src 'self' 'unsafe-inline';
         img-src 'self' blob: data: https://vercel.live;
         font-src 'self' data:;
@@ -27,7 +31,7 @@ export function proxy(request: NextRequest) {
     const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
     const dynamicCsp = `
         default-src 'self';
-        script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
+        script-src 'self' ${devEval} 'nonce-${nonce}' 'strict-dynamic' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
         style-src 'self' 'unsafe-inline';
         img-src 'self' blob: data:;
         font-src 'self' data:;
@@ -47,7 +51,6 @@ export function proxy(request: NextRequest) {
 
     if (isProtectedRoute) {
         requestHeaders.set('x-nonce', nonce);
-        requestHeaders.set('Content-Security-Policy', dynamicCsp);
         responseHeaders.set('Content-Security-Policy', dynamicCsp);
     } else {
         responseHeaders.set('Content-Security-Policy', staticCsp);
