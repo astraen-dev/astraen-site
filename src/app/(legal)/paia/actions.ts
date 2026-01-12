@@ -4,9 +4,35 @@ import { z } from 'zod';
 import { nanoid } from 'nanoid';
 import { headers } from 'next/headers';
 import { redis } from '@/lib/redis';
+import 'server-only';
 
 const RATE_LIMIT_WINDOW_SECONDS = 600;
 const RATE_LIMIT_MAX_REQUESTS = 10;
+
+function getClientIp(requestHeaders: Headers): string | null {
+    const isDev = process.env.NODE_ENV === 'development';
+
+    const vercelForwardedFor = requestHeaders.get('x-vercel-forwarded-for');
+    if (vercelForwardedFor) {
+        return vercelForwardedFor.split(',')[0].trim();
+    }
+
+    const forwardedFor = requestHeaders.get('x-forwarded-for');
+    if (forwardedFor) {
+        return forwardedFor.split(',')[0].trim();
+    }
+
+    const realIp = requestHeaders.get('x-real-ip');
+    if (realIp) {
+        return realIp.trim();
+    }
+
+    if (isDev) {
+        return '127.0.0.1';
+    }
+
+    return null;
+}
 
 const recaptchaResponseSchema = z.object({
     success: z.boolean(),
@@ -24,7 +50,7 @@ export async function getPaiaDownloadToken(
 
     // --- Rate Limiting ---
     const requestHeaders = await headers();
-    const ip = requestHeaders.get('x-forwarded-for');
+    const ip = getClientIp(requestHeaders);
 
     if (!ip) {
         return { success: false, error: 'Could not identify request origin.' };
@@ -32,12 +58,16 @@ export async function getPaiaDownloadToken(
 
     const rateLimitKey = `rate-limit:paia:${ip}`;
     try {
-        const requestCount = await redis.incr(rateLimitKey);
-        if (requestCount === 1) {
-            await redis.expire(rateLimitKey, RATE_LIMIT_WINDOW_SECONDS);
-        }
+        const multi = redis.multi();
+        multi.incr(rateLimitKey);
+        multi.expire(rateLimitKey, RATE_LIMIT_WINDOW_SECONDS, 'NX');
+        const results = await multi.exec();
+        const incrResult = results?.[0]?.[1];
 
-        if (requestCount > RATE_LIMIT_MAX_REQUESTS) {
+        if (
+            typeof incrResult === 'number' &&
+            incrResult > RATE_LIMIT_MAX_REQUESTS
+        ) {
             console.warn(`Rate limit exceeded for IP: ${ip}`);
             return {
                 success: false,
@@ -101,7 +131,7 @@ export async function getPaiaDownloadToken(
         // --- Generate and Store Download Token ---
         const downloadToken = nanoid(32);
         const key = `paia-token:${downloadToken}`;
-        await redis.set(key, 'valid', { EX: 300 });
+        await redis.set(key, 'valid', 'EX', 300);
         return { success: true, token: downloadToken };
     } catch (error) {
         console.error('An unexpected error occurred in PAIA action:', error);

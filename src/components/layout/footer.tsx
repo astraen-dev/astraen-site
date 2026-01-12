@@ -18,7 +18,7 @@ const links = [
 const legal = [
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Service', href: '/terms' },
-    { label: 'PAIA Manual', href: '/paia' },
+    { label: 'PAIA', href: '/paia' },
 ];
 
 export function Footer() {

@@ -1,6 +1,9 @@
 import { Metadata } from 'next';
-import PaiaClientPage from './PaiaClientPage';
 import { headers } from 'next/headers';
+import PaiaClientPage from './PaiaClientPage';
+import { ConfigError } from '@/components/paia/config-error';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
     title: 'astraen | PAIA Manual Access',
@@ -13,22 +16,15 @@ export const metadata: Metadata = {
 };
 
 export default async function PaiaPage() {
+    const headerList = await headers();
+    const nonce = headerList.get('x-nonce') || '';
+
     const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-    const nonce = (await headers()).get('x-nonce') || undefined;
 
     if (!recaptchaSiteKey) {
         return (
-            <div className="shadow-danger-a/10 relative w-full rounded-2xl bg-slate-900/40 p-8 text-center shadow-2xl ring-1 ring-white/10 backdrop-blur-lg sm:p-12">
-                <div className="from-danger-a to-danger-b absolute -inset-px rounded-2xl bg-linear-to-br opacity-20 blur-lg" />
-                <div className="relative z-10">
-                    <h1 className="text-danger-a text-2xl font-bold">
-                        Configuration Error
-                    </h1>
-                    <p className="mt-4 text-slate-300">
-                        The reCAPTCHA service is not configured correctly on the
-                        server.
-                    </p>
-                </div>
+            <div className="flex min-h-[60vh] items-center justify-center p-6">
+                <ConfigError />
             </div>
         );
     }

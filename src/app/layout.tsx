@@ -6,8 +6,6 @@ import { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/next';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
-import { ScrollToTop } from '@/components/layout/scroll-to-top';
-import { headers } from 'next/headers';
 
 const fontSans = Inter({
     variable: '--font-sans',
@@ -52,18 +50,15 @@ export const metadata: Metadata = {
     },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
     children,
 }: Readonly<{ children: ReactNode }>) {
-    await headers();
-
     return (
-        <html lang="en" className="scroll-smooth">
+        <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
             <body
                 className={`${fontSans.variable} ${fontMono.variable} antialiased selection:bg-white selection:text-black`}
             >
-                <div className="bg-noise" />
-                <ScrollToTop />
+                <div className="bg-noise z-0" />
                 <Header />
                 <main className="relative z-10 flex min-h-screen flex-col">
                     {children}

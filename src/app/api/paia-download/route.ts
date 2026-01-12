@@ -17,40 +17,17 @@ export async function GET(request: NextRequest) {
     if (!tokenExists) {
         return new NextResponse('Invalid or expired token.', { status: 403 });
     }
-
-    await redis.del(key);
-
     const paiaManualUrl = process.env.PAIA_MANUAL_BLOB_URL;
-    const paiaManualFilename = process.env.PAIA_MANUAL_FILENAME;
-
-    if (!paiaManualUrl || !paiaManualFilename) {
+    if (!paiaManualUrl) {
         return new NextResponse('Server configuration error.', { status: 500 });
     }
 
     try {
         const blobMetadata = await head(paiaManualUrl);
-        const blobResponse = await fetch(blobMetadata.downloadUrl);
-
-        if (!blobResponse.ok || !blobResponse.body) {
-            console.error(
-                `Failed to download blob from storage. Status: ${blobResponse.status}`
-            );
-            return new NextResponse(
-                'Could not retrieve the document from storage.',
-                { status: 502 }
-            );
-        }
-
-        return new NextResponse(blobResponse.body, {
-            headers: {
-                'Content-Type': 'application/pdf',
-                'Content-Disposition': `inline; filename="${paiaManualFilename}"`,
-            },
-        });
+        return NextResponse.redirect(blobMetadata.downloadUrl);
     } catch (error) {
-        // This catch block handles unexpected errors (e.g., network failures).
         console.error(
-            'An unexpected error occurred while fetching the PAIA manual:',
+            'An unexpected error occurred while fetching the PAIA manual metadata:',
             error
         );
         return new NextResponse('An unexpected error occurred.', {
