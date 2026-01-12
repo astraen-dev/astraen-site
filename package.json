@@ -16,7 +16,7 @@
         "@vercel/analytics": "^1.6.1",
         "@vercel/blob": "^2.0.0",
         "clsx": "^2.1.1",
-        "framer-motion": "^12.25.0",
+        "framer-motion": "^12.26.1",
         "ioredis": "^5.9.1",
         "lucide-react": "^0.562.0",
         "nanoid": "^5.1.6",
