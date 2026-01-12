@@ -2,13 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-    motion,
-    useScroll,
-    useTransform,
-    useMotionValue,
-    useMotionValueEvent,
-} from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
 
 // Segment display name mappings (for individual path segments)
 const segmentDisplayNames: Record<string, string> = {
@@ -55,35 +50,33 @@ export function Header() {
     const { scrollY } = useScroll();
     const breadcrumbParts = getBreadcrumbParts(pathname);
 
-    const width = useMotionValue<string>('100%');
     const range = [0, 100];
 
     const marginTop = useTransform(scrollY, range, [0, 16]);
-    const paddingX = useTransform(scrollY, range, [24, 16]);
     const paddingY = useTransform(scrollY, range, [16, 10]);
+    const paddingX = useTransform(scrollY, range, [32, 24]);
 
-    useMotionValueEvent(scrollY, 'change', (latest) => {
-        if (latest <= 50) {
-            width.set('100%');
-        } else {
-            width.set('auto');
-        }
-    });
-
-    const topRadius = useTransform(scrollY, range, [0, 9999]);
-    const bottomRadius = useTransform(scrollY, range, [24, 9999]);
+    const minWidth = useTransform(scrollY, range, ['100%', '0%']);
+    const borderRadius = useTransform(scrollY, range, [0, 100]);
 
     const backgroundColor = useTransform(scrollY, range, [
-        'rgba(10, 10, 10, 0.8)',
+        'rgba(5, 5, 5, 0.8)',
         'rgba(10, 10, 10, 0.9)',
     ]);
+
     const borderColor = useTransform(scrollY, range, [
-        'rgba(255, 255, 255, 0.05)',
+        'rgba(255, 255, 255, 0)',
         'rgba(255, 255, 255, 0.1)',
     ]);
+
     const backdropBlur = useTransform(scrollY, range, [
+        'blur(0px)',
         'blur(12px)',
-        'blur(16px)',
+    ]);
+
+    const shadow = useTransform(scrollY, range, [
+        '0 0 0 0 rgba(0,0,0,0)',
+        '0 8px 30px -8px rgba(0,0,0,0.5)',
     ]);
 
     const handleClick = (
@@ -99,25 +92,22 @@ export function Header() {
     return (
         <header className="pointer-events-none fixed top-0 right-0 left-0 z-50 flex justify-center">
             <motion.div
-                initial={false}
                 style={{
-                    width,
                     marginTop,
-                    borderTopLeftRadius: topRadius,
-                    borderTopRightRadius: topRadius,
-                    borderBottomLeftRadius: bottomRadius,
-                    borderBottomRightRadius: bottomRadius,
+                    paddingTop: paddingY,
+                    paddingBottom: paddingY,
+                    paddingLeft: paddingX,
+                    paddingRight: paddingX,
+                    minWidth,
+                    borderRadius,
                     backgroundColor,
                     borderColor,
                     backdropFilter: backdropBlur,
-                    paddingLeft: paddingX,
-                    paddingRight: paddingX,
-                    paddingTop: paddingY,
-                    paddingBottom: paddingY,
+                    boxShadow: shadow,
                 }}
-                className="pointer-events-auto flex items-center justify-center border shadow-lg shadow-black/20"
+                className="pointer-events-auto flex items-center justify-center border"
             >
-                <nav className="relative z-50 flex items-center">
+                <nav className="relative z-50 flex items-center whitespace-nowrap">
                     {breadcrumbParts.map((part, index) => (
                         <span key={part.href} className="flex items-center">
                             {index > 0 && (
@@ -128,7 +118,7 @@ export function Header() {
                             <Link
                                 href={part.href}
                                 onClick={(e) => handleClick(e, part.href)}
-                                className="font-mono text-sm font-bold tracking-widest whitespace-nowrap text-white transition-opacity hover:opacity-80"
+                                className="font-mono text-sm font-bold tracking-widest text-white transition-opacity hover:opacity-80"
                             >
                                 {part.label}
                             </Link>
