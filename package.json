@@ -17,6 +17,7 @@
         "@vercel/blob": "^2.0.0",
         "clsx": "^2.1.1",
         "framer-motion": "^12.25.0",
+        "ioredis": "^5.9.1",
         "lucide-react": "^0.562.0",
         "nanoid": "^5.1.6",
         "next": "16.1.1",
@@ -26,7 +27,7 @@
         "react-dom": "19.2.3",
         "react-google-recaptcha-v3": "^1.11.0",
         "react-type-animation": "^3.2.0",
-        "redis": "^5.10.0",
+        "server-only": "^0.0.1",
         "sonner": "^2.0.7",
         "tailwind-merge": "^3.4.0",
         "zod": "^4.3.5"
