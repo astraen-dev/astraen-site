@@ -101,7 +101,7 @@ export async function getPaiaDownloadToken(
         // --- Generate and Store Download Token ---
         const downloadToken = nanoid(32);
         const key = `paia-token:${downloadToken}`;
-        await redis.set(key, 'valid', { EX: 300 });
+        await redis.set(key, 'valid', 'EX', 300);
         return { success: true, token: downloadToken };
     } catch (error) {
         console.error('An unexpected error occurred in PAIA action:', error);
