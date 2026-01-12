@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { nanoid } from 'nanoid';
 import { headers } from 'next/headers';
 import { redis } from '@/lib/redis';
+import 'server-only';
 
 const RATE_LIMIT_WINDOW_SECONDS = 600;
 const RATE_LIMIT_MAX_REQUESTS = 10;
@@ -57,12 +58,16 @@ export async function getPaiaDownloadToken(
 
     const rateLimitKey = `rate-limit:paia:${ip}`;
     try {
-        const requestCount = await redis.incr(rateLimitKey);
-        if (requestCount === 1) {
-            await redis.expire(rateLimitKey, RATE_LIMIT_WINDOW_SECONDS);
-        }
+        const multi = redis.multi();
+        multi.incr(rateLimitKey);
+        multi.expire(rateLimitKey, RATE_LIMIT_WINDOW_SECONDS, 'NX');
+        const results = await multi.exec();
+        const incrResult = results?.[0]?.[1];
 
-        if (requestCount > RATE_LIMIT_MAX_REQUESTS) {
+        if (
+            typeof incrResult === 'number' &&
+            incrResult > RATE_LIMIT_MAX_REQUESTS
+        ) {
             console.warn(`Rate limit exceeded for IP: ${ip}`);
             return {
                 success: false,
