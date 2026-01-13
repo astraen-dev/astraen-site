@@ -1,0 +1,46 @@
+<svg width="1500" height="500" viewBox="0 0 1500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="1500" height="500" fill="#050505"/>
+
+    <defs>
+        <!-- Refined Engineering Grid (Reduced Opacity) -->
+        <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ededed" stroke-width="0.5" stroke-opacity="0.06"/>
+        </pattern>
+
+        <!-- Softened Central Glow -->
+        <radialGradient id="centerHighlight" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#ededed" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="#ededed" stop-opacity="0" />
+        </radialGradient>
+    </defs>
+
+    <!-- Apply Grid -->
+    <rect width="1500" height="500" fill="url(#gridPattern)" />
+
+    <!-- Central Glow -->
+    <rect width="1500" height="500" fill="url(#centerHighlight)" />
+
+    <!-- Logo Section (Larger Scale) -->
+    <g transform="translate(750, 200) scale(0.75)">
+        <g transform="translate(-256, -250)">
+            <path d="M256 120L130 380H190L256 240L322 380H382L256 120Z" fill="#ededed"/>
+            <circle cx="256" cy="340" r="30" fill="#ededed"/>
+            <path d="M256 120L130 380H190L256 240L322 380H382L256 120Z" stroke="#050505" stroke-width="12" stroke-linejoin="round"/>
+        </g>
+    </g>
+
+    <!-- Branding (Larger and Bolder) -->
+    <text x="750" y="360" text-anchor="middle" fill="#ededed" font-family="monospace" font-size="28" letter-spacing="0.5em" font-weight="bold">ASTRAEN</text>
+
+    <!-- Technical Metadata (Faded) -->
+    <g transform="translate(1250, 220)">
+        <text fill="#444" font-family="monospace" font-size="10" letter-spacing="0.1em">CORE_SYS: v0.0.1</text>
+        <text y="20" fill="#444" font-family="monospace" font-size="10" letter-spacing="0.1em">STATUS: OPERATIONAL</text>
+        <rect y="35" width="120" height="1" fill="#ededed" fill-opacity="0.05"/>
+    </g>
+
+    <!-- Minimal Corner Accents -->
+    <path d="M30 50V30H50" stroke="#ededed" stroke-opacity="0.1" stroke-width="1" fill="none"/>
+    <path d="M1470 450V470H1450" stroke="#ededed" stroke-opacity="0.1" stroke-width="1" fill="none"/>
+</svg>
