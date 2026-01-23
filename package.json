@@ -14,13 +14,13 @@
         "@radix-ui/react-dialog": "^1.1.15",
         "@radix-ui/react-tooltip": "^1.2.8",
         "@vercel/analytics": "^1.6.1",
-        "@vercel/blob": "^2.0.0",
+        "@vercel/blob": "^2.0.1",
         "clsx": "^2.1.1",
-        "framer-motion": "^12.26.1",
-        "ioredis": "^5.9.1",
-        "lucide-react": "^0.562.0",
+        "framer-motion": "^12.29.0",
+        "ioredis": "^5.9.2",
+        "lucide-react": "^0.563.0",
         "nanoid": "^5.1.6",
-        "next": "16.1.1",
+        "next": "16.1.4",
         "postcss": "^8.5.6",
         "radix-ui": "^1.4.3",
         "react": "19.2.3",
@@ -30,7 +30,7 @@
         "server-only": "^0.0.1",
         "sonner": "^2.0.7",
         "tailwind-merge": "^3.4.0",
-        "zod": "^4.3.5"
+        "zod": "^4.3.6"
     },
     "devDependencies": {
         "@tailwindcss/language-server": "^0.14.29",
