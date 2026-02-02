@@ -1,0 +1,29 @@
+<svg width="1400" height="350" viewBox="0 0 1400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1400" height="350" fill="#050505"/>
+
+    <defs>
+        <pattern id="gridPattern" width="35" height="35" patternUnits="userSpaceOnUse">
+            <path d="M 35 0 L 0 0 0 35" fill="none" stroke="#ededed" stroke-width="0.5" stroke-opacity="0.06"/>
+        </pattern>
+
+        <radialGradient id="centerHighlight" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#ededed" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="#ededed" stop-opacity="0" />
+        </radialGradient>
+    </defs>
+
+    <rect width="1400" height="350" fill="url(#gridPattern)" />
+
+    <rect width="1400" height="350" fill="url(#centerHighlight)" />
+
+    <g transform="translate(700, 140) scale(0.55)">
+        <g transform="translate(-256, -250)">
+            <path d="M256 120L130 380H190L256 240L322 380H382L256 120Z" fill="#ededed"/>
+            <circle cx="256" cy="340" r="30" fill="#ededed"/>
+            <path d="M256 120L130 380H190L256 240L322 380H382L256 120Z" stroke="#050505" stroke-width="12" stroke-linejoin="round"/>
+        </g>
+    </g>
+
+    <path d="M25 40V25H40" stroke="#ededed" stroke-opacity="0.1" stroke-width="1" fill="none"/>
+    <path d="M1375 310V325H1360" stroke="#ededed" stroke-opacity="0.1" stroke-width="1" fill="none"/>
+</svg>

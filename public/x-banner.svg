@@ -21,8 +21,8 @@
     <!-- Central Glow -->
     <rect width="1500" height="500" fill="url(#centerHighlight)" />
 
-    <!-- Logo Section (Larger Scale) -->
-    <g transform="translate(750, 200) scale(0.75)">
+    <!-- Logo Section (Moved Down Further) -->
+    <g transform="translate(750, 260) scale(0.75)">
         <g transform="translate(-256, -250)">
             <path d="M256 120L130 380H190L256 240L322 380H382L256 120Z" fill="#ededed"/>
             <circle cx="256" cy="340" r="30" fill="#ededed"/>
@@ -30,15 +30,8 @@
         </g>
     </g>
 
-    <!-- Branding (Larger and Bolder) -->
-    <text x="750" y="360" text-anchor="middle" fill="#ededed" font-family="monospace" font-size="28" letter-spacing="0.5em" font-weight="bold">ASTRAEN</text>
-
-    <!-- Technical Metadata (Faded) -->
-    <g transform="translate(1250, 220)">
-        <text fill="#444" font-family="monospace" font-size="10" letter-spacing="0.1em">CORE_SYS: v0.0.1</text>
-        <text y="20" fill="#444" font-family="monospace" font-size="10" letter-spacing="0.1em">STATUS: OPERATIONAL</text>
-        <rect y="35" width="120" height="1" fill="#ededed" fill-opacity="0.05"/>
-    </g>
+    <!-- Branding (Moved Down Further) -->
+    <text x="750" y="420" text-anchor="middle" fill="#ededed" font-family="monospace" font-size="28" letter-spacing="0.5em" font-weight="bold">ASTRAEN</text>
 
     <!-- Minimal Corner Accents -->
     <path d="M30 50V30H50" stroke="#ededed" stroke-opacity="0.1" stroke-width="1" fill="none"/>
